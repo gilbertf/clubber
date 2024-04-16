@@ -58,27 +58,24 @@
 				{% if event.organizer == None and event.num_participants < event.min_participants %}
 			       		und
 				{% elif event.num_participants < event.min_participants %}
-			     		sich
-			     	{% else %}
-			     		.
+			     		sich	.
 				{% endif %}
 
 				{% if event.num_participants < event.min_participants %}
 					noch nicht genügend Teilnehmery angemeldet
 			     	{% if event.num_participants < event.min_participants and event.organizer != None %}
-					haben.
+						haben.
 			     	{% else %}
 			     		sind.
-				{% endif %}
-			     	Aktuell
-				{% if event.missing_participants == 1 %}
-					fehlt noch eine Anmeldung.
-				{% else %}
-					fehlen noch {{ event.missing_participants|apnumber }} Anmeldungen.
 					{% endif %}
-
+			     	Aktuell
+					{% if event.missing_participants == 1 %}
+						fehlt noch eine Anmeldung.
+					{% else %}
+						fehlen noch {{ event.missing_participants|apnumber }} Anmeldungen.
+					{% endif %}
 				{% endif %}
-			     	<p>
+			    <p>
 				Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, ob jemand öffnet.
 			</div>
 		{% endif %}
@@ -149,19 +146,18 @@
 			{% for p in event.participants_txt.all %}
 				<li class="list-group-item" id="event-{{ event.id }}-participant_txt-{{ p.id }}">
 					{% if event.staff %}
-					<form class="form-inline">
-						<div class="input-group">
-							<input id="modify-txt-input" class="form-control text-center" name="txt" hx-trigger="input delay:2s" hx-post="{% url 'event_participant_txt_modify' event.id p.id %}" value="{{ p.txt}}">
-							</input>
-
-							<button class="btn btn-danger" hx-post="{% url 'event_participant_txt_delete' event.id p.id %}">
-								<svg id="delete-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill icon-baseline" viewBox="0 0 16 16">
-									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
-								</svg>
-								<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_delete" role="status"></div>
-							</button>
-						</div>
-					</form>
+						<form class="form-inline">
+							<div class="input-group">
+								<input id="modify-txt-input" class="form-control text-center" name="txt" hx-trigger="input delay:2s" hx-post="{% url 'event_participant_txt_modify' event.id p.id %}" value="{{ p.txt}}">
+								</input>
+								<button class="btn btn-danger" hx-post="{% url 'event_participant_txt_delete' event.id p.id %}">
+									<svg id="delete-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill icon-baseline" viewBox="0 0 16 16">
+										<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+									</svg>
+									<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_delete" role="status"></div>
+								</button>
+							</div>
+						</form>
 					{% else %}
 						{{ p.txt }}
 					{% endif %}
@@ -200,9 +196,9 @@
 						Das Treffen ist komplett ausgebucht.
 					{% else %}
 						Das Treffen ist überbucht
-				     	{% endif %}
+				    {% endif %}
 				</div>
-				</li>
+			</li>
 		</ul>
 	</div>
 </div>
