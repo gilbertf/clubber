@@ -1,3 +1,4 @@
+{% load humanize %} 
 <style>
 	.htmx-request #delete-name-txt-icon{
 	display:none;
@@ -69,15 +70,13 @@
 			     	{% else %}
 			     		sind.
 				{% endif %}
-
 			     	Aktuell
-							{% if event.missing_participants == 1 %}
-								fehlt eine Anmeldung.
-							{% elif event.missing_participants == 2 %}
-								fehlen zwei Anmeldungen.
-						     	{% else %}
-						     		fehlen noch {{ event.missing_participants }} Anmeldungen.
-						     	{% endif %}
+				{% if event.missing_participants == 1 %}
+					fehlt noch eine Anmeldung.
+				{% else %}
+					fehlen noch {{ event.missing_participants|apnumber }} Anmeldungen.
+					{% endif %}
+
 				{% endif %}
 			     	<p>
 				Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, ob jemand öffnet.
@@ -196,7 +195,7 @@
 					{% if event.freeSlots == 1 %}
 						Noch ein freier Platz
 					{% elif event.freeSlots > 1 %}
-				     		Noch {{ event.freeSlots }} freie Plätze
+				     		Noch {{ event.freeSlots|apnumber }} freie Plätze
 					{% elif event.freeSlots == 0 %}
 						Das Treffen ist komplett ausgebucht.
 					{% else %}
