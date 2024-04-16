@@ -39,6 +39,8 @@ Treffen
 									Heute
 								{% elif day.0.daysFuture == 1 %}
 									Morgen
+								{% elif day.0.daysFuture == 2 %}
+									Übermorgen
 								{% else %}
 									in {{day.0.daysFuture}} Tagen
 								{% endif %}

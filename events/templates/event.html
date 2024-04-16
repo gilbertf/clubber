@@ -47,36 +47,31 @@
 	{% if event.cancled %}
 		<div class="alert alert-danger my-2">Das Treffen wurde abgesagt</div>
 	{% else %}
-		{% if event.organizer != None and event.num_participants >= event.min_participants %}
+		{% if event.organizer != None and event.missing_participants <= 0 %}
 			<div class="alert alert-success my-2">Das Treffen findet statt und wird von {{ event.organizer.username }} geleitet.</div>
 		{% else %}
 			<div class="alert alert-warning my-2">
-				Nach aktuellem Stand wird die Veranstaltung nicht statfinden, da
 				{% if event.organizer == None %}
-						sich noch niemand gefunden hat der öffnen wird
-				{% endif %}
-				{% if event.organizer == None and event.num_participants < event.min_participants %}
-			       		und
-				{% elif event.num_participants < event.min_participants %}
-			     		sich	.
+					{% if event.missing_participants <= 0 %}
+						Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch niemand gefunden hat der öffnen wird.
+					{% else %}
+						Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch niemand gefunden hat der öffnen wird und noch nicht genügend Teilnehmery angemeldet sind.
+					{% endif %}
+				{% else %}
+					{% if event.missing_participants > 0 %}
+						Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch nicht genügend Teilnehmery angemeldet haben.
+					{% endif %}
 				{% endif %}
 
-				{% if event.num_participants < event.min_participants %}
-					noch nicht genügend Teilnehmery angemeldet
-			     	{% if event.num_participants < event.min_participants and event.organizer != None %}
-						haben.
-			     	{% else %}
-			     		sind.
-					{% endif %}
-			     	Aktuell
+				{% if event.missing_participants > 0 %}
 					{% if event.missing_participants == 1 %}
-						fehlt noch eine Anmeldung.
+						Es fehlt noch eine Anmeldung.
 					{% else %}
-						fehlen noch {{ event.missing_participants|apnumber }} Anmeldungen.
+						Es fehlen noch {{ event.missing_participants|apnumber }} Anmeldungen.
 					{% endif %}
 				{% endif %}
-			    <p>
-				Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, ob jemand öffnet.
+				<br>
+				Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, ob das Treffen stattfindet.
 			</div>
 		{% endif %}
 	{% endif %}
