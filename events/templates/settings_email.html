@@ -1,0 +1,16 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+E-Mail (Einstellungen)
+{% endblock %}
+
+{% block content %} 
+
+<form method="POST">
+{% csrf_token %}
+{{ settings_email_form|crispy }}                    
+<button class="btn btn-primary" type="submit">Ändern</button>
+</form>
+
+{% endblock %}

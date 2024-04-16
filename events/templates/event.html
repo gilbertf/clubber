@@ -1,0 +1,209 @@
+<style>
+	.htmx-request #delete-name-txt-icon{
+	display:none;
+	}
+	.htmx-request #add-name-txt-icon{
+	display:none;
+	}
+
+	.htmx-request #event_participant_txt_add {
+	display:inline-block;
+	}
+
+	#event_participant_txt_add {
+	display:none;
+	}
+
+	.htmx-request #event_participant_txt_delete{
+	display:inline-block;
+	}
+
+	#event_participant_txt_delete {
+	display:none;
+	}
+</style>
+
+<div
+	class="row"
+	id="event-{{ event.id }}"
+	hx-target="#event-{{ event.id }}"
+	hx-swap="outerHTML" >
+
+	<div class="col">
+		{% if event.typ.url != "" %}
+			<a href="{{ event.typ.url }}">Weitere Infos hier</a>
+		{% endif %}
+
+		{% if event.staff %}
+			<form method="post" action="/modify">
+				{% csrf_token %}
+				<button class="btn btn-primary" name="modify" value={{ event.id }}>Treffen bearbeiten
+				</button>
+			</form>
+		{% endif %}
+	</div>
+
+	{% if event.cancled %}
+		<div class="alert alert-danger my-2">Das Treffen wurde abgesagt</div>
+	{% else %}
+		{% if event.organizer != None and event.num_participants >= event.min_participants %}
+			<div class="alert alert-success my-2">Das Treffen findet statt und wird von {{ event.organizer.username }} geleitet.</div>
+		{% else %}
+			<div class="alert alert-warning my-2">
+				Nach aktuellem Stand wird die Veranstaltung nicht statfinden, da
+				{% if event.organizer == None %}
+						sich noch niemand gefunden hat der öffnen wird
+				{% endif %}
+				{% if event.organizer == None and event.num_participants < event.min_participants %}
+			       		und
+				{% elif event.num_participants < event.min_participants %}
+			     		sich
+			     	{% else %}
+			     		.
+				{% endif %}
+
+				{% if event.num_participants < event.min_participants %}
+					noch nicht genügend Teilnehmery angemeldet
+			     	{% if event.num_participants < event.min_participants and event.organizer != None %}
+					haben.
+			     	{% else %}
+			     		sind.
+				{% endif %}
+
+			     	Aktuell
+							{% if event.missing_participants == 1 %}
+								fehlt eine Anmeldung.
+							{% elif event.missing_participants == 2 %}
+								fehlen zwei Anmeldungen.
+						     	{% else %}
+						     		fehlen noch {{ event.missing_participants }} Anmeldungen.
+						     	{% endif %}
+				{% endif %}
+			     	<p>
+				Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, ob jemand öffnet.
+			</div>
+		{% endif %}
+	{% endif %}
+
+	<div class="row align-items-center my-2">
+		{% if event.staff %}
+			<div class="col">
+				{% if event.organizer != request.user %}
+					<button class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">Ich öffne{% if event.organizer != None %} anstelle von {{ event.organizer }}{% endif %}</button>
+				{% else %}
+					<button class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">Ich öffne nicht</button>
+				{% endif %}
+			</div>
+
+			<div class="col">
+				{% if event.cancled %}
+					<button class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">Treffen zusagen</button>
+				{% else %}
+					<button class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">Treffen absagen</button>
+				{% endif %}
+			</div>
+
+			{% if event.no_participants and event.cancled %}
+				<div class="col">
+					<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="Bist du dir sicher das dieses Treffen gelöscht werden soll?" hx-swap="delete"> 
+						<button class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">Treffen löschen</button>
+					</div>
+				</div>
+			{% endif %}
+		{% endif %}
+	</div>
+
+	{% if not event.orga and event.auth %}
+		{% if event.subs %}
+			<div class="my-2"> 
+				<button class="btn btn-success" hx-post="{% url 'event_follow_unset' event.id %}">Teilnahme absagen</button>
+			</div>
+		{% endif %}
+		{% if not event.subs and not event.full %}
+			<div class="my-2"> 
+				<button class="btn btn-primary" hx-post="{% url 'event_follow_set' event.id %}">Teilnahme zusagen</button>
+			</div>
+		{% endif %}
+	{% endif %}
+
+	<div class="my-2"> 
+		<ul class="list-group">
+			{% for p in event.participants.all %}
+				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
+					{% if not event.staff %}
+					{{ p.username }}
+					{% else %}
+						<form class="form-inline">
+							<div class="form-group mb-2">
+								{{ p.username }}
+								<button class="btn btn-danger mx-2 btn-lg" hx-post="{% url 'event_participant_delete' event.id p.id %}">
+									<svg clas="bi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill icon-baseline" viewBox="0 0 16 16">
+										<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+									</svg>
+								</button>
+							</div>
+						</form>
+					{% endif %}
+				</li>
+			{% endfor %}
+
+			{% for p in event.participants_txt.all %}
+				<li class="list-group-item" id="event-{{ event.id }}-participant_txt-{{ p.id }}">
+					{% if event.staff %}
+					<form class="form-inline">
+						<div class="input-group">
+							<input id="modify-txt-input" class="form-control text-center" name="txt" hx-trigger="input delay:2s" hx-post="{% url 'event_participant_txt_modify' event.id p.id %}" value="{{ p.txt}}">
+							</input>
+
+							<button class="btn btn-danger" hx-post="{% url 'event_participant_txt_delete' event.id p.id %}">
+								<svg id="delete-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill icon-baseline" viewBox="0 0 16 16">
+									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+								</svg>
+								<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_delete" role="status"></div>
+							</button>
+						</div>
+					</form>
+					{% else %}
+						{{ p.txt }}
+					{% endif %}
+				</li>
+			{% endfor %}
+
+			<li class="list-group-item">
+				{% if event.freeSlots > 0 %}
+					<form method="post" class="form-inline">
+						<div class="input-group">
+							<input class="form-control text-center" name="username" maxlength="20" type="text" placeholder="neues Teilnehmery" name="name_text">
+							<button class="btn btn-primary" hx-post="{% url 'event_participant_txt_add' event.id %}">
+								<svg id="add-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-center bi-plus-circle-fill icon-baseline" viewBox="0 0 16 16">
+									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+								</svg>
+								<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_add" role="status"></div>
+							</button>
+						</div>
+					</form>
+					<div class="my-2">
+						{% if messages %}
+							    {% for message in messages %}
+								{% if  message.tags == "error" %}
+									<div class="alert alert-block alert-danger">{{ message}}</div>
+								{% endif %}
+							    {% endfor %}
+						{% endif %}
+					</div>
+				{% endif %}
+				<div class="my-2">
+					{% if event.freeSlots == 1 %}
+						Noch ein freier Platz
+					{% elif event.freeSlots > 1 %}
+				     		Noch {{ event.freeSlots }} freie Plätze
+					{% elif event.freeSlots == 0 %}
+						Das Treffen ist komplett ausgebucht.
+					{% else %}
+						Das Treffen ist überbucht
+				     	{% endif %}
+				</div>
+				</li>
+		</ul>
+	</div>
+</div>

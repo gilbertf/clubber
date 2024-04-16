@@ -1,0 +1,71 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Treffen
+{% endblock %}
+
+{% block content %}
+	<style>
+		.icon-baseline{
+		  display:flex;
+		  align-items:center;
+		  justify-content:center;
+		  font-size:20px;
+		}
+	</style>
+
+	<style>
+		a {
+		  color: var(--bs-black);
+		}
+	</style>
+
+
+	{% if not user.is_authenticated %}
+		<div class="alert alert-warning" role="alert">
+			Du kannst dich zu Veranstaltungen ohne Benutzerkonto anmelden. Das bedeutet jedoch, dass du deine Anmeldung im Nachhinein nicht mehr ändern kannst und auch keine Benachrichtigungen per E-Mail, z.B. für neue Treffen, erhälst. Zur Registrierung geht es <a href=/account/register>hier</a>.
+		</div>
+	{% endif %}
+	
+	{% if event_list %}
+		<div class="container text-center">
+			<div class="accordion accordion-flush" id="accordion-all">
+				<div class="row align-items-start">
+					{% for day in event_list %}
+						<div class="col-12 col-md-4 mb-5">
+							<div class="h5">
+								{% if day.0.daysFuture == 0 %}
+									Heute
+								{% elif day.0.daysFuture == 1 %}
+									Morgen
+								{% else %}
+									in {{day.0.daysFuture}} Tagen
+								{% endif %}
+							</div>
+							<div class="h5">
+								{{ day.0.date|date:"l, j. F" }}
+							</div>
+							{% for event in day %}
+								<div class="accordion-item" id="accordion-event-{{ event.id }}">
+									<h2 class="accordion-header" id="accordion-heading-{{ event.id }}">
+										<button class="accordion-button{% if not event.expand %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-{{ event.id }}">
+											{{ event.start_time }} - {{ event.end_time }} &nbsp&nbsp <b>{{ event.typ }}</b>
+										</button>
+									</h2>
+									<div id="accordion-collapse-{{ event.id }}" class="accordion-collapse collapse{% if event.expand %} show{% endif %}" data-bs-parent="#accordion-all">
+										<div class="accordion-body">
+											{% include "event.html" %}    
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<p>Aktuell sind keine Treffen geplant.</p>
+	{% endif %}
+{% endblock %}

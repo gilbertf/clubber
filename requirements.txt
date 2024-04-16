@@ -1,0 +1,10 @@
+Django==5.0.4
+django-flatpickr
+django-crispy-forms
+django-extensions
+crispy-bootstrap5
+gunicorn
+psycopg2-binary
+pytz
+ics
+pyaml

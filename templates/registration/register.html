@@ -1,0 +1,16 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Registrieren
+{% endblock %}
+
+{% block content %} 
+
+<form method="POST">
+{% csrf_token %}
+{{ new_user_form|crispy }}                    
+<button class="btn btn-primary" type="submit">Registrieren</button>
+</form>
+
+{% endblock %}

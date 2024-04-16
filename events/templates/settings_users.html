@@ -1,0 +1,57 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+Benutzerverwaltung (Einstellungen)
+{% endblock %}
+
+{% block content %}
+<ol class="list-group">
+	{% for user in users %}
+		<li class="list-group-item d-flex justify-content-between align-items-start" id="user-{{ user.id }}">
+			<div class="ms-2 me-auto">
+	      			<div class="fw-bold">{{ user }} {% if request.user == user %} (du selber){% endif %}</div>
+				{{ user.email }}
+
+				<form method="post" id="form-user-{{ user.username }}" action="/users">
+					{% csrf_token %}
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="cb-{{ user.username }}" name="admin-events" role="switch" {% if user.is_staff %}checked{% endif %} {% if request.user == user or user.is_superuser %}disabled{% endif %}>
+						<label class="form-check-label">Veranstaltungen anlegen und bearbeiten</label>
+					</div>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="cb2-{{ user.username }}" name="admin-users" role="switch" {% if user.is_superuser %}checked{% endif %} {% if request.user == user %}disabled{% endif %}>
+					 	<label class="form-check-label">Benutzer verwalten</label>
+					</div>
+					<input type="text" name="user_id" value={{ user.id }} hidden>
+				</form>
+
+				<script>
+					$(document).ready(function(){
+						$("#cb-{{ user.username }}").change(function(){
+							$("#form-user-{{ user.username }}").submit(); // Submit the form
+						});
+						$("#cb2-{{ user.username }}").change(function(){
+							$("#form-user-{{ user.username }}").submit(); // Submit the form
+						});
+					});
+				</script>
+
+			</div>
+			<div class="ms-2 me-auto">
+				{% if request.user.is_superuser and not request.user == user %}
+					<div class="">
+						<form hx-swap="delete" hx-target="#user-{{ user.id }}" hx-confirm="Bist du sicher das der Nutzer {{ user }} gelöscht werden soll?">
+							{% csrf_token %}
+							<button class="mx-2 btn btn-danger" hx-post="/user/{{user.id }}/delete">Benutzer löschen</button>
+						</form>
+					</div>
+				{% endif %}
+			</div>
+		</li>
+	{% endfor %}
+</ol>
+
+
+{% endblock %}

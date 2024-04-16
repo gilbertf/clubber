@@ -1,0 +1,5 @@
+Hallo {{ username }},
+das {{ typ }} am {{ date }} von {{ start_time }} - {{ end_time }} wird stattfinden.
+
+Viele Grüße
+Gilbert

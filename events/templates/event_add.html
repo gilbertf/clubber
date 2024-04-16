@@ -1,0 +1,24 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Neues Treffen
+{% endblock %}
+
+{% block content %}
+
+{% if event_form %}
+{% if empty_type %}
+Du must zuerst unter Einstellungen->Veranstaltungsarten mindestens eine Veranstaltungsart anlegen.
+{% else %}
+<div class="container text-left">
+	<form  method="post">
+		{% csrf_token %}
+		{{ event_form|crispy }}
+		<button class="btn btn-primary" name="add" type="submit">Hinzufügen</button>
+	</form>
+</div>
+{% endif %}
+{% endif %}
+
+{% endblock %}

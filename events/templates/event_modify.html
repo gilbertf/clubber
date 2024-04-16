@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Treffen bearbeiten
+{% endblock %}
+
+{% block content %}
+
+{% if event_form %}
+<div class="container text-left">
+	<h1>Treffen bearbeiten</h1>
+	<form  method="post">
+		{% csrf_token %}
+		{{ event_form|crispy }}
+		<button class="btn btn-primary" name="modify_done" type="submit" value={{ event_id }}>Ändern</button>
+	</form>
+</div>
+{% endif %}
+
+{% endblock %}

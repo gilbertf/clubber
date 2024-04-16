@@ -1,0 +1,5 @@
+Hallo {{ username }},
+es wurde ein neues {{ typ }} am {{ date }} von {{ start_time }} - {{ end_time }} angelegt. Du kannst jetzt unter {{ SITE_URL }}/join/{{user_id}}/{{event_id }} zusagen.
+
+Viele Grüße
+Gilbert

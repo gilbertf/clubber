@@ -1,0 +1,43 @@
+# Clubber
+Es handelt sich um ein primitives Buchungssystem welches aktuell zur Veranstaltungsorganisation des MeerManege e. V. Zirkusvereins eingesetzt wird.
+
+## Installation 
+Create python environment, e.g. in /var/clubber
+```
+python3 -m venv venv
+```
+
+Go into env and install python modules
+```
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Configure clubber in `config/settings.yml` and place your custom `logo.png` and `favicon.png` pictures in the `config` folder.
+
+For postgres create database
+```
+CREATE DATABASE clubber;
+CREATE USER clubber WITH PASSWORD 'clubber';
+ALTER ROLE clubber SET client_encoding TO 'utf8';
+ALTER ROLE clubber SET default_transaction_isolation TO 'read committed';
+ALTER ROLE clubber SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE clubber TO clubber;
+```
+
+Create/Update database tabes
+```
+python manage.py makemigrations events
+python manage.py migrate
+```
+
+Run development server for testing only
+```
+python manage.py runserver
+```
+
+For production run
+```
+python manage.py collectstatic
+```
+to copy all static files to `static_ext`.
