@@ -59,7 +59,7 @@
 					{% endif %}
 				{% else %}
 					{% if event.missing_participants > 0 %}
-						Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch nicht genügend Teilnehmery angemeldet haben.
+						{{ event.organizer.username }} ist bereit zu öffnen.Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch nicht genügend Teilnehmery angemeldet haben.
 					{% endif %}
 				{% endif %}
 
