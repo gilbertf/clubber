@@ -1,0 +1,39 @@
+CSRF_TRUSTED_ORIGINS: ["https://www.abc.de"]
+ALLOWED_HOSTS: [
+        "abc.de",
+        "127.0.0.1",
+]
+SECRET_KEY: "xxx"
+
+# Mail: User notification on event changes
+EMAIL_NOTIFICATION_ENABLE: True
+EMAIL_NOTIFICATION_NEW_EVENT_DEFAULT: True
+EMAIL_NOTIFICATION_JOINED_EVENT_DEFAULT: True
+EMAIL_HOST: "smtp.xxx.de"
+EMAIL_PORT: 465
+EMAIL_USE_TLS: False
+EMAIL_USE_SSL: True
+EMAIL_HOST_USER: "a"
+EMAIL_HOST_PASSWORD: "xxx"
+DEFAULT_FROM_EMAIL: "a@xxx.de"
+EMAIL_SITE_URL: "https://www.abc.de"
+EMAIL_EVENT_LOCATION: "Irgendwo"
+
+# Settings for new events
+#   Default values for number of participants when creating new event
+EVENT_PARTICIPANTS_MIN_DEFAULT: 3
+EVENT_PARTICIPANTS_MAX_DEFAULT: 15
+#   Limit values
+EVENT_PARTICIPANTS_MIN_LIMIT: 0
+EVENT_PARTICIPANTS_MAX_LIMIT: 50
+#   Default time entry when creating new event
+EVENT_START_TIME_DEFAULT: "19:00"
+EVENT_END_TIME_DEFAULT: "21:00"
+#   Allow for multiple events at the same time.
+#   This is typically not possible when only a single location, e.g. gym is available
+EVENT_TIME_OVERLAP_ALLOW: False
+
+#Optional: Link, when clicking on header logo
+LOGO_URL: "https://www.xxx.de"
+
+DEBUG: True
