@@ -400,7 +400,9 @@ def event_delete(request, event_id):
     advanceEvent(request, event)
     if request.user.is_staff and event.cancled == True and event.is_empty():
         event.delete()
-        return HttpResponse(status=200)
+        r = HttpResponse(status=200)
+        r["HX-Refresh"] = "true"
+        return r
     return render(request, 'event.html', {'event': event})
 
 def event_follow_set(request, event_id):
