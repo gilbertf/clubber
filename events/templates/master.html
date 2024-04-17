@@ -4,9 +4,8 @@
 		<title>{% block title %}{% endblock %}</title>
 		{% load static %}
 
-                <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 		<link rel="stylesheet" href="{% static 'flatpickr/css/flatpickr.min.css' %}" media="all">
-
 		<link rel="icon" href="{% static 'favicon.png' %}" type="image/png">
 
 		<meta charset="utf-8">
@@ -22,9 +21,11 @@
 
 	<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 		<div class="container text-center" w-100>
-			<a href="{{ LOGO_URL }}">
- 		       		<img class="img-fluid text-center" src="/static/logo.png">
- 	             	</a>
+			{% if LOGO_ENABLE %}
+				<a href="{{ LOGO_URL }}">
+					<img class="img-fluid text-center" src="/static/logo.png">
+				</a>
+			{% endif %}
 
 			{% load static %}
 

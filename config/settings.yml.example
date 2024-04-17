@@ -33,7 +33,9 @@ EVENT_END_TIME_DEFAULT: "21:00"
 #   This is typically not possible when only a single location, e.g. gym is available
 EVENT_TIME_OVERLAP_ALLOW: False
 
+# Header logo (will be shown on top of page and must be placed as logo.png in the config folder if LOGO_ENABLE is set to True)
+LOGO_ENABLE: False
 #Optional: Link, when clicking on header logo
 LOGO_URL: "https://www.xxx.de"
 
-DEBUG: True
+DEBUG: False
