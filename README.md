@@ -1,5 +1,5 @@
 # Clubber
-Es handelt sich um ein primitives Buchungssystem welches aktuell zur Veranstaltungsorganisation des MeerManege e. V. Zirkusvereins eingesetzt wird. Aktuell ist das Userinterface nur in deutscher Sprache verfügbar.
+Es handelt sich um ein primitives Buchungssystem welches aktuell zur Veranstaltungsorganisation des MeerManege e. V. Zirkusvereins eingesetzt wird. Die Benutzerschnittstelle ist nur in deutscher Sprache verfügbar.
 
 ## Installation 
 Create python environment, e.g. in /var/clubber
@@ -13,7 +13,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Configure clubber in `config/settings.yml` and place your custom `logo.png` and `favicon.png` pictures in the `config` folder.
+Configure clubber in `config/settings.yml` and place your custom `logo.png` and `favicon.png` pictures in the `config` folder. Plase add `config/impressum-cust.html` with your impressum.
 
 For postgres create database
 ```
@@ -31,16 +31,20 @@ python manage.py makemigrations events
 python manage.py migrate
 ```
 
+## Development Setup
 Run development server for testing only
 ```
 python manage.py runserver
 ```
 
+## Production Setup
 For production run
 ```
 python manage.py collectstatic
 ```
-to copy all static files to `static_ext`.
+to copy all static files to `static_ext`. This `static_ext` folder is to be served by your webserver, e.g. as configured in the nginx example, see `nginx.example`.
+In this nginx configuration example the django instance on TCP port 8888 is served exported on port 443 sing ssl.
+The django can be started as daemon using systemd as sketched in the `clubber-web.service` job description file usally located in `/etc/systemd/system`.
 
 ## How to start
 1. Create admin user by running `python manage.py createsuperuser`.
