@@ -43,8 +43,7 @@ For production run
 python manage.py collectstatic
 ```
 to copy all static files to `static_ext`. This `static_ext` folder is to be served by your webserver, e.g. as configured in the nginx example, see `nginx.example`.
-In this nginx configuration example the django instance on TCP port 8888 is served exported on port 443 sing ssl.
-The django can be started as daemon using systemd as sketched in the `clubber-web.service` job description file usally located in `/etc/systemd/system`.
+In this nginx configuration example the django instance on TCP port 8888 is exported to port 443 sing ssl. The Django instance can be started as daemon using systemd as sketched in the systemd service description file `clubber-web.service`.
 
 ## How to start
 1. Create admin user by running `python manage.py createsuperuser`.
