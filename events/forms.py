@@ -37,7 +37,7 @@ class EventForm(forms.ModelForm):
     
     def clean(self):
         if self.cleaned_data["date"] < datetime.now().date():
-            raise ValidationError(_("The date cannot be in the past!"))
+            raise ValidationError(_("The date cannot be in the past."))
 
         if self.cleaned_data["start_time"] >= self.cleaned_data["end_time"]:
             raise ValidationError(_("And end time earlier as start time is not allowd."))

@@ -365,7 +365,7 @@ def username_check(name, event):
         if others == 0 and others_txt == 0:
             return True, ""
         else:
-            return False, name + _("already registered")
+            return False, name + _(" is already registered")
     else:
             if len(name) == 0:
                 return False, _("You are required to enter a name")

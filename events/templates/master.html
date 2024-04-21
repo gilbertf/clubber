@@ -15,14 +15,14 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
 
-	<script src="{% static 'jquery.min.js' %}"></script>
-	<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-	<script src="{% static 'flatpickr/js/flatpickr.min.js' %}"></script>
-	<script src="{% static 'flatpickr/js/django-flatpickr.js' %}"></script>
-	<script src="{% static 'flatpickr/js/l10n/de.js' %}"></script>  
-	<script src="{% static 'htmx.min.js' %}"></script>  
+		<script src="{% static 'jquery.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+		<script src="{% static 'flatpickr/js/flatpickr.min.js' %}"></script>
+		<script src="{% static 'flatpickr/js/django-flatpickr.js' %}"></script>
+		<script src="{% static 'flatpickr/js/l10n/de.js' %}"></script>  
+		<script src="{% static 'htmx.min.js' %}"></script>  
+	</head>
 
 	<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 		<div class="container text-center" w-100>
@@ -50,7 +50,7 @@
 								  <a class="nav-link dropdown-toggle{% if request.path == "/account/change" or request.path == "/email" or request.path == "/users" %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% translate "Settings" %}</a>
 								<ul class="dropdown-menu">
 									<a class="dropdown-item{% if request.path == "/account/change" %} active{% endif %}" href="/account/change">{% translate "Change password" %}"</a>
-									<a class="dropdown-item{% if request.path == "/email" %} active{% endif %}" href="/email">{% translate "E-Mail and language" %}</a>
+									<a class="dropdown-item{% if request.path == "/email" %} active{% endif %}" href="/email">{% translate "Email and language" %}</a>
 									<form id="form-logout" action="{% url 'logout' %}" method="post">
 										{% csrf_token %}
 									    <input type="hidden"></input>
