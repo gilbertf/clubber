@@ -24,6 +24,7 @@ from django.views.generic import DeleteView
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 
 from datetime import date
 
@@ -55,10 +56,7 @@ def settings_email(request):
         settings_email_form = EmailNotificationsForm(request.POST, instance=request.user)
         if settings_email_form.is_valid():
             settings_email_form.save()
-            messages.success(request, 'Benachrichtigungseinstellungen aktualisiert!')
-            return redirect('/')
-        else:
-            messages.error(request, 'Bitte untenstehenden Fehler beachten.')
+        return redirect('/')
     else:
         settings_email_form = EmailNotificationsForm(instance=request.user)
     return render(request, "settings_email.html", context={"settings_email_form":settings_email_form})
@@ -80,7 +78,6 @@ def event_join(request, user_id, event_id):
         event = Event.objects.filter(id = event_id).get()
         addUserToEvent(user, event)
     else:
-        print('Du bist nicht oder unter falschem Benutzernamen angemeldet')
         logout(request)
         return redirect("/login/" + str(user_id) + "?next=" + request.path)
     return HttpResponseRedirect('/event/' + str(event_id) + "/show")
@@ -240,10 +237,7 @@ def event_modify(request):
                 event = event_form.save()
                 removeUserFromEvent(request.user, event)
                 event.save()
-                messages.success(request, 'Veranstaltung aktualisiert!')
                 return redirect('/')
-            else:
-                messages.error(request, 'Please correct the error below.')
         else:
             event_form = EventForm()
     else:
@@ -259,7 +253,6 @@ def event_add(request):
         event_form = EventForm(request.POST)
         if event_form.is_valid():
             event = event_form.save()
-            messages.success(request, 'Neue Veranstaltung angelegt')
             if settings.EMAIL_NOTIFICATION_ENABLE:
                 sendMailNewEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id)
             return redirect('/')
@@ -276,7 +269,6 @@ def settings_users_delete(request, user_id):
         if user != request.user:
             user.delete()
             return HttpResponse(status=200)
-    #return render(request, "settings_users.html", {"users": get_user_model().objects.all()})
 
 def settings_users(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
@@ -373,12 +365,12 @@ def username_check(name, event):
         if others == 0 and others_txt == 0:
             return True, ""
         else:
-            return False, name + " ist bereits eingetragen"
+            return False, name + _("already registered")
     else:
             if len(name) == 0:
-                return False, "Du musst einen Namen eingeben"
+                return False, _("You are required to enter a name")
             else:
-                return False, "Die max. Länge von 20 Zeichen wurde überschritten"
+                return False, _("Exceeding max. length")
 
 def event_participant_txt_modify(request, event_id, participant_txt_id):
     if request.user.is_staff:

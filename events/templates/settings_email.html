@@ -1,16 +1,15 @@
 {% extends "master.html" %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block title %}
-E-Mail (Einstellungen)
+    {% translate "Email and language settings" %}
 {% endblock %}
 
 {% block content %} 
-
-<form method="POST">
-{% csrf_token %}
-{{ settings_email_form|crispy }}                    
-<button class="btn btn-primary" type="submit">Ändern</button>
-</form>
-
+    <form method="POST">
+        {% csrf_token %}
+        {{ settings_email_form|crispy }}                    
+        <button class="btn btn-primary" type="submit">{% translate "Update" %}</button>
+    </form>
 {% endblock %}

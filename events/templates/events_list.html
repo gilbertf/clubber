@@ -1,8 +1,10 @@
 {% extends "master.html" %}
 {% load crispy_forms_tags %}
+{% load humanize %} 
+{% load i18n %}
 
 {% block title %}
-Treffen
+	{% translate Events %}
 {% endblock %}
 
 {% block content %}
@@ -24,7 +26,7 @@ Treffen
 
 	{% if not user.is_authenticated %}
 		<div class="alert alert-warning" role="alert">
-			Du kannst dich zu Veranstaltungen ohne Benutzerkonto anmelden. Das bedeutet jedoch, dass du deine Anmeldung im Nachhinein nicht mehr ändern kannst und auch keine Benachrichtigungen per E-Mail, z.B. für neue Treffen, erhälst. Zur Registrierung geht es <a href=/account/register>hier</a>.
+			{% translate "It is possible to register to events without an account. As consequence it is not possible to change your entry at a later time and you will not receive notification mails. To register click <a href=/account/register>here</a>." %}
 		</div>
 	{% endif %}
 	
@@ -36,13 +38,11 @@ Treffen
 						<div class="col-12 col-md-4 mb-5">
 							<div class="h5">
 								{% if day.0.daysFuture == 0 %}
-									Heute
+									{% translate "Today" %}
 								{% elif day.0.daysFuture == 1 %}
-									Morgen
-								{% elif day.0.daysFuture == 2 %}
-									Übermorgen
+									{% translate "Tomorrow" %}
 								{% else %}
-									in {{day.0.daysFuture}} Tagen
+									in {{ day.0.daysFuture|apnumber }} {% translate "days" %}
 								{% endif %}
 							</div>
 							<div class="h5">
@@ -68,6 +68,6 @@ Treffen
 			</div>
 		</div>
 	{% else %}
-		<p>Aktuell sind keine Treffen geplant.</p>
+		<p>{% translate "No scheduled events" %}</p>
 	{% endif %}
 {% endblock %}

@@ -1,16 +1,15 @@
 {% extends "master.html" %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block title %}
-Passwort ändern (Einstellungen)
+    {% translate "Change Password" %}
 {% endblock %}
 
 {% block content %} 
-
-<form method="POST">
-{% csrf_token %}
-{{ change_form|crispy }}                    
-<button class="btn btn-primary" type="submit">Ändern</button>
-</form>
-
+    <form method="POST">
+        {% csrf_token %}
+        {{ change_form|crispy }}                    
+        <button class="btn btn-primary" type="submit">{% translate "Update" %}</button>
+    </form>
 {% endblock %}

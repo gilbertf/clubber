@@ -1,4 +1,6 @@
-{% load humanize %} 
+{% load humanize %}
+{% load i18n %}
+
 <style>
 	.htmx-request #delete-name-txt-icon{
 	display:none;
@@ -32,46 +34,49 @@
 
 	<div class="col">
 		{% if event.typ.url != "" %}
-			<a href="{{ event.typ.url }}">Weitere Infos hier</a>
+		<a href="{{ event.typ.url }}"{% translate "Additional information" %}</a>
 		{% endif %}
 
 		{% if event.staff %}
 			<form method="post" action="/modify">
 				{% csrf_token %}
-				<button class="btn btn-primary" name="modify" value={{ event.id }}>Treffen bearbeiten
+				<button class="btn btn-primary" name="modify" value={{ event.id }}>{% translate "Modify event" %}
 				</button>
 			</form>
 		{% endif %}
 	</div>
 
 	{% if event.cancled %}
-		<div class="alert alert-danger my-2">Das Treffen wurde abgesagt</div>
+	<div class="alert alert-danger my-2">{% translate "This event is cancled" %}</div>
 	{% else %}
 		{% if event.organizer != None and event.missing_participants <= 0 %}
-			<div class="alert alert-success my-2">Das Treffen findet statt und wird von {{ event.organizer.username }} geleitet.</div>
+			<div class="alert alert-success my-2">{% translate "Event is confirmed and will be organized by" %} {{ event.organizer.username }}</div>
 		{% else %}
 			<div class="alert alert-warning my-2">
 				{% if event.organizer == None %}
 					{% if event.missing_participants <= 0 %}
-						Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch niemand gefunden hat der öffnen wird.
+						{% translate "Currently nobody has volunteered to organize this event." %}
 					{% else %}
-						Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch niemand gefunden hat der öffnen wird und noch nicht genügend Teilnehmery angemeldet sind.
+						{% translate "Currently nobody has volunteered to organize this event and not enough participants have registered." %}
 					{% endif %}
 				{% else %}
 					{% if event.missing_participants > 0 %}
-						{{ event.organizer.username }} ist bereit zu öffnen.Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch nicht genügend Teilnehmery angemeldet haben.
+					{{ event.organizer.username }} {% translate "is willing to open, but not enough particiants have registered yet." %}
 					{% endif %}
 				{% endif %}
 
 				{% if event.missing_participants > 0 %}
 					{% if event.missing_participants == 1 %}
-						Es fehlt noch eine Anmeldung.
+						{% translate "One missing participant" %}
 					{% else %}
-						Es fehlen noch {{ event.missing_participants|apnumber }} Anmeldungen.
+						Still {{ event.missing_participants|apnumber }} registrations are missing.
 					{% endif %}
 				{% endif %}
-				<br>
-				Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, ob das Treffen stattfindet.
+				{% if not event.organizer == request.user and not event.subs %}
+					<br>
+					{% translate "Nevertheless, please register if you want to join this event" %}
+				{% endif %}
+
 			</div>
 		{% endif %}
 	{% endif %}
@@ -80,24 +85,24 @@
 		{% if event.staff %}
 			<div class="col">
 				{% if event.organizer != request.user %}
-					<button class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">Ich öffne{% if event.organizer != None %} anstelle von {{ event.organizer }}{% endif %}</button>
+					<button class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will organize" %}{% if event.organizer != None %} {% translate "instead of" %} {{ event.organizer }}{% endif %}</button>
 				{% else %}
-					<button class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">Ich öffne nicht</button>
+					<button class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not organize" %}</button>
 				{% endif %}
 			</div>
 
 			<div class="col">
 				{% if event.cancled %}
-					<button class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">Treffen zusagen</button>
+					<button class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm event" %}</button>
 				{% else %}
-					<button class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">Treffen absagen</button>
+					<button class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle event" %}</button>
 				{% endif %}
 			</div>
 
 			{% if event.no_participants and event.cancled %}
 				<div class="col">
-					<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="Bist du dir sicher das dieses Treffen gelöscht werden soll?" hx-swap="delete"> 
-						<button class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">Treffen löschen</button>
+					<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
+						<button class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">{% translate "Delete event" %}</button>
 					</div>
 				</div>
 			{% endif %}
@@ -107,12 +112,12 @@
 	{% if not event.orga and event.auth %}
 		{% if event.subs %}
 			<div class="my-2"> 
-				<button class="btn btn-success" hx-post="{% url 'event_follow_unset' event.id %}">Teilnahme absagen</button>
+				<button class="btn btn-success" hx-post="{% url 'event_follow_unset' event.id %}">{% translate "Cancle participation" %}</button>
 			</div>
 		{% endif %}
 		{% if not event.subs and not event.full %}
 			<div class="my-2"> 
-				<button class="btn btn-primary" hx-post="{% url 'event_follow_set' event.id %}">Teilnahme zusagen</button>
+				<button class="btn btn-primary" hx-post="{% url 'event_follow_set' event.id %}">{% translate "Confirm participation" %}</button>
 			</div>
 		{% endif %}
 	{% endif %}
@@ -184,13 +189,13 @@
 				{% endif %}
 				<div class="my-2">
 					{% if event.freeSlots == 1 %}
-						Noch ein freier Platz
+						{% translate "One slot remaining" %}
 					{% elif event.freeSlots > 1 %}
-				     		Noch {{ event.freeSlots|apnumber }} freie Plätze
+						{% translate "Still" %} {{ event.freeSlots|apnumber }} {% translate "free slots" %}
 					{% elif event.freeSlots == 0 %}
-						Das Treffen ist komplett ausgebucht.
+						{% translate "No free slots remaining" %}
 					{% else %}
-						Das Treffen ist überbucht
+						{% translate "Too many registrations" %}
 				    {% endif %}
 				</div>
 			</li>
