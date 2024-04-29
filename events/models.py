@@ -43,7 +43,7 @@ class Person(AbstractBaseUser):
     email = models.CharField(max_length=50)
     USERNAME_FIELD = "username"
     EMAIL_FIELD = "email"
-    language = models.CharField(max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE)
+    language = models.CharField(max_length=10, choices=settings.LANGUAGES, default=settings.LANGUAGE_CODE, verbose_name=_("Language"))
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)

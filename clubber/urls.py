@@ -24,6 +24,6 @@ urlpatterns = [
     path("account/register", views.register_request, name="register"),
     path("login", views.login_request, name="login"),
     path("login/<int:user_id>", views.login_request, name="login"),
-    path("account/change", views.change_request, name="change"),
-    path("account/reset", views.reset_request, name="reset"),
+    path("account/change", views.password_change_request, name="change"),
+    path("account/reset", views.password_reset_request, name="reset"),
 ]

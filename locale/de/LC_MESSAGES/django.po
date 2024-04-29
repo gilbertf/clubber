@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-21 23:13+0200\n"
-"PO-Revision-Date: 2024-04-21 23:27+0200\n"
+"POT-Creation-Date: 2024-04-21 23:36+0200\n"
+"PO-Revision-Date: 2024-04-21 23:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -51,7 +51,7 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#: events/forms.py:21
+#: events/forms.py:21 events/models.py:46
 msgid "Language"
 msgstr "Sprache"
 
@@ -346,8 +346,9 @@ msgid "Manage users"
 msgstr "Benutzerverwaltung"
 
 #: events/templates/settings_users.html:44
-msgid "Confirm to delete {{ user }}"
-msgstr "Bist du sicher das der Nutzer {{ user }} gelöscht werden soll?\""
+#, python-format
+msgid "Confirm to delete user %(user)s"
+msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 
 #: events/templates/settings_users.html:46
 msgid "Delete user"

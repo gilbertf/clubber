@@ -1,5 +1,4 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import SetPasswordForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.forms import EmailField
@@ -7,7 +6,6 @@ from django.conf import settings
 from events.models import Person
 import django.contrib.auth.password_validation as password_validation
 from django.contrib.auth.password_validation import validate_password
-from django.core import validators
 from django.utils.translation import gettext_lazy as _
 
 class NewUserForm(forms.ModelForm):
@@ -52,18 +50,18 @@ class NewUserForm(forms.ModelForm):
             return user
         return user
 
-class ChangeForm(SetPasswordForm):
+class PasswordChangeForm(SetPasswordForm):
 	class Meta:
 		model = User
 		fields = ("password1", "password2")
 
 	def save(self, commit=True):
-		user = super(ChangeForm, self).save(commit=False)
+		user = super(PasswordChangeForm, self).save(commit=False)
 		if commit:
 			user.save()
 		return user
 
-class ResetForm(PasswordResetForm):
+class PasswordResetForm(PasswordResetForm):
     class Meta:
         model = User
         fields = ("email")

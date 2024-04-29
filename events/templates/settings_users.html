@@ -41,7 +41,7 @@
 			<div class="ms-2 me-auto">
 				{% if request.user.is_superuser and not request.user == user %}
 					<div class="">
-						<form hx-swap="delete" hx-target="#user-{{ user.id }}" hx-confirm="{% translate "Confirm to delete {{ user }}" %}">
+						<form hx-swap="delete" hx-target="#user-{{ user.id }}" hx-confirm="{% blocktranslate %}Confirm to delete user {{ user }}{% endblocktranslate%}">
 							{% csrf_token %}
 							<button class="mx-2 btn btn-danger" hx-post="/user/{{user.id }}/delete">{% translate "Delete user" %}</button>
 						</form>
