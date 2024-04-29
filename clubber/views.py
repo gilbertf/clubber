@@ -37,8 +37,11 @@ def login_request(request, user_id = None):
                  fm.fields["username"].initial = user.username
          return render(request, "registration/login.html", context={"form":fm})
 
+from django.utils import translation    
 def register_request(request):
     new_user_form = NewUserForm()
+    new_user_form["language"].initial = translation.get_language()
+
     if request.method == 'POST':
         new_user_form = NewUserForm(request.POST)
         if new_user_form.is_valid():

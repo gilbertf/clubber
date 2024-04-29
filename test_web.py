@@ -24,7 +24,7 @@ def register(self, usr, pwd, email):
 
     saveScreen(self, "home")
 
-    reg = self.driver.find_element(by = By.LINK_TEXT, value = "Registrieren")
+    reg = self.driver.find_element(By.ID, "btn_register")
     reg.click()
     saveScreen(self, "register_empty")
 
@@ -40,13 +40,13 @@ def register(self, usr, pwd, email):
     saveScreen(self, "register_redirect")
 
 def logout(self):
-    self.driver.find_element(By.LINK_TEXT, "Einstellungen").click()
+    self.driver.find_element(By.ID, "btn_settings").click()
     saveScreen(self, "logout_pre")
-    self.driver.find_element(By.LINK_TEXT, "Abmelden").click()
+    self.driver.find_element(By.ID, "btn_logout").click()
     saveScreen(self, "logout_post")
 
 def login(self, usr, pwd):
-    self.driver.find_element(By.LINK_TEXT, "Anmelden").click()
+    self.driver.find_element(By.ID, "btn_login").click()
     saveScreen(self, "login_empty")
     self.driver.find_element(By.ID, "id_username").send_keys(usr)
     self.driver.find_element(By.ID, "id_password").send_keys(pwd)
@@ -78,8 +78,8 @@ def runServer():
     return sp
 
 def newType(self, typ):
-    self.driver.find_element(By.LINK_TEXT, "Einstellungen").click()
-    self.driver.find_element(By.LINK_TEXT, "Veranstaltungsarten").click()
+    self.driver.find_element(By.ID, "btn_settings").click()
+    self.driver.find_element(By.ID, "btn_event_types").click()
     self.driver.find_element(By.ID,"btn_typ_add").click()
     self.driver.find_element(By.ID, "id_name").send_keys(typ)
     saveScreen(self, "new_type_full")
@@ -87,7 +87,7 @@ def newType(self, typ):
     saveScreen(self, "new_type_redirect")
 
 def newEvent(self,start_time, end_time):
-    self.driver.find_element(By.LINK_TEXT, "Neues Treffen").click()
+    self.driver.find_element(By.ID, "btn_event_add").click()
     saveScreen(self, "newEvent_empty")
     st = self.driver.find_element(By.ID,"id_start_time")
     self.driver.execute_script ("arguments[0].value='" + start_time + ":00';", st)
@@ -98,14 +98,35 @@ def newEvent(self,start_time, end_time):
     btn.click()
     saveScreen(self, "newEvent_redirect")
 
-def initDriver():
-    driver = webdriver.Chrome()
+def initDriverChrome():
+    from selenium.webdriver.chrome.options import Options
+    chrome_options = Options()
+    #chrome_options.add_argument("--lang=en")
+    chrome_options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+    chrome_options.add_argument("--lang=en")
+    driver = webdriver.Chrome(options=chrome_options)
     driver.maximize_window()
     driver.get("http://127.0.0.1:8000")
     driver.maximize_window()
     driver.implicitly_wait(3)
     return driver
 
+def initDriver():
+    # Set the desired language code 
+    language_code = "en" 
+    
+    # Set the language preference in the browser 
+    profile = webdriver.FirefoxProfile() 
+    profile.set_preference("intl.accept_languages", language_code) 
+    
+    # Start the browser with the modified profile 
+    driver = webdriver.Firefox() 
+
+    driver.get("http://127.0.0.1:8000")
+    driver.maximize_window()
+    driver.implicitly_wait(3)
+
+    return driver
 
 usr = "Nutzer"
 adm = "Admin"

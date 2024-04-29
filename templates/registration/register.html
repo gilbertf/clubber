@@ -3,13 +3,13 @@
 {% load i18n %}
 
 {% block title %}
-{% translate "Register" %}
+    {% translate "Register" %}
 {% endblock %}
 
-{% block content %} 
-<form method="POST">
-    {% csrf_token %}
-    {{ new_user_form|crispy }}                    
-    <button class="btn btn-primary" type="submit">{% translate "Register" %}</button>
-</form>
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ new_user_form|crispy }}                    
+        <button class="btn btn-primary" type="submit">{% translate "Register" %}</button>
+    </form>
 {% endblock %}
