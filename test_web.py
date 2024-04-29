@@ -1,8 +1,11 @@
+#!/usr/bin/env python3
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+import sys
 
 def gotoElement(driver, e):
     #Most likely "scroll-behavior: smooth" makes us miss the button to click on
@@ -12,7 +15,7 @@ def gotoElement(driver, e):
 
 def saveScreen(self, name):
     import os
-    p = "shots/" + unittest.TestCase.id(self).split(".")[2]
+    p = "screenshots/" + self.language + "/" + unittest.TestCase.id(self).split(".")[2]
     if not os.path.exists(p):
         os.makedirs(p)
     self.driver.save_screenshot(p + "/" + name + ".png")
@@ -125,15 +128,20 @@ def initDriver(language = "en"):
 usr = "Nutzer"
 adm = "Admin"
 pwd = "BananeZauberWelt"
+mail = "gilbert@erlangen.ccc.de"
 
 class WebInterface(unittest.TestCase):
+    language = "en"
+
     @classmethod
     def setUpClass(self):
+        if len(sys.argv) > 1:
+          self.language = sys.argv[1]
         self.server = runServer()
-        self.driver = initDriver(language="de")
+        self.driver = initDriver(self.language)
 
     def test_0_create_normal_user(self):
-        register(self, usr, pwd, "gilbert@erlangen.ccc.de")
+        register(self, usr, pwd, mail)
         logout(self)
 
     def test_1_login_logout_normal_user(self):
@@ -141,7 +149,7 @@ class WebInterface(unittest.TestCase):
         logout(self)
 
     def test_2_make_admin(self):
-        register(self, adm, pwd, "gilbert@erlangen.ccc.de")
+        register(self, adm, pwd, mail)
         logout(self)
         makeAdmin(adm)
 
@@ -167,5 +175,9 @@ class WebInterface(unittest.TestCase):
         self.driver.quit()
         self.server.terminate()
 
-if __name__ == "__main__":    
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        sys.exit("ERROR: A command-line parameter must be supplied for these tests")
+    WebInterface.language = sys.argv[1]
+    del sys.argv[1:]
     unittest.main()

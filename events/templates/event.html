@@ -69,7 +69,9 @@
 					{% if event.missing_participants == 1 %}
 						{% translate "One missing participant" %}
 					{% else %}
-						Still {{ event.missing_participants|apnumber }} registrations are missing.
+						{% blocktranslate %}
+							Still {{ event.missing_participants|apnumber }} registrations are missing.
+						{% endblocktranslate %}
 					{% endif %}
 				{% endif %}
 				{% if not event.organizer == request.user and not event.subs %}

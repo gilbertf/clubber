@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 09:52+0200\n"
-"PO-Revision-Date: 2024-04-29 09:52+0200\n"
+"POT-Creation-Date: 2024-04-29 21:00+0200\n"
+"PO-Revision-Date: 2024-04-29 21:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -50,7 +50,7 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#: events/forms.py:21 events/models.py:46
+#: events/forms.py:21 events/models.py:47
 msgid "Language"
 msgstr "Sprache"
 
@@ -70,53 +70,53 @@ msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
 msgid " does not start with http:// or https://"
 msgstr " beginnt nicht mit http:// oder https://"
 
-#: events/models.py:42
+#: events/models.py:43
 msgid "Username"
 msgstr "Benutzername"
 
-#: events/models.py:52
+#: events/models.py:53
 msgid "Notify on new events"
 msgstr "Benachrichtigung erhalten, wenn eine neues Treffen angeboten wird"
 
-#: events/models.py:53
+#: events/models.py:54
 msgid "Notify on changes to events you are registered"
 msgstr ""
 "Benachrichtigung, wenn sich Änderungen bei einer Veranstaltung ergeben bei "
 "welcher du angemeldet bist"
 
-#: events/models.py:61
+#: events/models.py:62
 msgid "Name"
 msgstr "Bezeichnung"
 
-#: events/models.py:62
+#: events/models.py:63
 msgid "Address (URL)"
 msgstr "Internetadresse (URL)"
 
-#: events/models.py:71
+#: events/models.py:72
 msgid "Event type"
 msgstr "Veranstaltungsart"
 
-#: events/models.py:72
+#: events/models.py:73
 msgid "Maximum number of participants"
 msgstr "Maximale Teilnehmerzahl"
 
-#: events/models.py:73
+#: events/models.py:74
 msgid "Minimal number of participants"
 msgstr "Minimale Teilnehmerzahl"
 
-#: events/models.py:74
+#: events/models.py:75
 msgid "Who is organizing?"
 msgstr "Wer öffnet?"
 
-#: events/models.py:75
+#: events/models.py:76
 msgid "Date"
 msgstr "Datum"
 
-#: events/models.py:76
+#: events/models.py:77
 msgid "Begin"
 msgstr "Begin"
 
-#: events/models.py:77
+#: events/models.py:78
 msgid "End"
 msgstr "Ende"
 
@@ -125,7 +125,7 @@ msgid "Additional information"
 msgstr "Zusätzliche Informationen"
 
 #: events/templates/event.html:43 events/templates/event_modify.html:6
-#: events/templates/event_modify.html:13
+#: events/templates/event_modify.html:12
 msgid "Modify event"
 msgstr "Treffen bearbeiten"
 
@@ -165,70 +165,83 @@ msgstr ""
 msgid "One missing participant"
 msgstr "Es fehlt noch eine Anmeldung"
 
-#: events/templates/event.html:77
+#: events/templates/event.html:72
+#, python-format
+msgid ""
+"\n"
+"\t\t\t\t\t\t\tStill %(event.missing_participants|apnumber)s registrations "
+"are missing.\n"
+"\t\t\t\t\t\t"
+msgstr ""
+"\n"
+"\t\t\t\t\t\t\tEs fehlen noch %(event.missing_participants|apnumber)s "
+"anmeldungen.\n"
+"\t\t\t\t\t\t"
+
+#: events/templates/event.html:79
 msgid "Nevertheless, please register if you want to join this event"
 msgstr ""
 "Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, "
 "ob das Treffen stattfindet"
 
-#: events/templates/event.html:88
+#: events/templates/event.html:90
 msgid "I will organize"
 msgstr "Ich öffne"
 
-#: events/templates/event.html:88
+#: events/templates/event.html:90
 msgid "instead of"
 msgstr "anstelle von"
 
-#: events/templates/event.html:90
+#: events/templates/event.html:92
 msgid "I will not organize"
 msgstr "Ich öffne nicht"
 
-#: events/templates/event.html:96
+#: events/templates/event.html:98
 msgid "Confirm event"
 msgstr "Treffen zusagen"
 
-#: events/templates/event.html:98
+#: events/templates/event.html:100
 msgid "Cancle event"
 msgstr "Treffen absagen"
 
-#: events/templates/event.html:104
+#: events/templates/event.html:106
 msgid "Confirm to delete this event"
 msgstr ""
 "Bist du dir sicher das dieses Treffen gelöscht werden soll? Bitte bestätigen"
 
-#: events/templates/event.html:105
+#: events/templates/event.html:107
 msgid "Delete event"
 msgstr "Treffen löschen"
 
-#: events/templates/event.html:115
+#: events/templates/event.html:117
 msgid "Cancle participation"
 msgstr "Teilnahme absagen"
 
-#: events/templates/event.html:120
+#: events/templates/event.html:122
 msgid "Confirm participation"
 msgstr "Teilnahme zusagen"
 
-#: events/templates/event.html:171
+#: events/templates/event.html:173
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:192
+#: events/templates/event.html:194
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:194
+#: events/templates/event.html:196
 msgid "Still"
 msgstr "Noch"
 
-#: events/templates/event.html:194
+#: events/templates/event.html:196
 msgid "free slots"
 msgstr "freie Plätze"
 
-#: events/templates/event.html:196
+#: events/templates/event.html:198
 msgid "No free slots remaining"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:198
+#: events/templates/event.html:200
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
@@ -236,27 +249,55 @@ msgstr "Das Treffen ist überbucht"
 msgid "New event"
 msgstr "Neues Treffen"
 
-#: events/templates/event_add.html:14
+#: events/templates/event_add.html:13
 #, python-format
 msgid ""
 "\n"
-"You have to create at least one event type first. Goto <a "
+"\t\t\tYou have to create at least one event type first. Goto <a "
 "href=%(typ_list_url)s>Event types</a> in the settings section.\n"
+"\t\t\t"
 msgstr ""
 "\n"
 "Du musst zuerst mindestens eine <a href=%(typ_list_url)s>Veranstaltungsart</"
-"a>in den Einstellungen  unter Veranstaltungsarten anlegen.\n"
+"a>in den Einstellungen  unter Veranstaltungsarten anlegen."
 
-#: events/templates/event_add.html:22
+#: events/templates/event_add.html:21
 msgid "Add event"
 msgstr "Neues Treffen anlegen"
 
-#: events/templates/event_modify.html:17
+#: events/templates/event_modify.html:16
+#: events/templates/events/typ_edit_form.html:13
 #: events/templates/settings_email.html:13
 #: templates/registration/password_change.html:13
-#: templates/registration/password_reset_confirm.html:15
+#: templates/registration/password_reset_confirm.html:14
 msgid "Update"
 msgstr "Aktualisieren"
+
+#: events/templates/events/typ_add_form.html:6
+#: events/templates/events/typ_list.html:36
+msgid "Add new event type"
+msgstr "Neue Veranstaltungsart anlegen"
+
+#: events/templates/events/typ_add_form.html:13
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: events/templates/events/typ_edit_form.html:6
+msgid "Modify event type"
+msgstr "Veranstaltungsart bearbeiten"
+
+#: events/templates/events/typ_list.html:5 events/templates/master.html:70
+msgid "Event types"
+msgstr "Veranstaltungsarten"
+
+#: events/templates/events/typ_list.html:21
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr "Löschen"
+
+#: events/templates/events/typ_list.html:25
+msgid "Modify"
+msgstr "Bearbeiten"
 
 #: events/templates/events_list.html:29
 msgid ""
@@ -320,10 +361,6 @@ msgstr "Abmelden"
 msgid "User management"
 msgstr "Benutzerverwaltung"
 
-#: events/templates/master.html:70
-msgid "Event types"
-msgstr "Veranstaltungsarten"
-
 #: events/templates/master.html:91
 msgid "Impressum"
 msgstr "Impressum"
@@ -353,15 +390,15 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:368
+#: events/views.py:370
 msgid " is already registered"
 msgstr " ist bereits eingetragen"
 
-#: events/views.py:371
+#: events/views.py:373
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:373
+#: events/views.py:375
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
@@ -405,13 +442,7 @@ msgstr ""
 "\n"
 "Du kannst dich jetzt <a href=\"%(login_url)s\">hier</a> anmelden.\n"
 
-#: templates/registration/password_reset_confirm.html:11
-msgid ""
-"Please enter your new password twice so we can verify you typed it in "
-"correctly."
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:18
+#: templates/registration/password_reset_confirm.html:17
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
@@ -1008,10 +1039,6 @@ msgstr[1] ""
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
 msgid "Order"
-msgstr ""
-
-#: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
-msgid "Delete"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:899
