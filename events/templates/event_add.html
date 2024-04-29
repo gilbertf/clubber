@@ -3,26 +3,24 @@
 {% load i18n %}
 
 {% block title %}
-{% translate "New event" %}
+	{% translate "New event" %}
 {% endblock %}
 
 {% block content %}
-
-{% if event_form %}
-{% if empty_type %}
-{% url "typ-list" as typ_list_url %}
-{% blocktranslate %}
-You have to create at least one event type first. Goto <a href={{typ_list_url}}>Event types</a> in the settings section.
-{% endblocktranslate %}
-{% else %}
-<div class="container text-left">
-	<form  method="post">
-		{% csrf_token %}
-		{{ event_form|crispy }}
-		<button class="btn btn-primary" id="btn_event_add_confirm" name="add" type="submit">{% translate "Add event" %}</button>
-	</form>
-</div>
-{% endif %}
-{% endif %}
-
+	{% if event_form %}
+		{% if empty_type %}
+			{% url "typ-list" as typ_list_url %}
+			{% blocktranslate %}
+			You have to create at least one event type first. Goto <a href={{typ_list_url}}>Event types</a> in the settings section.
+			{% endblocktranslate %}
+		{% else %}
+			<div class="container text-left">
+				<form  method="post">
+					{% csrf_token %}
+					{{ event_form|crispy }}
+					<button class="btn btn-primary" id="btn_event_add_confirm" name="add" type="submit">{% translate "Add event" %}</button>
+				</form>
+			</div>
+		{% endif %}
+	{% endif %}
 {% endblock %}
