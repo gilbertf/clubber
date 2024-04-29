@@ -19,7 +19,7 @@ You have to create at least one event type first. Goto <a href={{typ_list_url}}>
 	<form  method="post">
 		{% csrf_token %}
 		{{ event_form|crispy }}
-		<button class="btn btn-primary" name="add" type="submit">{% translate "Add event" %}</button>
+		<button class="btn btn-primary" id="btn_event_add_confirm" name="add" type="submit">{% translate "Add event" %}</button>
 	</form>
 </div>
 {% endif %}

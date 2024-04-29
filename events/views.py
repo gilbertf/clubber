@@ -33,6 +33,7 @@ class TypListView(ListView):
 
 class TypUpdateView(UserPassesTestMixin, UpdateView):
     model = Typ
+    template_name = "events/typ_edit_form.html"
     fields = ["name", "url"]
     success_url = reverse_lazy("typ-list")
     def test_func(self):
@@ -46,6 +47,7 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
 
 class TypAddView(UserPassesTestMixin, CreateView):
     model = Typ
+    template_name = "events/typ_add_form.html"
     fields = ["name", "url"]
     success_url = reverse_lazy("typ-list")
     def test_func(self):

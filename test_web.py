@@ -42,11 +42,11 @@ def register(self, usr, pwd, email):
 def logout(self):
     self.driver.find_element(By.LINK_TEXT, "Einstellungen").click()
     saveScreen(self, "logout_pre")
-    self.driver.find_element(By.LINK_TEXT, "Ausloggen").click()
+    self.driver.find_element(By.LINK_TEXT, "Abmelden").click()
     saveScreen(self, "logout_post")
 
 def login(self, usr, pwd):
-    self.driver.find_element(By.LINK_TEXT, "Einloggen").click()
+    self.driver.find_element(By.LINK_TEXT, "Anmelden").click()
     saveScreen(self, "login_empty")
     self.driver.find_element(By.ID, "id_username").send_keys(usr)
     self.driver.find_element(By.ID, "id_password").send_keys(pwd)
