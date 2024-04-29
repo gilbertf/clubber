@@ -98,29 +98,23 @@ def newEvent(self,start_time, end_time):
     btn.click()
     saveScreen(self, "newEvent_redirect")
 
-def initDriverChrome():
-    from selenium.webdriver.chrome.options import Options
-    chrome_options = Options()
-    #chrome_options.add_argument("--lang=en")
-    chrome_options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-    chrome_options.add_argument("--lang=en")
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.maximize_window()
-    driver.get("http://127.0.0.1:8000")
-    driver.maximize_window()
-    driver.implicitly_wait(3)
-    return driver
+# def initDriverChrome():
+#     from selenium.webdriver.chrome.options import Options
+#     chrome_options = Options()
+#     #chrome_options.add_argument("--lang=en")
+#     chrome_options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+#     chrome_options.add_argument("--lang=en")
+#     driver = webdriver.Chrome(options=chrome_options)
+#     driver.maximize_window()
+#     driver.get("http://127.0.0.1:8000")
+#     driver.maximize_window()
+#     driver.implicitly_wait(3)
+#     return driver
 
-def initDriver():
-    # Set the desired language code 
-    language_code = "en" 
-    
-    # Set the language preference in the browser 
-    profile = webdriver.FirefoxProfile() 
-    profile.set_preference("intl.accept_languages", language_code) 
-    
-    # Start the browser with the modified profile 
-    driver = webdriver.Firefox() 
+def initDriver(language = "en"):
+    fo = webdriver.FirefoxOptions();
+    fo.set_preference("intl.accept_languages", language) 
+    driver = webdriver.Firefox(fo)
 
     driver.get("http://127.0.0.1:8000")
     driver.maximize_window()
@@ -136,7 +130,7 @@ class WebInterface(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         self.server = runServer()
-        self.driver = initDriver()
+        self.driver = initDriver(language="de")
 
     def test_0_create_normal_user(self):
         register(self, usr, pwd, "gilbert@erlangen.ccc.de")
