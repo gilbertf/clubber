@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-21 23:36+0200\n"
-"PO-Revision-Date: 2024-04-21 23:37+0200\n"
+"POT-Creation-Date: 2024-04-29 09:52+0200\n"
+"PO-Revision-Date: 2024-04-29 09:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,27 +19,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: clubber/forms.py:15
+#: clubber/forms.py:13
 msgid "Password"
 msgstr "Passwort"
 
-#: clubber/forms.py:23
+#: clubber/forms.py:21
 msgid "Confirm password"
 msgstr "Passwort zur Bestätigung"
 
-#: clubber/forms.py:28 events/forms.py:20
+#: clubber/forms.py:26 events/forms.py:20
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
 msgid "Email address"
 msgstr "E-Mail Adresse"
 
-#: clubber/forms.py:28
+#: clubber/forms.py:26
 msgid "You can enable notifications on newly created or updated events"
 msgstr ""
 "Du erhälts Benachrichtigungen per E-Mail, z.B. wenn eine neues Treffen "
 "erstellt wurde"
 
-#: clubber/forms.py:44
+#: clubber/forms.py:42
 msgid "Password mismatch"
 msgstr "Passwörter stimmen nicht überein"
 
@@ -254,8 +253,8 @@ msgstr "Neues Treffen anlegen"
 
 #: events/templates/event_modify.html:17
 #: events/templates/settings_email.html:13
-#: templates/registration/change.html:13
-#: templates/registration/password_reset_confirm.html:34
+#: templates/registration/password_change.html:13
+#: templates/registration/password_reset_confirm.html:15
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -366,15 +365,28 @@ msgstr "Du musst einen Namen eingeben"
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
-#: templates/registration/change.html:6
-msgid "Change Password"
-msgstr "Passwort ändern"
-
 #: templates/registration/login.html:19
 msgid "You can reset you password <a href=/account/reset>here</a>."
 msgstr ""
 "Wenn Du dein Passwort vergessen hast kannst du es <a href=/account/"
 "reset>hier</a> zurücksetzen."
+
+#: templates/registration/password_change.html:6
+msgid "Change Password"
+msgstr "Passwort ändern"
+
+#: templates/registration/password_reset.html:6
+#: templates/registration/password_reset_confirm.html:6
+msgid "Reset password"
+msgstr "Passwort zurücksetzen"
+
+#: templates/registration/password_reset.html:13
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: templates/registration/password_reset.html:16
+msgid "You will receive further instructions via mail"
+msgstr "Du wirst weitere Anweisungen per E-Mail erhalten"
 
 #: templates/registration/password_reset_complete.html:6
 msgid "Password reset complete"
@@ -384,123 +396,102 @@ msgstr "Passwort wurde zurückgesetzt"
 msgid "Password reset successfull."
 msgstr "Dein Passwort wurde zurückgesetzt."
 
-#: templates/registration/password_reset_confirm.html:6
-msgid "Confirm password reset"
+#: templates/registration/password_reset_complete.html:13
+#, python-format
+msgid ""
+"\n"
+"You can now login <a href=\"%(login_url)s\">here</a>.\n"
 msgstr ""
+"\n"
+"Du kannst dich jetzt <a href=\"%(login_url)s\">hier</a> anmelden.\n"
 
 #: templates/registration/password_reset_confirm.html:11
-msgid "Home"
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:12
-msgid "Password reset confirmation"
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:19
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
 
-#: templates/registration/password_reset_confirm.html:26
-msgid "New password:"
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:31
-msgid "Confirm password:"
-msgstr ""
-
-#: templates/registration/password_reset_confirm.html:38
+#: templates/registration/password_reset_confirm.html:18
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
 
-#: templates/registration/reset.html:6
-msgid "Reset password"
-msgstr "Passwort zurücksetzen"
+#: templates/registration/password_reset_email.html:4
+msgid "Hello"
+msgstr "Hallo"
 
-#: templates/registration/reset.html:13
-msgid "Reset"
-msgstr "Zurücksetzen"
-
-#: templates/registration/reset.html:16
-msgid "You will receive further instructions via mail"
+#: templates/registration/password_reset_email.html:5
+#, python-format
+msgid ""
+"you're receiving this email because there was a request to reset your "
+"password for %(site_name)s."
 msgstr ""
+"du erhältst diese Nachricht da das Zurücksetzen deines Passworts auf "
+"%(site_name)s angefragt wurde."
+
+#: templates/registration/password_reset_email.html:7
+msgid "Please go to the following page and choose a new password:"
+msgstr "Bitte gehe auf folgende Seite um ein neues Passwort zu setzen:"
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
-#: venv_old/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/contrib/sitemaps/apps.py:8
-#: venv_old/lib/python3.12/site-packages/django/contrib/sitemaps/apps.py:8
 msgid "Site Maps"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/contrib/staticfiles/apps.py:9
-#: venv_old/lib/python3.12/site-packages/django/contrib/staticfiles/apps.py:9
 msgid "Static Files"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/contrib/syndication/apps.py:7
-#: venv_old/lib/python3.12/site-packages/django/contrib/syndication/apps.py:7
 msgid "Syndication"
 msgstr ""
 
 #. Translators: String used to replace omitted page numbers in elided page
 #. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:30
-#: venv_old/lib/python3.12/site-packages/django/core/paginator.py:30
 msgid "…"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:32
-#: venv_old/lib/python3.12/site-packages/django/core/paginator.py:32
 msgid "That page number is not an integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:33
-#: venv_old/lib/python3.12/site-packages/django/core/paginator.py:33
 msgid "That page number is less than 1"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/paginator.py:34
-#: venv_old/lib/python3.12/site-packages/django/core/paginator.py:34
 msgid "That page contains no results"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:22
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:22
 msgid "Enter a valid value."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:104
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:760
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:104
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:760
 msgid "Enter a valid URL."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:165
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:165
 msgid "Enter a valid integer."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:176
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:176
 msgid "Enter a valid email address."
 msgstr ""
 
 #. Translators: "letters" means latin letters: a-z and A-Z.
 #: venv/lib/python3.12/site-packages/django/core/validators.py:259
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:259
 msgid ""
 "Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:267
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:267
 msgid ""
 "Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
 "hyphens."
@@ -508,56 +499,44 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:279
 #: venv/lib/python3.12/site-packages/django/core/validators.py:306
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:279
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:306
 msgid "Enter a valid IPv4 address."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:286
 #: venv/lib/python3.12/site-packages/django/core/validators.py:307
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:286
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:307
 msgid "Enter a valid IPv6 address."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:298
 #: venv/lib/python3.12/site-packages/django/core/validators.py:305
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:298
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:305
 msgid "Enter a valid IPv4 or IPv6 address."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:341
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:341
 msgid "Enter only digits separated by commas."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:347
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:347
 #, python-format
 msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:382
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:382
 #, python-format
 msgid "Ensure this value is less than or equal to %(limit_value)s."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:391
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:391
 #, python-format
 msgid "Ensure this value is greater than or equal to %(limit_value)s."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:400
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:400
 #, python-format
 msgid "Ensure this value is a multiple of step size %(limit_value)s."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:407
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:407
 #, python-format
 msgid ""
 "Ensure this value is a multiple of step size %(limit_value)s, starting from "
@@ -565,7 +544,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:439
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:439
 #, python-format
 msgid ""
 "Ensure this value has at least %(limit_value)d character (it has "
@@ -577,7 +555,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:457
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:457
 #, python-format
 msgid ""
 "Ensure this value has at most %(limit_value)d character (it has "
@@ -591,14 +568,10 @@ msgstr[1] ""
 #: venv/lib/python3.12/site-packages/django/core/validators.py:480
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:355
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:394
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:480
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:355
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:394
 msgid "Enter a number."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:482
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:482
 #, python-format
 msgid "Ensure that there are no more than %(max)s digit in total."
 msgid_plural "Ensure that there are no more than %(max)s digits in total."
@@ -606,7 +579,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:487
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:487
 #, python-format
 msgid "Ensure that there are no more than %(max)s decimal place."
 msgid_plural "Ensure that there are no more than %(max)s decimal places."
@@ -614,7 +586,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:492
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:492
 #, python-format
 msgid ""
 "Ensure that there are no more than %(max)s digit before the decimal point."
@@ -624,7 +595,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:563
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:563
 #, python-format
 msgid ""
 "File extension “%(extension)s” is not allowed. Allowed extensions are: "
@@ -632,47 +602,38 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:624
-#: venv_old/lib/python3.12/site-packages/django/core/validators.py:624
 msgid "Null characters are not allowed."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/base.py:1473
 #: venv/lib/python3.12/site-packages/django/forms/models.py:906
-#: venv_old/lib/python3.12/site-packages/django/db/models/base.py:1473
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:906
 msgid "and"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/base.py:1475
-#: venv_old/lib/python3.12/site-packages/django/db/models/base.py:1475
 #, python-format
 msgid "%(model_name)s with this %(field_labels)s already exists."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/constraints.py:20
-#: venv_old/lib/python3.12/site-packages/django/db/models/constraints.py:20
 #, python-format
 msgid "Constraint “%(name)s” is violated."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:133
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:133
 #, python-format
 msgid "Value %(value)r is not a valid choice."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:134
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:134
 msgid "This field cannot be null."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:135
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:135
 msgid "This field cannot be blank."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:136
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:136
 #, python-format
 msgid "%(model_name)s with this %(field_label)s already exists."
 msgstr ""
@@ -680,53 +641,44 @@ msgstr ""
 #. Translators: The 'lookup_type' is one of 'date', 'year' or
 #. 'month'. Eg: "Title must be unique for pub_date year"
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:140
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:140
 #, python-format
 msgid ""
 "%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:179
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:179
 #, python-format
 msgid "Field of type: %(field_type)s"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1155
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1155
 #, python-format
 msgid "“%(value)s” value must be either True or False."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1156
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1156
 #, python-format
 msgid "“%(value)s” value must be either True, False, or None."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1158
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1158
 msgid "Boolean (Either True or False)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1208
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1208
 #, python-format
 msgid "String (up to %(max_length)s)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1210
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1210
 msgid "String (unlimited)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1314
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1314
 msgid "Comma-separated integers"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1415
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1415
 #, python-format
 msgid ""
 "“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
@@ -735,8 +687,6 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1419
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1554
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1419
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1554
 #, python-format
 msgid ""
 "“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
@@ -744,12 +694,10 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1423
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1423
 msgid "Date (without time)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1550
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1550
 #, python-format
 msgid ""
 "“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
@@ -757,7 +705,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1558
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1558
 #, python-format
 msgid ""
 "“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
@@ -765,23 +712,19 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1563
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1563
 msgid "Date (with time)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1690
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1690
 #, python-format
 msgid "“%(value)s” value must be a decimal number."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1692
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1692
 msgid "Decimal number"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1853
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1853
 #, python-format
 msgid ""
 "“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
@@ -789,98 +732,79 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1857
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1857
 msgid "Duration"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1934
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1934
 msgid "File path"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2012
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2012
 #, python-format
 msgid "“%(value)s” value must be a float."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2014
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2014
 msgid "Floating point number"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2054
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2054
 #, python-format
 msgid "“%(value)s” value must be an integer."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2056
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2056
 msgid "Integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2152
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2152
 msgid "Big (8 byte) integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2169
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2169
 msgid "Small integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2177
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2177
 msgid "IPv4 address"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2208
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2208
 msgid "IP address"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2301
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2302
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2301
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2302
 #, python-format
 msgid "“%(value)s” value must be either None, True or False."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2304
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2304
 msgid "Boolean (Either True, False or None)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2355
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2355
 msgid "Positive big integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2370
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2370
 msgid "Positive integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2385
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2385
 msgid "Positive small integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2401
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2401
 #, python-format
 msgid "Slug (up to %(max_length)s)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2437
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2437
 msgid "Text"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2512
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2512
 #, python-format
 msgid ""
 "“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
@@ -888,7 +812,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2516
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2516
 #, python-format
 msgid ""
 "“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
@@ -896,148 +819,119 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2520
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2520
 msgid "Time"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2628
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2628
 msgid "URL"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2652
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2652
 msgid "Raw binary data"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2717
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2717
 #, python-format
 msgid "“%(value)s” is not a valid UUID."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2719
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2719
 msgid "Universally unique identifier"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:232
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/files.py:232
 msgid "File"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:393
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/files.py:393
 msgid "Image"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:26
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/json.py:26
 msgid "A JSON object"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:28
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/json.py:28
 msgid "Value must be valid JSON."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:939
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/related.py:939
 #, python-format
 msgid "%(model)s instance with %(field)s %(value)r does not exist."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:941
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/related.py:941
 msgid "Foreign Key (type determined by related field)"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1235
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/related.py:1235
 msgid "One-to-one relationship"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1292
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/related.py:1292
 #, python-format
 msgid "%(from)s-%(to)s relationship"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1294
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/related.py:1294
 #, python-format
 msgid "%(from)s-%(to)s relationships"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1342
-#: venv_old/lib/python3.12/site-packages/django/db/models/fields/related.py:1342
 msgid "Many-to-many relationship"
 msgstr ""
 
 #. Translators: If found as last label character, these punctuation
 #. characters will prevent the default label_suffix to be appended to the label
 #: venv/lib/python3.12/site-packages/django/forms/boundfield.py:185
-#: venv_old/lib/python3.12/site-packages/django/forms/boundfield.py:185
 msgid ":?.!"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:95
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:95
 msgid "This field is required."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:304
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:304
 msgid "Enter a whole number."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:475
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1252
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:475
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:1252
 msgid "Enter a valid date."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:498
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1253
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:498
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:1253
 msgid "Enter a valid time."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:525
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:525
 msgid "Enter a valid date/time."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:559
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:559
 msgid "Enter a valid duration."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:560
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:560
 #, python-brace-format
 msgid "The number of days must be between {min_days} and {max_days}."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:629
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:629
 msgid "No file was submitted. Check the encoding type on the form."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:630
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:630
 msgid "No file was submitted."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:631
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:631
 msgid "The submitted file is empty."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:633
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:633
 #, python-format
 msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
 msgid_plural ""
@@ -1046,12 +940,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:638
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:638
 msgid "Please either submit a file or check the clear checkbox, not both."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:702
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:702
 msgid ""
 "Upload a valid image. The file you uploaded was either not an image or a "
 "corrupted image."
@@ -1060,9 +952,6 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:874
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:960
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1585
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:874
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:960
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:1585
 #, python-format
 msgid "Select a valid choice. %(value)s is not one of the available choices."
 msgstr ""
@@ -1070,41 +959,32 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:962
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1081
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1583
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:962
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:1081
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:1583
 msgid "Enter a list of values."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1082
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:1082
 msgid "Enter a complete value."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1321
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:1321
 msgid "Enter a valid UUID."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1351
-#: venv_old/lib/python3.12/site-packages/django/forms/fields.py:1351
 msgid "Enter a valid JSON."
 msgstr ""
 
 #. Translators: This is the default suffix added to form field labels
 #: venv/lib/python3.12/site-packages/django/forms/forms.py:94
-#: venv_old/lib/python3.12/site-packages/django/forms/forms.py:94
 msgid ":"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/forms.py:231
-#: venv_old/lib/python3.12/site-packages/django/forms/forms.py:231
 #, python-format
 msgid "(Hidden field %(name)s) %(error)s"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:61
-#: venv_old/lib/python3.12/site-packages/django/forms/formsets.py:61
 #, python-format
 msgid ""
 "ManagementForm data is missing or has been tampered with. Missing fields: "
@@ -1112,7 +992,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:65
-#: venv_old/lib/python3.12/site-packages/django/forms/formsets.py:65
 #, python-format
 msgid "Please submit at most %(num)d form."
 msgid_plural "Please submit at most %(num)d forms."
@@ -1120,7 +999,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:70
-#: venv_old/lib/python3.12/site-packages/django/forms/formsets.py:70
 #, python-format
 msgid "Please submit at least %(num)d form."
 msgid_plural "Please submit at least %(num)d forms."
@@ -1129,30 +1007,24 @@ msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
-#: venv_old/lib/python3.12/site-packages/django/forms/formsets.py:484
-#: venv_old/lib/python3.12/site-packages/django/forms/formsets.py:491
 msgid "Order"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
-#: venv_old/lib/python3.12/site-packages/django/forms/formsets.py:499
 msgid "Delete"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:899
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:899
 #, python-format
 msgid "Please correct the duplicate data for %(field)s."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:904
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:904
 #, python-format
 msgid "Please correct the duplicate data for %(field)s, which must be unique."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:911
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:911
 #, python-format
 msgid ""
 "Please correct the duplicate data for %(field_name)s which must be unique "
@@ -1160,28 +1032,23 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:920
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:920
 msgid "Please correct the duplicate values below."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1357
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:1357
 msgid "The inline value did not match the parent instance."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1448
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:1448
 msgid "Select a valid choice. That choice is not one of the available choices."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1587
-#: venv_old/lib/python3.12/site-packages/django/forms/models.py:1587
 #, python-format
 msgid "“%(pk)s” is not a valid value."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/utils.py:227
-#: venv_old/lib/python3.12/site-packages/django/forms/utils.py:227
 #, python-format
 msgid ""
 "%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
@@ -1189,45 +1056,36 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:461
-#: venv_old/lib/python3.12/site-packages/django/forms/widgets.py:461
 msgid "Clear"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:462
-#: venv_old/lib/python3.12/site-packages/django/forms/widgets.py:462
 msgid "Currently"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:463
-#: venv_old/lib/python3.12/site-packages/django/forms/widgets.py:463
 msgid "Change"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:800
-#: venv_old/lib/python3.12/site-packages/django/forms/widgets.py:800
 msgid "Unknown"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:801
-#: venv_old/lib/python3.12/site-packages/django/forms/widgets.py:801
 msgid "Yes"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/widgets.py:802
-#: venv_old/lib/python3.12/site-packages/django/forms/widgets.py:802
 msgid "No"
 msgstr ""
 
 #. Translators: Please do not add spaces around commas.
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:876
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:876
 msgid "yes,no,maybe"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:906
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:923
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:906
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:923
 #, python-format
 msgid "%(size)d byte"
 msgid_plural "%(size)d bytes"
@@ -1235,426 +1093,347 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:925
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:925
 #, python-format
 msgid "%s KB"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:927
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:927
 #, python-format
 msgid "%s MB"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:929
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:929
 #, python-format
 msgid "%s GB"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:931
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:931
 #, python-format
 msgid "%s TB"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:933
-#: venv_old/lib/python3.12/site-packages/django/template/defaultfilters.py:933
 #, python-format
 msgid "%s PB"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:74
-#: venv_old/lib/python3.12/site-packages/django/utils/dateformat.py:74
 msgid "p.m."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:75
-#: venv_old/lib/python3.12/site-packages/django/utils/dateformat.py:75
 msgid "a.m."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:80
-#: venv_old/lib/python3.12/site-packages/django/utils/dateformat.py:80
 msgid "PM"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:81
-#: venv_old/lib/python3.12/site-packages/django/utils/dateformat.py:81
 msgid "AM"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:153
-#: venv_old/lib/python3.12/site-packages/django/utils/dateformat.py:153
 msgid "midnight"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dateformat.py:155
-#: venv_old/lib/python3.12/site-packages/django/utils/dateformat.py:155
 msgid "noon"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:7
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:7
 msgid "Monday"
 msgstr "Montag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:8
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:8
 msgid "Tuesday"
 msgstr "Dienstag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:9
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:9
 msgid "Wednesday"
 msgstr "Mittwoch"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:10
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:10
 msgid "Thursday"
 msgstr "Donnerstag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:11
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:11
 msgid "Friday"
 msgstr "Freitag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:12
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:12
 msgid "Saturday"
 msgstr "Samstag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:13
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:13
 msgid "Sunday"
 msgstr "Sonntag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:16
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:16
 msgid "Mon"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:17
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:17
 msgid "Tue"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:18
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:18
 msgid "Wed"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:19
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:19
 msgid "Thu"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:20
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:20
 msgid "Fri"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:21
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:21
 msgid "Sat"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:22
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:22
 msgid "Sun"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:25
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:25
 msgid "January"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:26
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:26
 msgid "February"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:27
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:27
 msgid "March"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:28
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:28
 msgid "April"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:29
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:29
 msgid "May"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:30
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:30
 msgid "June"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:31
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:31
 msgid "July"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:32
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:32
 msgid "August"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:33
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:33
 msgid "September"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:34
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:34
 msgid "October"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:35
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:35
 msgid "November"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:36
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:36
 msgid "December"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:39
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:39
 msgid "jan"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:40
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:40
 msgid "feb"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:41
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:41
 msgid "mar"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:42
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:42
 msgid "apr"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:43
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:43
 msgid "may"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:44
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:44
 msgid "jun"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:45
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:45
 msgid "jul"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:46
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:46
 msgid "aug"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:47
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:47
 msgid "sep"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:48
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:48
 msgid "oct"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:49
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:49
 msgid "nov"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:50
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:50
 msgid "dec"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:53
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:53
 msgctxt "abbrev. month"
 msgid "Jan."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:54
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:54
 msgctxt "abbrev. month"
 msgid "Feb."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:55
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:55
 msgctxt "abbrev. month"
 msgid "March"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:56
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:56
 msgctxt "abbrev. month"
 msgid "April"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:57
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:57
 msgctxt "abbrev. month"
 msgid "May"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:58
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:58
 msgctxt "abbrev. month"
 msgid "June"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:59
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:59
 msgctxt "abbrev. month"
 msgid "July"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:60
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:60
 msgctxt "abbrev. month"
 msgid "Aug."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:61
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:61
 msgctxt "abbrev. month"
 msgid "Sept."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:62
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:62
 msgctxt "abbrev. month"
 msgid "Oct."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:63
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:63
 msgctxt "abbrev. month"
 msgid "Nov."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:64
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:64
 msgctxt "abbrev. month"
 msgid "Dec."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:67
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:67
 msgctxt "alt. month"
 msgid "January"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:68
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:68
 msgctxt "alt. month"
 msgid "February"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:69
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:69
 msgctxt "alt. month"
 msgid "March"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:70
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:70
 msgctxt "alt. month"
 msgid "April"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:71
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:71
 msgctxt "alt. month"
 msgid "May"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:72
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:72
 msgctxt "alt. month"
 msgid "June"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:73
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:73
 msgctxt "alt. month"
 msgid "July"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:74
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:74
 msgctxt "alt. month"
 msgid "August"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:75
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:75
 msgctxt "alt. month"
 msgid "September"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:76
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:76
 msgctxt "alt. month"
 msgid "October"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:77
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:77
 msgctxt "alt. month"
 msgid "November"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:78
-#: venv_old/lib/python3.12/site-packages/django/utils/dates.py:78
 msgctxt "alt. month"
 msgid "December"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/ipv6.py:8
-#: venv_old/lib/python3.12/site-packages/django/utils/ipv6.py:8
 msgid "This is not a valid IPv6 address."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/text.py:123
-#: venv_old/lib/python3.12/site-packages/django/utils/text.py:123
 #, python-format
 msgctxt "String to return when truncating text"
 msgid "%(truncated_text)s…"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/text.py:323
-#: venv_old/lib/python3.12/site-packages/django/utils/text.py:323
 msgid "or"
 msgstr ""
 
 #. Translators: This string is used as a separator between list elements
 #: venv/lib/python3.12/site-packages/django/utils/text.py:342
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:135
-#: venv_old/lib/python3.12/site-packages/django/utils/text.py:342
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:135
 msgid ", "
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:8
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:8
 #, python-format
 msgid "%(num)d year"
 msgid_plural "%(num)d years"
@@ -1662,7 +1441,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:9
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:9
 #, python-format
 msgid "%(num)d month"
 msgid_plural "%(num)d months"
@@ -1670,7 +1448,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:10
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:10
 #, python-format
 msgid "%(num)d week"
 msgid_plural "%(num)d weeks"
@@ -1678,7 +1455,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:11
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:11
 #, python-format
 msgid "%(num)d day"
 msgid_plural "%(num)d days"
@@ -1686,7 +1462,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:12
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:12
 #, python-format
 msgid "%(num)d hour"
 msgid_plural "%(num)d hours"
@@ -1694,7 +1469,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/utils/timesince.py:13
-#: venv_old/lib/python3.12/site-packages/django/utils/timesince.py:13
 #, python-format
 msgid "%(num)d minute"
 msgid_plural "%(num)d minutes"
@@ -1702,17 +1476,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:29
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:29
 msgid "Forbidden"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:30
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:30
 msgid "CSRF verification failed. Request aborted."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:34
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:34
 msgid ""
 "You are seeing this message because this HTTPS site requires a “Referer "
 "header” to be sent by your web browser, but none was sent. This header is "
@@ -1721,7 +1492,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:40
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:40
 msgid ""
 "If you have configured your browser to disable “Referer” headers, please re-"
 "enable them, at least for this site, or for HTTPS connections, or for “same-"
@@ -1729,7 +1499,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:45
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:45
 msgid ""
 "If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
 "including the “Referrer-Policy: no-referrer” header, please remove them. The "
@@ -1739,7 +1508,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:54
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:54
 msgid ""
 "You are seeing this message because this site requires a CSRF cookie when "
 "submitting forms. This cookie is required for security reasons, to ensure "
@@ -1747,56 +1515,44 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:60
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:60
 msgid ""
 "If you have configured your browser to disable cookies, please re-enable "
 "them, at least for this site, or for “same-origin” requests."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/csrf.py:66
-#: venv_old/lib/python3.12/site-packages/django/views/csrf.py:66
 msgid "More information is available with DEBUG=True."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:44
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:44
 msgid "No year specified"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:64
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:115
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:214
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:64
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:115
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:214
 msgid "Date out of range"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:94
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:94
 msgid "No month specified"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:147
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:147
 msgid "No day specified"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:194
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:194
 msgid "No week specified"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:349
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:380
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:349
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:380
 #, python-format
 msgid "No %(verbose_name_plural)s available"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:652
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:652
 #, python-format
 msgid ""
 "Future %(verbose_name_plural)s not available because %(class_name)s."
@@ -1804,41 +1560,34 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/dates.py:692
-#: venv_old/lib/python3.12/site-packages/django/views/generic/dates.py:692
 #, python-format
 msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/detail.py:56
-#: venv_old/lib/python3.12/site-packages/django/views/generic/detail.py:56
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/list.py:70
-#: venv_old/lib/python3.12/site-packages/django/views/generic/list.py:70
 msgid "Page is not “last”, nor can it be converted to an int."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/list.py:77
-#: venv_old/lib/python3.12/site-packages/django/views/generic/list.py:77
 #, python-format
 msgid "Invalid page (%(page_number)s): %(message)s"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/generic/list.py:169
-#: venv_old/lib/python3.12/site-packages/django/views/generic/list.py:169
 #, python-format
 msgid "Empty list and “%(class_name)s.allow_empty” is False."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/static.py:49
-#: venv_old/lib/python3.12/site-packages/django/views/static.py:49
 msgid "Directory indexes are not allowed here."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/static.py:51
-#: venv_old/lib/python3.12/site-packages/django/views/static.py:51
 #, python-format
 msgid "“%(path)s” does not exist"
 msgstr ""
@@ -1846,22 +1595,16 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/views/static.py:68
 #: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:8
 #: venv/lib/python3.12/site-packages/django/views/templates/directory_index.html:11
-#: venv_old/lib/python3.12/site-packages/django/views/static.py:68
-#: venv_old/lib/python3.12/site-packages/django/views/templates/directory_index.html:8
-#: venv_old/lib/python3.12/site-packages/django/views/templates/directory_index.html:11
 #, python-format
 msgid "Index of %(directory)s"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:7
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:220
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:7
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:220
 msgid "The install worked successfully! Congratulations!"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:206
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:206
 #, python-format
 msgid ""
 "View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
@@ -1869,7 +1612,6 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:221
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:221
 #, python-format
 msgid ""
 "You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
@@ -1879,34 +1621,35 @@ msgid ""
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:229
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:229
 msgid "Django Documentation"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:230
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:230
 msgid "Topics, references, &amp; how-to’s"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:238
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:238
 msgid "Tutorial: A Polling App"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:239
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:239
 msgid "Get started with Django"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:247
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:247
 msgid "Django Community"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
-#: venv_old/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#, python-format
+#~ msgid "Hello %(user.get_username)s,"
+#~ msgstr "Hallo %(user.get_username)s,"
+
+#~ msgid "Your username, in case you’ve forgotten:"
+#~ msgstr "Dein Benutzername, falls du diesen vergessen haben solltest:"
 
 #~ msgid "E-Mail"
 #~ msgstr "E-Mail"
