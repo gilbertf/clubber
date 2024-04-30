@@ -20,7 +20,7 @@ def saveScreen(self, name):
         os.makedirs(p)
     self.driver.save_screenshot(p + "/" + name + ".png")
 
-def register(self, usr, pwd, email):
+def register(self, usr, pwd, email, language):
     saveScreen(self, "home")
 
     reg = self.driver.find_element(By.ID, "btn_register")
@@ -31,6 +31,8 @@ def register(self, usr, pwd, email):
     self.driver.find_element(By.ID, "id_password1").send_keys(pwd)
     self.driver.find_element(By.ID, "id_password2").send_keys(pwd)
     self.driver.find_element(By.ID, "id_email").send_keys(email)
+    self.driver.find_element(By.ID, "id_language").send_keys(language)
+
     saveScreen(self, "register_full")
 
     btn = self.driver.find_element(by = By.CSS_SELECTOR, value=".btn")
@@ -151,7 +153,7 @@ def deleteEvent(self):
 def initDriver(language = "en"):
     fo = webdriver.FirefoxOptions();
     fo.set_preference("intl.accept_languages", language)
-    fo.set_preference("layout.css.devPixelsPerPx", str(0.5))
+    #fo.set_preference("layout.css.devPixelsPerPx", str(0.5))
     driver = webdriver.Firefox(fo)
     driver.get("http://127.0.0.1:8000")
     driver.maximize_window()
@@ -174,7 +176,7 @@ class WebInterface(unittest.TestCase):
         self.driver = initDriver(self.language)
 
     def test_0_create_normal_user(self):
-        register(self, usr, pwd, mail)
+        register(self, usr, pwd, mail, "Deutsch")
         logout(self)
 
     def test_1_login_logout_normal_user(self):
@@ -182,7 +184,7 @@ class WebInterface(unittest.TestCase):
         logout(self)
 
     def test_2_make_admin(self):
-        register(self, adm, pwd, mail)
+        register(self, adm, pwd, mail, "Englisch")
         logout(self)
         makeAdmin(adm)
 

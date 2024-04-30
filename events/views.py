@@ -25,6 +25,7 @@ from django.views.generic import UpdateView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django.utils import translation
 
 from datetime import date
 
@@ -146,8 +147,10 @@ def sendMail(d, plain, html, subject, participants = None, newEvent = False, cha
             if (user.email_notification_new_event and newEvent) or (user.email_notification_joined_event  and changeEvent):
                 d["user_id"] = user.id
                 d["username"] = user.username
+                translation.activate(user.language)
                 html_content = html.render(d)
                 text_content = plaintext.render(d)
+                translation.deactivate()
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
                 msg.attach_alternative(html_content, "text/html")
                 if newEventIcs != None:
