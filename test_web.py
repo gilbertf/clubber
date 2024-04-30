@@ -21,10 +21,6 @@ def saveScreen(self, name):
     self.driver.save_screenshot(p + "/" + name + ".png")
 
 def register(self, usr, pwd, email):
-    self.driver.get("http://127.0.0.1:8000")
-
-    self.driver.implicitly_wait(3)
-
     saveScreen(self, "home")
 
     reg = self.driver.find_element(By.ID, "btn_register")
@@ -89,7 +85,7 @@ def newType(self, typ):
     self.driver.find_element(By.ID,"btn_typ_add_confirm").click()
     saveScreen(self, "new_type_redirect")
 
-def newEvent(self,start_time, end_time):
+def newEvent(self, start_time, end_time):
     self.driver.find_element(By.ID, "btn_event_add").click()
     saveScreen(self, "newEvent_empty")
     st = self.driver.find_element(By.ID,"id_start_time")
@@ -101,6 +97,40 @@ def newEvent(self,start_time, end_time):
     btn.click()
     saveScreen(self, "newEvent_redirect")
 
+def modifyEvent(self, start_time, end_time):
+    self.driver.find_element(By.ID, "btn_event_modify").click()
+    saveScreen(self, "modifyEvent_open")
+    st = self.driver.find_element(By.ID,"id_start_time")
+    self.driver.execute_script ("arguments[0].value='" + start_time + ":00';", st)
+    et = self.driver.find_element(By.ID,"id_end_time")
+    self.driver.execute_script ("arguments[0].value='" + end_time + ":00';", et)
+    saveScreen(self, "modifyEvent_changed")
+    btn = self.driver.find_element(By.ID,"btn_event_modify_confirm")
+    gotoElement(self.driver, btn)
+    btn.click()
+    saveScreen(self, "modifyEvent_redirect")
+
+def participateEvent(self):
+    saveScreen(self, "participateEvent_0")
+    self.driver.find_element(By.ID, "btn_event_participate_set").click()
+    saveScreen(self, "participateEvent_1")
+    self.driver.find_element(By.ID, "btn_event_participate_unset").click()
+    saveScreen(self, "participateEvent_2")
+
+def cancleEvent(self):
+    saveScreen(self, "cancleEvent_0")
+    self.driver.find_element(By.ID, "btn_event_cancle_set").click()
+    saveScreen(self, "cancleEvent_1")
+    self.driver.find_element(By.ID, "btn_event_cancle_unset").click()
+    saveScreen(self, "cancleEvent_2")
+
+def deleteEvent(self):
+    saveScreen(self, "deleteEvent_0")
+    self.driver.find_element(By.ID, "btn_event_cancle_set").click()
+    saveScreen(self, "deleteEvent_1")
+    self.driver.find_element(By.ID, "btn_event_delete").click()
+    saveScreen(self, "deleteEvent_2")
+  
 # def initDriverChrome():
 #     from selenium.webdriver.chrome.options import Options
 #     chrome_options = Options()
@@ -116,13 +146,12 @@ def newEvent(self,start_time, end_time):
 
 def initDriver(language = "en"):
     fo = webdriver.FirefoxOptions();
-    fo.set_preference("intl.accept_languages", language) 
+    fo.set_preference("intl.accept_languages", language)
+    fo.set_preference("layout.css.devPixelsPerPx", str(0.5))
     driver = webdriver.Firefox(fo)
-
     driver.get("http://127.0.0.1:8000")
     driver.maximize_window()
     driver.implicitly_wait(3)
-
     return driver
 
 usr = "Nutzer"
@@ -170,14 +199,37 @@ class WebInterface(unittest.TestCase):
         newEvent(self,"19:00", "23:00")
         logout(self)
 
+    def test_6_modify_event(self):
+        login(self, adm, pwd)
+        modifyEvent(self, "10:00", "14:00")
+        logout(self)
+
+    def test_7_participate_event(self):
+        login(self, adm, pwd)
+        participateEvent(self)
+        logout(self)
+
+    def test_8_cancle_event(self):
+        login(self, adm, pwd)
+        cancleEvent(self)
+        logout(self)
+
+    def test_9_delete_event(self):
+        login(self, adm, pwd)
+        deleteEvent(self)
+        logout(self)
+
     @classmethod
     def tearDownClass(self):
         self.driver.quit()
         self.server.terminate()
 
 if __name__ == '__main__':
+    langs = ["en", "de"]
     if len(sys.argv) != 2:
-        sys.exit("ERROR: A command-line parameter must be supplied for these tests")
+        sys.exit("Specify language code on commandline: " + ", ".join(langs))
     WebInterface.language = sys.argv[1]
+    if WebInterface.language not in langs:
+        sys.exit("Require one of following lang codes: " + ", ".join(langs))
     del sys.argv[1:]
     unittest.main()

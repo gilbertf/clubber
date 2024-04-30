@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-29 21:00+0200\n"
-"PO-Revision-Date: 2024-04-29 21:04+0200\n"
+"POT-Creation-Date: 2024-04-29 21:12+0200\n"
+"PO-Revision-Date: 2024-04-29 21:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -167,81 +167,73 @@ msgstr "Es fehlt noch eine Anmeldung"
 
 #: events/templates/event.html:72
 #, python-format
-msgid ""
-"\n"
-"\t\t\t\t\t\t\tStill %(event.missing_participants|apnumber)s registrations "
-"are missing.\n"
-"\t\t\t\t\t\t"
-msgstr ""
-"\n"
-"\t\t\t\t\t\t\tEs fehlen noch %(event.missing_participants|apnumber)s "
-"anmeldungen.\n"
-"\t\t\t\t\t\t"
+msgid "Still %(number_participants_missing)s registrations are missing."
+msgstr "Es fehlen noch %(number_participants_missing)s Anmeldungen."
 
-#: events/templates/event.html:79
+#: events/templates/event.html:77
 msgid "Nevertheless, please register if you want to join this event"
 msgstr ""
 "Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, "
 "ob das Treffen stattfindet"
 
-#: events/templates/event.html:90
+#: events/templates/event.html:88
 msgid "I will organize"
 msgstr "Ich öffne"
 
-#: events/templates/event.html:90
+#: events/templates/event.html:88
 msgid "instead of"
 msgstr "anstelle von"
 
-#: events/templates/event.html:92
+#: events/templates/event.html:90
 msgid "I will not organize"
 msgstr "Ich öffne nicht"
 
-#: events/templates/event.html:98
+#: events/templates/event.html:96
 msgid "Confirm event"
 msgstr "Treffen zusagen"
 
-#: events/templates/event.html:100
+#: events/templates/event.html:98
 msgid "Cancle event"
 msgstr "Treffen absagen"
 
-#: events/templates/event.html:106
+#: events/templates/event.html:104
 msgid "Confirm to delete this event"
 msgstr ""
 "Bist du dir sicher das dieses Treffen gelöscht werden soll? Bitte bestätigen"
 
-#: events/templates/event.html:107
+#: events/templates/event.html:105
 msgid "Delete event"
 msgstr "Treffen löschen"
 
-#: events/templates/event.html:117
+#: events/templates/event.html:115
 msgid "Cancle participation"
 msgstr "Teilnahme absagen"
 
-#: events/templates/event.html:122
+#: events/templates/event.html:120
 msgid "Confirm participation"
 msgstr "Teilnahme zusagen"
 
-#: events/templates/event.html:173
+#: events/templates/event.html:171
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:194
+#: events/templates/event.html:192
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:196
+#: events/templates/event.html:194
 msgid "Still"
 msgstr "Noch"
 
-#: events/templates/event.html:196
+#: events/templates/event.html:194
 msgid "free slots"
 msgstr "freie Plätze"
 
-#: events/templates/event.html:198
+#: events/templates/event.html:196
 msgid "No free slots remaining"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:200
+#: events/templates/event.html:198
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
@@ -252,16 +244,13 @@ msgstr "Neues Treffen"
 #: events/templates/event_add.html:13
 #, python-format
 msgid ""
-"\n"
-"\t\t\tYou have to create at least one event type first. Goto <a "
-"href=%(typ_list_url)s>Event types</a> in the settings section.\n"
-"\t\t\t"
+"You have to create at least one event type first. Goto <a "
+"href=%(typ_list_url)s>event types</a> in the settings section."
 msgstr ""
-"\n"
 "Du musst zuerst mindestens eine <a href=%(typ_list_url)s>Veranstaltungsart</"
-"a>in den Einstellungen  unter Veranstaltungsarten anlegen."
+"a>in den Einstellungen unter Veranstaltungsarten anlegen."
 
-#: events/templates/event_add.html:21
+#: events/templates/event_add.html:19
 msgid "Add event"
 msgstr "Neues Treffen anlegen"
 
@@ -435,12 +424,8 @@ msgstr "Dein Passwort wurde zurückgesetzt."
 
 #: templates/registration/password_reset_complete.html:13
 #, python-format
-msgid ""
-"\n"
-"You can now login <a href=\"%(login_url)s\">here</a>.\n"
-msgstr ""
-"\n"
-"Du kannst dich jetzt <a href=\"%(login_url)s\">hier</a> anmelden.\n"
+msgid "You can now login <a href=\"%(login_url)s\">here</a>."
+msgstr "Du kannst dich jetzt <a href=\"%(login_url)s\">hier</a> anmelden."
 
 #: templates/registration/password_reset_confirm.html:17
 msgid ""
