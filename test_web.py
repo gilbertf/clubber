@@ -129,8 +129,12 @@ def deleteEvent(self):
     self.driver.find_element(By.ID, "btn_event_cancle_set").click()
     saveScreen(self, "deleteEvent_1")
     self.driver.find_element(By.ID, "btn_event_delete").click()
+    #saveScreen(self, "deleteEvent_2")
+    alert = self.driver.switch_to.alert
+    alert.accept()
     saveScreen(self, "deleteEvent_2")
-  
+    self.driver.switch_to.parent_frame
+
 # def initDriverChrome():
 #     from selenium.webdriver.chrome.options import Options
 #     chrome_options = Options()
