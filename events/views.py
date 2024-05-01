@@ -418,7 +418,8 @@ def event_cancle_set(request, event_id):
         event.cancled = True
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailCancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all() | get_user_model().objects.filter(id=event.organizer.id)
+            sendMailCancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
 
 def event_cancle_unset(request, event_id):
@@ -428,7 +429,8 @@ def event_cancle_unset(request, event_id):
         event.cancled = False
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailUncancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all() | get_user_model().objects.filter(id=event.organizer.id)
+            sendMailUncancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
 
 def event_open_set(request, event_id):
@@ -440,7 +442,8 @@ def event_open_set(request, event_id):
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailWillOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all() | get_user_model().objects.filter(id=event.organizer.id)
+            sendMailWillOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
 
 def event_open_unset(request, event_id):
@@ -450,5 +453,6 @@ def event_open_unset(request, event_id):
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailWillNotOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all() | get_user_model().objects.filter(id=event.organizer.id)
+            sendMailWillNotOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
