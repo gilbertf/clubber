@@ -132,12 +132,11 @@ def prepare_event_list(request):
     return structured_el
 
 def sendMail(d, plain, html, subject, participants = None, newEvent = False, changeEvent = False, newEventIcs = None):
-    plaintext = get_template(plain)
+    text = get_template(plain)
     html = get_template(html)
     subject = get_template(subject)
 
     from_email = settings.DEFAULT_FROM_EMAIL
-    subject = subject.render(d).strip()
 
     if participants == None:
         participants = get_user_model().objects.all()
@@ -148,17 +147,15 @@ def sendMail(d, plain, html, subject, participants = None, newEvent = False, cha
                 d["user_id"] = user.id
                 d["username"] = user.username
                 translation.activate(user.language)
-                html_content = html.render(d)
-                text_content = plaintext.render(d)
+                html_r = html.render(d)
+                text_r = text.render(d)
+                subject_r = subject.render(d).strip()
                 translation.deactivate()
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
-                msg.attach_alternative(html_content, "text/html")
+                msg = EmailMultiAlternatives(subject_r, text_r, from_email, [user.email])
+                msg.attach_alternative(html_r, "text/html")
                 if newEventIcs != None:
                     msg.attach("event.ics", newEventIcs, "text/calendar")
                 msg.send()
-
-def sendMailRegister():
-    sendMail(d, 'email_register.txt', 'email_register.html', 'email_register.subject')
 
 def sendMailNewEvent(date, start_time, end_time, typ, organizer, event_id):
     d = {

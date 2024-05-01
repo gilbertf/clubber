@@ -1,5 +1,3 @@
-Hallo {{ username }},
-das {{ typ }} am {{ date }} von {{ start_time }} - {{ end_time }} wird von {{ organizer }} geöffnet.
-
-Viele Grüße
-Gilbert
+{% load i18n %}
+{% blocktranslate %}Hello {{ username }},{% endblocktranslate %}
+{% blocktranslate %}the event "{{ typ }}" at {{ date }} from {{ start_time }} to {{ end_time }} will be opened.{% endblocktranslate %}

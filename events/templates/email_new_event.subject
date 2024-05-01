@@ -1,1 +1,2 @@
-Neues {{ typ }} am {{ date }} ab {{ start_time }} Uhr
+{% load i18n %}
+{% blocktranslate %}New {{ typ }} on {{ date }}{% endblocktranslate %}

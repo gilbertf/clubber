@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-30 17:02+0200\n"
-"PO-Revision-Date: 2024-04-30 17:03+0200\n"
+"POT-Creation-Date: 2024-05-01 23:26+0200\n"
+"PO-Revision-Date: 2024-05-01 23:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -120,16 +120,92 @@ msgstr "Begin"
 msgid "End"
 msgstr "Ende"
 
+#: events/templates/email_cancle_event.html:2
 #: events/templates/email_new_event.html:2
+#: events/templates/email_uncancle_event.html:2
+#: events/templates/email_will_not_open_event.html:2
+#: events/templates/email_will_open_event.html:2
+#, python-format
+msgid "Hello %(username)s,<br>"
+msgstr "Hallo %(username)s,<br>"
+
+#: events/templates/email_cancle_event.html:3
 #, python-format
 msgid ""
-"Hello %(username)s,<br>a new event of type \"%(typ)s\" at %(date)s from "
-"%(start_time)s to %(end_time)s is available. To join click <a "
-"href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>here</a>."
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
+"cancled."
 msgstr ""
-"Hallo %(username)s,<br>eine neue Veranstaltung der Art  \\\"%(typ)s\\\" am "
-"%(date)s von %(start_time)s bis %(end_time)s ist verfügbar. Zum anmelden "
-"bitte hier <a href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>bestätigen</a>."
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wurde abgesagt."
+
+#: events/templates/email_cancle_event.txt:2
+#: events/templates/email_new_event.txt:2
+#: events/templates/email_uncancle_event.txt:2
+#: events/templates/email_will_not_open_event.txt:2
+#: events/templates/email_will_open_event.txt:2
+#, python-format
+msgid "Hello %(username)s,"
+msgstr "Hallo %(username)s,"
+
+#: events/templates/email_cancle_event.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" on %(date)s from %(start_time)s till %(end_time)s is "
+"cancled."
+msgstr ""
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wurde abgesagt."
+
+#: events/templates/email_new_event.html:3
+#, python-format
+msgid ""
+"a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
+"available. To join click <a href=%(SITE_URL)s/join/%(user_id)s/"
+"%(event_id)s>here</a>."
+msgstr ""
+"eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s ist verfügbar. Zum anmelden hier <a href=%(SITE_URL)s/join/"
+"%(user_id)s/%(event_id)s>bestätigen</a>."
+
+#: events/templates/email_new_event.txt:3
+#, python-format
+msgid ""
+"a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
+"available. To join go to %(SITE_URL)s/join/%(user_id)s/%(event_id)s."
+msgstr ""
+"eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s ist verfügbar. Zum anmelden gehe zu %(SITE_URL)s/join/"
+"%(user_id)s/%(event_id)s."
+
+#: events/templates/email_uncancle_event.html:3
+#: events/templates/email_uncancle_event.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
+"confirmed."
+msgstr ""
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wurde bestätigt."
+
+#: events/templates/email_will_not_open_event.html:3
+#: events/templates/email_will_not_open_event.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
+"not be opened."
+msgstr ""
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wird nicht geöffnet."
+
+#: events/templates/email_will_open_event.html:3
+#: events/templates/email_will_open_event.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
+"be opened."
+msgstr ""
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wird geöffnet."
 
 #: events/templates/event.html:37
 msgid "Additional information"
@@ -1668,14 +1744,72 @@ msgid "Connect, get help, or contribute"
 msgstr ""
 
 #, python-format
-#~ msgid "Hello %(user.get_username)s,"
-#~ msgstr "Hallo %(user.get_username)s,"
+#~ msgid ""
+#~ "Hello %(username)s,\n"
+#~ "the event of type \"%(typ)s\" on %(date)s from %(start_time)s till "
+#~ "%(end_time)s is cancled."
+#~ msgstr ""
+#~ "Hallo %(username)s,\n"
+#~ "die Veranstaltung der Art \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s wurde abgesagt."
 
-#~ msgid "Your username, in case you’ve forgotten:"
-#~ msgstr "Dein Benutzername, falls du diesen vergessen haben solltest:"
+#, python-format
+#~ msgid ""
+#~ "Hello %(username)s,<br>a new event of type \"%(typ)s\" at %(date)s from "
+#~ "%(start_time)s to %(end_time)s is available. To join click <a "
+#~ "href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>here</a>."
+#~ msgstr ""
+#~ "Hallo %(username)s,<br>eine neue Veranstaltung der Art \"%(typ)s\" am "
+#~ "%(date)s von %(start_time)s bis %(end_time)s ist verfügbar. Zum anmelden "
+#~ "bitte hier <a href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>bestätigen</"
+#~ "a>."
 
-#~ msgid "E-Mail"
-#~ msgstr "E-Mail"
+#, python-format
+#~ msgid ""
+#~ "Hello %(username)s,<br>the event of type \"%(typ)s\" on %(date)s from "
+#~ "%(start_time)s till %(end_time)s is cancled."
+#~ msgstr ""
+#~ "Hallo %(username)s,<br>die Veranstaltung der Art \"%(typ)s\" am %(date)s "
+#~ "von %(start_time)s bis %(end_time)s wurde abgesagt."
 
-#~ msgid "Benachrichtigungseinstellungen aktualisiert!"
-#~ msgstr "Updated notification settings!"
+#, fuzzy, python-format
+#~| msgid ""
+#~| "Hello %(username)s,<br>a new event of type \"%(typ)s\" at %(date)s from "
+#~| "%(start_time)s to %(end_time)s is available. To join click <a "
+#~| "href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>here</a>."
+#~ msgid ""
+#~ "Hallo %(username)s,<br>das %(typ)s am %(date)s von %(start_time)s - "
+#~ "%(end_time)s wird stattfinden."
+#~ msgstr ""
+#~ "Hallo %(username)s,<br>eine neue Veranstaltung der Art \"%(typ)s\" am "
+#~ "%(date)s von %(start_time)s bis %(end_time)s ist verfügbar. Zum anmelden "
+#~ "bitte hier <a href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>bestätigen</"
+#~ "a>."
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "Hello %(username)s,<br>a new event of type \"%(typ)s\" at %(date)s from "
+#~| "%(start_time)s to %(end_time)s is available. To join click <a "
+#~| "href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>here</a>."
+#~ msgid ""
+#~ "Hallo %(username)s,<br>das %(typ)s am %(date)s von %(start_time)s - "
+#~ "%(end_time)s wird nicht geöffnet."
+#~ msgstr ""
+#~ "Hallo %(username)s,<br>eine neue Veranstaltung der Art \"%(typ)s\" am "
+#~ "%(date)s von %(start_time)s bis %(end_time)s ist verfügbar. Zum anmelden "
+#~ "bitte hier <a href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>bestätigen</"
+#~ "a>."
+
+#, fuzzy, python-format
+#~| msgid ""
+#~| "Hello %(username)s,<br>a new event of type \"%(typ)s\" at %(date)s from "
+#~| "%(start_time)s to %(end_time)s is available. To join click <a "
+#~| "href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>here</a>."
+#~ msgid ""
+#~ "Hallo %(username)s,<br>das %(typ)s am %(date)s von %(start_time)s - "
+#~ "%(end_time)s wird von %(organizer)s geöffnet."
+#~ msgstr ""
+#~ "Hallo %(username)s,<br>eine neue Veranstaltung der Art \"%(typ)s\" am "
+#~ "%(date)s von %(start_time)s bis %(end_time)s ist verfügbar. Zum anmelden "
+#~ "bitte hier <a href=%(SITE_URL)s/join/%(user_id)s/%(event_id)s>bestätigen</"
+#~ "a>."

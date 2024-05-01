@@ -1,1 +1,2 @@
-{{ typ }} am {{ date }} um {{ start_time }} wird stattfinden.
+{% load i18n %}
+{% blocktranslate %}{{ typ }} on {{ date }} confirmed{% endblocktranslate %}
