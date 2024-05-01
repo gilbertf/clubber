@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-01 23:26+0200\n"
-"PO-Revision-Date: 2024-05-01 23:27+0200\n"
+"POT-Creation-Date: 2024-05-01 23:33+0200\n"
+"PO-Revision-Date: 2024-05-01 23:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -396,8 +396,12 @@ msgid "Tomorrow"
 msgstr "Morgen"
 
 #: events/templates/events_list.html:45
+msgid "In"
+msgstr "In"
+
+#: events/templates/events_list.html:45
 msgid "days"
-msgstr "Tage"
+msgstr "Tagen"
 
 #: events/templates/events_list.html:71
 msgid "No scheduled events"
@@ -1298,51 +1302,51 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:25
 msgid "January"
-msgstr ""
+msgstr "Januar"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:26
 msgid "February"
-msgstr ""
+msgstr "Februar"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:27
 msgid "March"
-msgstr ""
+msgstr "März"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:28
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:29
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:30
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:31
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:32
 msgid "August"
-msgstr ""
+msgstr "August"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:33
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:34
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:35
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:36
 msgid "December"
-msgstr ""
+msgstr "Dezember"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:39
 msgid "jan"

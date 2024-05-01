@@ -42,7 +42,7 @@
 								{% elif day.0.daysFuture == 1 %}
 									{% translate "Tomorrow" %}
 								{% else %}
-									in {{ day.0.daysFuture|apnumber }} {% translate "days" %}
+									{% translate "In" %} {{ day.0.daysFuture|apnumber }} {% translate "days" %}
 								{% endif %}
 							</div>
 							<div class="h5">
