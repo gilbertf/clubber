@@ -45,59 +45,61 @@
 		{% endif %}
 	</div>
 
+	<div class="alert my-2">
+		<ul class="list-group">
+			<li class="list-group-item">
+				Event Administration<br>
+				{% if event.cancled %}
+					<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm" %}</button>
+				{% else %}
+					{% if event.organizer == None %}
+						<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}</button>
+					{% else %}
+						{% if event.organizer != request.user %}
+							<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %} {% translate "instead of" %} {{ event.organizer }}</button>
+						{% endif %}
+						<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
+					{% endif %}
+					<button id="btn_event_cancle_set" class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle" %}</button>
+				{% endif %}
+			</div>
+		</li>
+	</ul>
+
 	{% if event.cancled %}
-	<div class="alert alert-danger my-2">{% translate "This event is cancled" %}</div>
+		<div class="alert alert-danger my-2">
+			{% translate "This event is cancled" %}
+		</div>
 	{% else %}
 		{% if event.organizer != None and event.missing_participants <= 0 %}
-			<div class="alert alert-success my-2">{% blocktranslate %}Event is confirmed{% endblocktranslate %}</div>
+			<div class="alert alert-success my-2">
+				{% blocktranslate %}Event is confirmed{% endblocktranslate %}
+			</div>
 		{% else %}
-			<div class="alert alert-warning my-2">
-				{% if event.organizer == None %}
-					{% if event.missing_participants <= 0 %}
-						{% translate "Currently nobody has volunteered to open." %}
-					{% else %}
-						{% translate "Currently nobody has volunteered to open and not enough participants have registered." %}
-					{% endif %}
-				{% else %}
-					{% if event.missing_participants > 0 %}
-						{% translate "Not enough particiants have registered to this event yet." %}
-					{% endif %}
-				{% endif %}
+			{% if event.organizer == None %}
+				<div class="alert alert-warning my-2">
+							{% translate "Currently nobody has volunteered to open." %}
+				</div>
+			{% endif %}
 
-				{% if event.missing_participants > 0 %}
+			{% if event.missing_participants > 0 %}
+				<div class="alert alert-warning my-2">
 					{% if event.missing_participants == 1 %}
-						{% translate "One missing participant" %}
+						{% translate "One missing participant." %}
 					{% else %}
 						{% blocktranslate with number_participants_missing=event.missing_participants|apnumber %}Still {{number_participants_missing}} registrations are missing.{% endblocktranslate %}
 					{% endif %}
-				{% endif %}
-				{% if not event.organizer == request.user and not event.subs %}
-					<br>
-					{% translate "Nevertheless, please register if you want to join this event." %}
-				{% endif %}
-
-			</div>
+					{% if not event.organizer == request.user and not event.subs %}
+						<br>
+						{% translate "Nevertheless, please register if you want to join this event." %}
+					{% endif %}
+				</div>
+			{% endif %}
 		{% endif %}
 	{% endif %}
 
 	<div class="row align-items-center my-2">
 		{% if event.staff %}
-			<div class="col">
-				{% if event.organizer != request.user %}
-					<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}{% if event.organizer != None %} {% translate "instead of" %} {{ event.organizer }}{% endif %}</button>
-				{% else %}
-					<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
-				{% endif %}
-			</div>
-
-			<div class="col">
-				{% if event.cancled %}
-					<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm event" %}</button>
-				{% else %}
-					<button id="btn_event_cancle_set" class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle event" %}</button>
-				{% endif %}
-			</div>
-
 			{% if event.no_participants and event.cancled %}
 				<div class="col">
 					<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
@@ -114,7 +116,7 @@
 				<button id="btn_event_participate_unset" class="btn btn-success" hx-post="{% url 'event_follow_unset' event.id %}">{% translate "Cancle participation" %}</button>
 			</div>
 		{% endif %}
-		{% if not event.subs and not event.full %}
+		{% if not event.subs and not event.full and not event.cancled %}
 			<div class="my-2"> 
 				<button id="btn_event_participate_set" class="btn btn-primary" hx-post="{% url 'event_follow_set' event.id %}">{% translate "Confirm participation" %}</button>
 			</div>
