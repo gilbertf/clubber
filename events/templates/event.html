@@ -188,18 +188,18 @@
 						{% endif %}
 					</div>
 				{% endif %}
-				<div class="my-2">
-					{% if event.freeSlots == 1 %}
-						Noch ein freier Platz
-					{% elif event.freeSlots > 1 %}
-				     		Noch {{ event.freeSlots|apnumber }} freie Plätze
-					{% elif event.freeSlots == 0 %}
-						Das Treffen ist komplett ausgebucht.
-					{% else %}
-						Das Treffen ist überbucht
-				    {% endif %}
-				</div>
 			</li>
 		</ul>
+		<div class="my-2">
+			{% if event.freeSlots == 1 %}
+				Noch ein freier Platz
+			{% elif event.freeSlots > 1 %}
+					 Noch {{ event.freeSlots|apnumber }} freie Plätze
+			{% elif event.freeSlots == 0 %}
+				Das Treffen ist komplett ausgebucht.
+			{% else %}
+				Das Treffen ist überbucht
+			{% endif %}
+		</div>
 	</div>
 </div>
