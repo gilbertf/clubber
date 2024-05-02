@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-01 23:33+0200\n"
-"PO-Revision-Date: 2024-05-01 23:36+0200\n"
+"POT-Creation-Date: 2024-05-02 13:05+0200\n"
+"PO-Revision-Date: 2024-05-02 13:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -211,116 +211,86 @@ msgstr ""
 msgid "Additional information"
 msgstr "Zusätzliche Informationen"
 
-#: events/templates/event.html:43 events/templates/event_modify.html:6
-#: events/templates/event_modify.html:12
-msgid "Modify event"
-msgstr "Treffen bearbeiten"
+#: events/templates/event.html:64
+msgid "Confirm"
+msgstr "Zusagen"
 
-#: events/templates/event.html:49
+#: events/templates/event.html:67 events/templates/event.html:70
+msgid "I will open"
+msgstr "Ich öffne"
+
+#: events/templates/event.html:70
+msgid "instead of"
+msgstr "anstelle von"
+
+#: events/templates/event.html:72
+msgid "I will not open"
+msgstr "Ich öffne nicht"
+
+#: events/templates/event.html:74
+msgid "Cancle"
+msgstr "Absagen"
+
+#: events/templates/event.html:83
 msgid "This event is cancled"
 msgstr "Dieses Treffen wurde abgesagt"
 
-#: events/templates/event.html:52
-#, python-format
-msgid ""
-"Event is confirmed and will be organized by %(event.organizer.username)s"
-msgstr ""
-"Das Treffen findet statt und wird von %(event.organizer.username)s geleitet"
+#: events/templates/event.html:88
+msgid "Currently nobody has volunteered to open."
+msgstr "Es hat sich noch niemand gefunden der öffnen wird."
 
-#: events/templates/event.html:57
-msgid "Currently nobody has volunteered to organize this event."
-msgstr ""
-"Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch "
-"niemand gefunden hat der öffnen wird."
+#: events/templates/event.html:95
+msgid "One missing participant."
+msgstr "Es fehlt noch eine Anmeldung."
 
-#: events/templates/event.html:59
-msgid ""
-"Currently nobody has volunteered to organize this event and not enough "
-"participants have registered."
-msgstr ""
-"Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich noch "
-"niemand gefunden hat der öffnen wird und noch nicht genügend Teilnehmery "
-"angemeldet sind."
-
-#: events/templates/event.html:63
-msgid "is willing to open, but not enough particiants have registered yet."
-msgstr ""
-"ist bereit zu öffnen.Nach aktuellem Stand wird die Veranstaltung nicht "
-"stattfinden, da sich noch nicht genügend Teilnehmery angemeldet haben."
-
-#: events/templates/event.html:69
-msgid "One missing participant"
-msgstr "Es fehlt noch eine Anmeldung"
-
-#: events/templates/event.html:71
+#: events/templates/event.html:97
 #, python-format
 msgid "Still %(number_participants_missing)s registrations are missing."
 msgstr "Es fehlen noch %(number_participants_missing)s Anmeldungen."
 
-#: events/templates/event.html:76
-msgid "Nevertheless, please register if you want to join this event"
-msgstr ""
-"Trage dich gerne trotzdem schon ein und schaue vor Beginn noch einmal nach, "
-"ob das Treffen stattfindet"
+#: events/templates/event.html:101
+msgid "Nevertheless, please register if you want to join this event."
+msgstr "Trage dich gerne trotzdem schon ein."
 
-#: events/templates/event.html:87
-msgid "I will organize"
-msgstr "Ich öffne"
-
-#: events/templates/event.html:87
-msgid "instead of"
-msgstr "anstelle von"
-
-#: events/templates/event.html:89
-msgid "I will not organize"
-msgstr "Ich öffne nicht"
-
-#: events/templates/event.html:95
-msgid "Confirm event"
-msgstr "Treffen zusagen"
-
-#: events/templates/event.html:97
-msgid "Cancle event"
-msgstr "Treffen absagen"
-
-#: events/templates/event.html:103
+#: events/templates/event.html:110
 msgid "Confirm to delete this event"
 msgstr ""
 "Bist du dir sicher das dieses Treffen gelöscht werden soll? Bitte bestätigen"
 
-#: events/templates/event.html:104
+#: events/templates/event.html:111
 msgid "Delete event"
 msgstr "Treffen löschen"
 
-#: events/templates/event.html:114
+#: events/templates/event.html:120
 msgid "Cancle participation"
 msgstr "Teilnahme absagen"
 
-#: events/templates/event.html:119
+#: events/templates/event.html:125
 msgid "Confirm participation"
 msgstr "Teilnahme zusagen"
 
-#: events/templates/event.html:170
+#: events/templates/event.html:134
+msgid "opening"
+msgstr "öffnet"
+
+#: events/templates/event.html:182
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:191
+#: events/templates/event.html:204
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:193
-msgid "Still"
-msgstr "Noch"
+#: events/templates/event.html:206
+#, python-format
+msgid " %(num)s free slots remaining"
+msgstr "Noch %(num)s freie Plätze"
 
-#: events/templates/event.html:193
-msgid "free slots"
-msgstr "freie Plätze"
-
-#: events/templates/event.html:195
-msgid "No free slots remaining"
+#: events/templates/event.html:208
+msgid "No free slot available"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:197
+#: events/templates/event.html:210
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
@@ -340,6 +310,10 @@ msgstr ""
 #: events/templates/event_add.html:19
 msgid "Add event"
 msgstr "Neues Treffen anlegen"
+
+#: events/templates/event_modify.html:6 events/templates/event_modify.html:12
+msgid "Modify event"
+msgstr "Treffen bearbeiten"
 
 #: events/templates/event_modify.html:16
 #: events/templates/events/typ_edit_form.html:13
@@ -1746,6 +1720,32 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "Event is confirmed and will be organized by %(event.organizer.username)s"
+#~ msgstr ""
+#~ "Das Treffen findet statt und wird von %(event.organizer.username)s "
+#~ "geleitet"
+
+#~ msgid ""
+#~ "Currently nobody has volunteered to organize this event and not enough "
+#~ "participants have registered."
+#~ msgstr ""
+#~ "Nach aktuellem Stand wird die Veranstaltung nicht stattfinden, da sich "
+#~ "noch niemand gefunden hat der öffnen wird und noch nicht genügend "
+#~ "Teilnehmery angemeldet sind."
+
+#~ msgid "is willing to open, but not enough particiants have registered yet."
+#~ msgstr ""
+#~ "ist bereit zu öffnen.Nach aktuellem Stand wird die Veranstaltung nicht "
+#~ "stattfinden, da sich noch nicht genügend Teilnehmery angemeldet haben."
+
+#~ msgid "Still"
+#~ msgstr "Noch"
+
+#~ msgid "free slots"
+#~ msgstr "freie Plätze"
 
 #, python-format
 #~ msgid ""
