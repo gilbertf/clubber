@@ -119,6 +119,12 @@
 
 	<div class="my-2"> 
 		<ul class="list-group">
+			{% if event.organizer %}
+				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
+					{{ event.organizer.username }} (ich öffne)
+				</li>
+			{% endif %}
+
 			{% for p in event.participants.all %}
 				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
 					{% if not event.staff %}
