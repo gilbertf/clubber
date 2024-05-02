@@ -37,7 +37,7 @@
 		<a href="{{ event.typ.url }}"{% translate "Additional information" %}</a>
 		{% endif %}
 	</div>
-	
+
 	{% if event.staff %}
 		<div class="alert my-2">
 			<ul class="list-group">
@@ -45,34 +45,45 @@
 					<div class="container text-center">
 						<div class="row">
 							<div class="col">
-								Event Administration
+								{% translate "Event Administration" %}
 							</div>
+						</div>
+						<div class="row">
 							<div class="col">
 								<form method="post" action="/modify">
-									{% csrf_token %}
-									<button class="btn" id="btn_event_modify" name="modify" value={{ event.id }}>
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-											<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-											<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-										</svg>
-									</button>
+								{% csrf_token %}
+								<button class="btn mx-2 btn-lg" id="btn_event_modify" name="modify" value={{ event.id }}>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square icon-baseline" viewBox="0 0 16 16">
+										<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+										<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+									</svg>
+								</button>
 								</form>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col">
+								{% if event.cancled %}
+									<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm" %}</button>
+									{% if event.staff and event.no_participants %}
+										<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
+											<button id="btn_event_delete" class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">{% translate "Delete event" %}</button>
+										</div>
+								{% endif %}
+								{% else %}
+									{% if event.organizer == None %}
+										<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}</button>
+									{% else %}
+										{% if event.organizer != request.user %}
+											<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %} {% translate "instead of" %} {{ event.organizer }}</button>
+										{% endif %}
+										<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
+									{% endif %}
+									<button id="btn_event_cancle_set" class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle" %}</button>
+								{% endif %}
+							</div>
+						</div>
 					</div>
-					{% if event.cancled %}
-						<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm" %}</button>
-					{% else %}
-						{% if event.organizer == None %}
-							<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}</button>
-						{% else %}
-							{% if event.organizer != request.user %}
-								<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %} {% translate "instead of" %} {{ event.organizer }}</button>
-							{% endif %}
-							<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
-						{% endif %}
-						<button id="btn_event_cancle_set" class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle" %}</button>
-					{% endif %}
 				</li>
 			</ul>
 		</div>
@@ -104,16 +115,6 @@
 		{% endif %}
 	{% endif %}
 
-		{% if event.staff and event.no_participants and event.cancled %}
-			<div class="row align-items-center my-2">
-				<div class="col">
-					<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
-						<button id="btn_event_delete" class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">{% translate "Delete event" %}</button>
-					</div>
-				</div>
-			</div>
-		{% endif %}
-
 	{% if not event.orga and event.auth %}
 		{% if event.subs %}
 			<div class="my-2"> 
@@ -131,7 +132,7 @@
 		<ul class="list-group">
 			{% if event.organizer %}
 				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
-					{{ event.organizer.username }} ({% translate "opening" %})
+					{{ event.organizer.username }} ({% translate "opens" %})
 				</li>
 			{% endif %}
 
