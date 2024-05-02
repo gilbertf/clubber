@@ -49,18 +49,18 @@
 	<div class="alert alert-danger my-2">{% translate "This event is cancled" %}</div>
 	{% else %}
 		{% if event.organizer != None and event.missing_participants <= 0 %}
-			<div class="alert alert-success my-2">{% blocktranslate %}Event is confirmed and will be organized by {{ event.organizer.username }}{% endblocktranslate %}</div>
+			<div class="alert alert-success my-2">{% blocktranslate %}Event is confirmed{% endblocktranslate %}</div>
 		{% else %}
 			<div class="alert alert-warning my-2">
 				{% if event.organizer == None %}
 					{% if event.missing_participants <= 0 %}
-						{% translate "Currently nobody has volunteered to organize this event." %}
+						{% translate "Currently nobody has volunteered to open." %}
 					{% else %}
-						{% translate "Currently nobody has volunteered to organize this event and not enough participants have registered." %}
+						{% translate "Currently nobody has volunteered to open and not enough participants have registered." %}
 					{% endif %}
 				{% else %}
 					{% if event.missing_participants > 0 %}
-					{{ event.organizer.username }} {% translate "is willing to open, but not enough particiants have registered yet." %}
+						{% translate "Not enough particiants have registered to this event yet." %}
 					{% endif %}
 				{% endif %}
 
@@ -73,7 +73,7 @@
 				{% endif %}
 				{% if not event.organizer == request.user and not event.subs %}
 					<br>
-					{% translate "Nevertheless, please register if you want to join this event" %}
+					{% translate "Nevertheless, please register if you want to join this event." %}
 				{% endif %}
 
 			</div>
@@ -84,9 +84,9 @@
 		{% if event.staff %}
 			<div class="col">
 				{% if event.organizer != request.user %}
-					<button class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will organize" %}{% if event.organizer != None %} {% translate "instead of" %} {{ event.organizer }}{% endif %}</button>
+					<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}{% if event.organizer != None %} {% translate "instead of" %} {{ event.organizer }}{% endif %}</button>
 				{% else %}
-					<button class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not organize" %}</button>
+					<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
 				{% endif %}
 			</div>
 
@@ -123,6 +123,12 @@
 
 	<div class="my-2"> 
 		<ul class="list-group">
+			{% if event.organizer %}
+				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
+					{{ event.organizer.username }} ({% translate "opening" %})
+				</li>
+			{% endif %}
+
 			{% for p in event.participants.all %}
 				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
 					{% if not event.staff %}
@@ -186,18 +192,17 @@
 						{% endif %}
 					</div>
 				{% endif %}
-				<div class="my-2">
-					{% if event.freeSlots == 1 %}
-						{% translate "One slot remaining" %}
-					{% elif event.freeSlots > 1 %}
-						{% translate "Still" %} {{ event.freeSlots|apnumber }} {% translate "free slots" %}
-					{% elif event.freeSlots == 0 %}
-						{% translate "No free slots remaining" %}
-					{% else %}
-						{% translate "Too many registrations" %}
-				    {% endif %}
-				</div>
-			</li>
 		</ul>
+		<div class="my-2">
+			{% if event.freeSlots == 1 %}
+				{% translate "One slot remaining" %}
+			{% elif event.freeSlots > 1 %}
+				{% translate "Still" %} {{ event.freeSlots|apnumber }} {% translate "free slots" %}
+			{% elif event.freeSlots == 0 %}
+				{% translate "No free slots remaining" %}
+			{% else %}
+				{% translate "Too many registrations" %}
+			{% endif %}
+		</div>
 	</div>
 </div>
