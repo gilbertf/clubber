@@ -1,9 +1,9 @@
 {% extends "master.html" %}
 {% load crispy_forms_tags %}
-
+{% load i18n %}
 
 {% block title %}
-Benutzerverwaltung (Einstellungen)
+	{% translate "User management" %}
 {% endblock %}
 
 {% block content %}
@@ -11,18 +11,18 @@ Benutzerverwaltung (Einstellungen)
 	{% for user in users %}
 		<li class="list-group-item d-flex justify-content-between align-items-start" id="user-{{ user.id }}">
 			<div class="ms-2 me-auto">
-	      			<div class="fw-bold">{{ user }} {% if request.user == user %} (du selber){% endif %}</div>
+	      			<div class="fw-bold">{{ user }} {% if request.user == user %} ({% translate "you" %}){% endif %}</div>
 				{{ user.email }}
 
 				<form method="post" id="form-user-{{ user.username }}" action="/users">
 					{% csrf_token %}
 					<div class="form-check form-switch">
 						<input class="form-check-input" type="checkbox" id="cb-{{ user.username }}" name="admin-events" role="switch" {% if user.is_staff %}checked{% endif %} {% if request.user == user or user.is_superuser %}disabled{% endif %}>
-						<label class="form-check-label">Veranstaltungen anlegen und bearbeiten</label>
+						<label class="form-check-label">{% translate "Manage events" %}</label>
 					</div>
 					<div class="form-check form-switch">
 						<input class="form-check-input" type="checkbox" id="cb2-{{ user.username }}" name="admin-users" role="switch" {% if user.is_superuser %}checked{% endif %} {% if request.user == user %}disabled{% endif %}>
-					 	<label class="form-check-label">Benutzer verwalten</label>
+					 	<label class="form-check-label">{% translate "Manage users" %}</label>
 					</div>
 					<input type="text" name="user_id" value={{ user.id }} hidden>
 				</form>
@@ -30,21 +30,20 @@ Benutzerverwaltung (Einstellungen)
 				<script>
 					$(document).ready(function(){
 						$("#cb-{{ user.username }}").change(function(){
-							$("#form-user-{{ user.username }}").submit(); // Submit the form
+							$("#form-user-{{ user.username }}").submit();
 						});
 						$("#cb2-{{ user.username }}").change(function(){
-							$("#form-user-{{ user.username }}").submit(); // Submit the form
+							$("#form-user-{{ user.username }}").submit();
 						});
 					});
 				</script>
-
 			</div>
 			<div class="ms-2 me-auto">
 				{% if request.user.is_superuser and not request.user == user %}
 					<div class="">
-						<form hx-swap="delete" hx-target="#user-{{ user.id }}" hx-confirm="Bist du sicher das der Nutzer {{ user }} gelöscht werden soll?">
+						<form hx-swap="delete" hx-target="#user-{{ user.id }}" hx-confirm="{% blocktranslate %}Confirm to delete user {{ user }}{% endblocktranslate%}">
 							{% csrf_token %}
-							<button class="mx-2 btn btn-danger" hx-post="/user/{{user.id }}/delete">Benutzer löschen</button>
+							<button class="mx-2 btn btn-danger" hx-post="/user/{{user.id }}/delete">{% translate "Delete user" %}</button>
 						</form>
 					</div>
 				{% endif %}
@@ -52,6 +51,4 @@ Benutzerverwaltung (Einstellungen)
 		</li>
 	{% endfor %}
 </ol>
-
-
 {% endblock %}

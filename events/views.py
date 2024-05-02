@@ -24,6 +24,8 @@ from django.views.generic import DeleteView
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+from django.utils import translation
 
 from datetime import date
 
@@ -32,6 +34,7 @@ class TypListView(ListView):
 
 class TypUpdateView(UserPassesTestMixin, UpdateView):
     model = Typ
+    template_name = "events/typ_edit_form.html"
     fields = ["name", "url"]
     success_url = reverse_lazy("typ-list")
     def test_func(self):
@@ -45,6 +48,7 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
 
 class TypAddView(UserPassesTestMixin, CreateView):
     model = Typ
+    template_name = "events/typ_add_form.html"
     fields = ["name", "url"]
     success_url = reverse_lazy("typ-list")
     def test_func(self):
@@ -55,10 +59,7 @@ def settings_email(request):
         settings_email_form = EmailNotificationsForm(request.POST, instance=request.user)
         if settings_email_form.is_valid():
             settings_email_form.save()
-            messages.success(request, 'Benachrichtigungseinstellungen aktualisiert!')
-            return redirect('/')
-        else:
-            messages.error(request, 'Bitte untenstehenden Fehler beachten.')
+        return redirect('/')
     else:
         settings_email_form = EmailNotificationsForm(instance=request.user)
     return render(request, "settings_email.html", context={"settings_email_form":settings_email_form})
@@ -80,7 +81,6 @@ def event_join(request, user_id, event_id):
         event = Event.objects.filter(id = event_id).get()
         addUserToEvent(user, event)
     else:
-        print('Du bist nicht oder unter falschem Benutzernamen angemeldet')
         logout(request)
         return redirect("/login/" + str(user_id) + "?next=" + request.path)
     return HttpResponseRedirect('/event/' + str(event_id) + "/show")
@@ -132,12 +132,11 @@ def prepare_event_list(request):
     return structured_el
 
 def sendMail(d, plain, html, subject, participants = None, newEvent = False, changeEvent = False, newEventIcs = None):
-    plaintext = get_template(plain)
+    text = get_template(plain)
     html = get_template(html)
     subject = get_template(subject)
 
     from_email = settings.DEFAULT_FROM_EMAIL
-    subject = subject.render(d).strip()
 
     if participants == None:
         participants = get_user_model().objects.all()
@@ -147,16 +146,16 @@ def sendMail(d, plain, html, subject, participants = None, newEvent = False, cha
             if (user.email_notification_new_event and newEvent) or (user.email_notification_joined_event  and changeEvent):
                 d["user_id"] = user.id
                 d["username"] = user.username
-                html_content = html.render(d)
-                text_content = plaintext.render(d)
-                msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
-                msg.attach_alternative(html_content, "text/html")
+                translation.activate(user.language)
+                html_r = html.render(d)
+                text_r = text.render(d)
+                subject_r = subject.render(d).strip()
+                translation.deactivate()
+                msg = EmailMultiAlternatives(subject_r, text_r, from_email, [user.email])
+                msg.attach_alternative(html_r, "text/html")
                 if newEventIcs != None:
                     msg.attach("event.ics", newEventIcs, "text/calendar")
                 msg.send()
-
-def sendMailRegister():
-    sendMail(d, 'email_register.txt', 'email_register.html', 'email_register.subject')
 
 def sendMailNewEvent(date, start_time, end_time, typ, organizer, event_id):
     d = {
@@ -240,10 +239,7 @@ def event_modify(request):
                 event = event_form.save()
                 removeUserFromEvent(request.user, event)
                 event.save()
-                messages.success(request, 'Veranstaltung aktualisiert!')
                 return redirect('/')
-            else:
-                messages.error(request, 'Please correct the error below.')
         else:
             event_form = EventForm()
     else:
@@ -259,7 +255,6 @@ def event_add(request):
         event_form = EventForm(request.POST)
         if event_form.is_valid():
             event = event_form.save()
-            messages.success(request, 'Neue Veranstaltung angelegt')
             if settings.EMAIL_NOTIFICATION_ENABLE:
                 sendMailNewEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id)
             return redirect('/')
@@ -276,7 +271,6 @@ def settings_users_delete(request, user_id):
         if user != request.user:
             user.delete()
             return HttpResponse(status=200)
-    #return render(request, "settings_users.html", {"users": get_user_model().objects.all()})
 
 def settings_users(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
@@ -373,12 +367,12 @@ def username_check(name, event):
         if others == 0 and others_txt == 0:
             return True, ""
         else:
-            return False, name + " ist bereits eingetragen"
+            return False, name + _(" is already registered")
     else:
             if len(name) == 0:
-                return False, "Du musst einen Namen eingeben"
+                return False, _("You are required to enter a name")
             else:
-                return False, "Die max. Länge von 20 Zeichen wurde überschritten"
+                return False, _("Exceeding max. length")
 
 def event_participant_txt_modify(request, event_id, participant_txt_id):
     if request.user.is_staff:
@@ -422,9 +416,13 @@ def event_cancle_set(request, event_id):
     advanceEvent(request, event)
     if request.user.is_staff:
         event.cancled = True
+        event.organizer = None
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailCancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all()
+            if event.organizer != None:
+                persons |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMailCancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
 
 def event_cancle_unset(request, event_id):
@@ -434,7 +432,10 @@ def event_cancle_unset(request, event_id):
         event.cancled = False
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailUncancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all()
+            if event.organizer != None:
+                persons |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMailUncancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
 
 def event_open_set(request, event_id):
@@ -446,7 +447,10 @@ def event_open_set(request, event_id):
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailWillOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all()
+            if event.organizer != None:
+                persons |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMailWillOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
 
 def event_open_unset(request, event_id):
@@ -456,5 +460,8 @@ def event_open_unset(request, event_id):
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMailWillNotOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, event.participants.all())
+            persons = event.participants.all()
+            if event.organizer != None:
+                persons |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMailWillNotOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
     return render(request, 'event.html', {'event': event})
