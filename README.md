@@ -1,5 +1,5 @@
 # Clubber
-Es handelt sich um ein primitives Buchungssystem welches aktuell zur Veranstaltungsorganisation des MeerManege e. V. Zirkusvereins eingesetzt wird. Die Benutzerschnittstelle ist nur in deutscher Sprache verfügbar.
+A simple booking system, details will follow.
 
 ## Installation 
 Create python environment, e.g. in /var/clubber
@@ -54,3 +54,4 @@ In this nginx configuration example the django instance on TCP port 8888 is expo
 
 ## Event Flow Diagram
 ![Event flow diagram](eventFlow.svg)
+![Event flow diagram](eventFlow.mm)
