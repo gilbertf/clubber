@@ -53,4 +53,4 @@ In this nginx configuration example the django instance on TCP port 8888 is expo
 
 
 ## Event Flow Diagram
-!(eventFlow.svg)
+![Event flow diagram](eventFlow.svg)
