@@ -29,12 +29,12 @@ strict digraph {
     spno -> spno [label="c3|"]
     mpos -> c [label="c6|m4"]
     mpos -> fbos [label="c3|m1,m7"]
-    mpno -> fbno [label="c3|m1,m3,m7"]
+    mpno -> fbno [label="c3|m3,m7"]
     mpno -> c [label="c6|m4"]
     spos -> c [label="c6|m4"]
     spos -> spos [label="c3|"]
-    c -> mpno [label="c7|m5"]
-    c -> spno [label="c7|m3,m5"]
+    c -> mpno [label="c7|m2"]
+    c -> spno [label="c7|m2,m3"]
     c -> d [label="c8|"]
     i -> spos [label="c5|m6"]
     i -> spno [label="c5|m6"]
@@ -43,9 +43,9 @@ strict digraph {
     i -> fbno [label="c5|m3,m6,m7"]
     i -> fbos [label="c5|m6,m7"]
 
-    condition [shape=record, label="{Condition|c1 Organizer set\lc2 Organizer reset\lc3 Participant added\lc4 Participant removed\lc5 New event created\lc6 Event cancled\lc7 Event cancle undone\lc8 Event deleted\lc9 p_min increased to p_min\>p\lc10 p_min decreased to p_min\≤p\lc11 p_max increased to p_max\> p\lc12 p_max decreased to p_max\≤p\l}"]
+    condition [shape=record, label="{Condition|c1 Organizer set\lc2 Organizer reset\lc3 Participant added\lc4 Participant removed\lc5 New event created\lc6 Event cancled\lc8 Event deleted\lc9 pₘᵢₙ increased to pₘᵢₙ\>p\lc10 pₘᵢₙ decreased to pₘᵢₙ\≤p\lc11 pₘₐₓ increased to pₘₐₓ\> p\lc12 pₘₐₓ decreased to pₘₐₓ\≤p\l}"]
     mail [shape=record, label="{Mail messages|m1 'Confirmed open' to all participants and organizer of event\lm2 'Pending if open' to all participants and organizer of event'\lm3 'Event with sufficient participants is missing organizer' to all organizers\lm4 'Cancled' to all participants and organizer of event\lm5 'Not cancled' to all participants and organizer of event\lm6 'New event' to all accounts\lm7 'Fully booked' to all organizers\l}"]
-    participants [shape=record, label="{Participants p\lp\≥0\n0\≤p_min\≤p_max|Missing participants\lp\<p_min\nSufficient participants\lp\≥p_min\np\<p_max\nFully booked\lp\≥p_max}"]
+    participants [shape=record, label="{Participants p\lp\≥0\n0\≤pₘᵢₙ\≤pₘₐₓ|Missing participants\lp\<pₘᵢₙ\nSufficient participants\lp\≥pₘᵢₙ\np\<pₘₐₓ\nFully booked\lp\≥pₘₐₓ}"]
 
 edge[ style=invis]
 mail -> condition -> participants
