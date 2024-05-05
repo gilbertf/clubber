@@ -131,17 +131,22 @@ def prepare_event_list(request):
 
     return structured_el
 
-def sendMail(d, plain, html, subject, participants = None, newEvent = False, changeEvent = False, newEventIcs = None):
-    text = get_template(plain)
-    html = get_template(html)
-    subject = get_template(subject)
+def sendMail(event, mailTemplate, mailReceivers, newEvent = False, changeEvent = False, newEventIcs = None):
+    d = {
+        'date' : event.date,
+        "start_time" : event.start_time ,
+        "end_time" : event.end_time,
+        "typ" : event.typ,
+        "event_id" : event.id,
+    }
+    
+    text = get_template(mailTemplate + ".txt")
+    html = get_template(mailTemplate + ".html")
+    subject = get_template(mailTemplate + ".subject")
 
     from_email = settings.DEFAULT_FROM_EMAIL
 
-    if participants == None:
-        participants = get_user_model().objects.all()
-
-    for user in participants:
+    for user in mailReceivers:
         if user.email != None and len(user.email) > 0:
             if (user.email_notification_new_event and newEvent) or (user.email_notification_joined_event  and changeEvent):
                 d["user_id"] = user.id
@@ -157,67 +162,18 @@ def sendMail(d, plain, html, subject, participants = None, newEvent = False, cha
                     msg.attach("event.ics", newEventIcs, "text/calendar")
                 msg.send()
 
-def sendMailNewEvent(date, start_time, end_time, typ, organizer, event_id):
-    d = {
-        'date' : date,
-        "start_time" : start_time ,
-        "end_time" : end_time,
-        "typ" : typ,
-        "event_id" : event_id,
-    }
-
+def makeIcsForEvent(event):
     cal = ics.Calendar()
-    event = ics.Event()
-    event.name = str(typ)
-    dt = datetime(date.year, date.month, date.day, start_time.hour, start_time.minute, tzinfo=pytz.timezone("Europe/Berlin"))
-    event.begin = dt
-    dt = datetime(date.year, date.month, date.day, end_time.hour, end_time.minute, tzinfo=pytz.timezone("Europe/Berlin"))
-    event.end = dt
-    event.location = settings.EMAIL_EVENT_LOCATION
-    event.url = settings.EMAIL_SITE_URL + "/event/" + str(event_id) + "/show"
-    cal.events.add(event)
-
-    sendMail(d, 'email_new_event.txt', 'email_new_event.html', 'email_new_event.subject', newEvent = True, newEventIcs = cal.serialize())
-
-def sendMailCancleEvent(date, start_time, end_time, typ, organizer, event_id, participants):
-    d = {
-        'date' : date,
-        "start_time" : start_time ,
-        "end_time" : end_time,
-        "typ" : typ,
-        "event_id" : event_id,
-    }
-    sendMail(d, 'email_cancle_event.txt', 'email_cancle_event.html', 'email_cancle_event.subject', participants, changeEvent = True)
-
-def sendMailUncancleEvent(date, start_time, end_time, typ, organizer, event_id, participants):
-    d = {
-        'date' : date,
-        "start_time" : start_time ,
-        "end_time" : end_time,
-        "typ" : typ,
-        "event_id" : event_id,
-    }
-    sendMail(d, 'email_uncancle_event.txt', 'email_uncancle_event.html', 'email_uncancle_event.subject', participants, changeEvent = True)
-
-def sendMailWillOpenEvent(date, start_time, end_time, typ, organizer, event_id, participants):
-    d = {
-        'date' : date,
-        "start_time" : start_time ,
-        "end_time" : end_time,
-        "typ" : typ,
-        "event_id" : event_id,
-    }
-    sendMail(d, 'email_will_open_event.txt', 'email_will_open_event.html', 'email_will_open_event.subject', participants, changeEvent = True)
-    
-def sendMailWillNotOpenEvent(date, start_time, end_time, typ, organizer, event_id, participants):
-    d = {
-        'date' : date,
-        "start_time" : start_time ,
-        "end_time" : end_time,
-        "typ" : typ,
-        "event_id" : event_id,
-    }
-    sendMail(d, 'email_will_not_open_event.txt', 'email_will_not_open_event.html', 'email_will_not_open_event.subject', participants, changeEvent = True)
+    calEvent = ics.Event()
+    calEvent.name = str(event.typ)
+    dt = datetime(event.date.year, event.date.month, event.date.day, event.start_time.hour, event.start_time.minute, tzinfo=pytz.timezone("Europe/Berlin"))
+    calEvent.begin = dt
+    dt = datetime(event.date.year, event.date.month, event.date.day, event.end_time.hour, event.end_time.minute, tzinfo=pytz.timezone("Europe/Berlin"))
+    calEvent.end = dt
+    calEvent.location = settings.EMAIL_EVENT_LOCATION
+    calEvent.url = settings.EMAIL_SITE_URL + "/event/" + str(event.id) + "/show"
+    cal.events.add(calEvent)
+    return cal.serialize()
 
 def event_modify(request):
     if not request.user.is_authenticated:
@@ -256,7 +212,8 @@ def event_add(request):
         if event_form.is_valid():
             event = event_form.save()
             if settings.EMAIL_NOTIFICATION_ENABLE:
-                sendMailNewEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id)
+                mailReceivers = get_user_model().objects.all()
+                sendMail(event, 'email_new_event', mailReceivers, newEvent = True, newEventIcs = makeIcsForEvent(event))
             return redirect('/')
 
     context = dict()
@@ -419,10 +376,10 @@ def event_cancle_set(request, event_id):
         event.organizer = None
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            persons = event.participants.all()
+            mailReceivers = event.participants.all()
             if event.organizer != None:
-                persons |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMailCancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
+                mailReceivers |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMail(event, 'email_cancle_event', mailReceivers, changeEvent = True)
     return render(request, 'event.html', {'event': event})
 
 def event_cancle_unset(request, event_id):
@@ -432,10 +389,10 @@ def event_cancle_unset(request, event_id):
         event.cancled = False
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            persons = event.participants.all()
+            mailReceivers = event.participants.all()
             if event.organizer != None:
-                persons |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMailUncancleEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
+                mailReceivers |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMail(event, 'email_uncancle_event', mailReceivers, changeEvent = True)
     return render(request, 'event.html', {'event': event})
 
 def event_open_set(request, event_id):
@@ -447,10 +404,10 @@ def event_open_set(request, event_id):
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            persons = event.participants.all()
+            mailReceivers = event.participants.all()
             if event.organizer != None:
-                persons |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMailWillOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
+                mailReceivers |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMail(event, 'email_will_open_event', mailReceivers, changeEvent = True)
     return render(request, 'event.html', {'event': event})
 
 def event_open_unset(request, event_id):
@@ -460,8 +417,8 @@ def event_open_unset(request, event_id):
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            persons = event.participants.all()
+            mailReceivers = event.participants.all()
             if event.organizer != None:
-                persons |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMailWillNotOpenEvent(event.date, event.start_time, event.end_time, event.typ, event.organizer, event.id, persons)
+                mailReceivers |= get_user_model().objects.filter(id=event.organizer.id)
+            sendMail(event, 'email_will_not_open_event', mailReceivers, changeEvent = True)
     return render(request, 'event.html', {'event': event})
