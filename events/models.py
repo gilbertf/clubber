@@ -80,16 +80,48 @@ class Event(models.Model):
     participants_txt = models.ManyToManyField(NameTxt, through="JoinedTxt")
     cancled = models.BooleanField(default=False)
 
-    def is_empty(self):
-        if len(self.participants.all()) + len(self.participants_txt.all()) == 0:
-            return 1
-        return 0
-
-    def num_participants(self):
+    @property
+    def numParticipants(self):
         return len(self.participants.all()) + len(self.participants_txt.all())
+    
+    @property
+    def noParticipants(self):
+        if self.numParticipants == 0:
+            return True
+        return False
+    
+    @property
+    def fullyBooked(self):
+        return self.numParticipants >= self.max_participants
+    
+    @property
+    def freeSlots(self):
+            return self.max_participants - self.numParticipants
+    
+    @property
+    def missingParticipants(self):
+        return self.min_participants - self.numParticipants
+    
+    @property
+    def sufficientParticipants(self):
+        if self.missingParticipants <= 0:
+            return True
+        return False
 
-    def is_full(self):
-       return self.num_participants() >= self.max_participants #Max. Teilnehmeranzahl berücksichtigen
+    # def updateStats(self):
+    #     self.numParticipants = len(self.participants.all()) + len(self.participants_txt.all())
+    #     self.fullyBooked = self.numParticipants >= self.max_participants
+    #     if self.numParticipants == 0:
+    #         self.noParticipants = True
+    #     else:
+    #         self.noParticipants = False
+    #     self.freeSlots = self.max_participants - self.numParticipants
+    #     self.missingParticipants = self.min_participants - self.numParticipants
+    #     if self.missingParticipants <= 0:
+    #         self.sufficientParticipants = True
+    #     else:
+    #         self.sufficientParticipants = False
+
 
 class Joined(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
