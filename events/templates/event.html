@@ -38,7 +38,7 @@
 		{% endif %}
 	</div>
 
-	{% if event.staff %}
+	{% if event.userIsStaff %}
 		<div class="alert my-2">
 			<ul class="list-group">
 				<li class="list-group-item">
@@ -65,7 +65,7 @@
 							<div class="col">
 								{% if event.cancled %}
 									<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm" %}</button>
-									{% if event.staff and event.no_participants %}
+									{% if event.userIsStaff and event.noParticipants %}
 										<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
 											<button id="btn_event_delete" class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">{% translate "Delete event" %}</button>
 										</div>
@@ -89,6 +89,7 @@
 		</div>
 	{% endif %}
 
+		
 	{% if event.cancled %}
 		<div class="alert alert-danger my-2">
 			{% translate "This event is cancled" %}
@@ -100,14 +101,14 @@
 			</div>
 		{% endif %}
 
-		{% if event.missing_participants > 0 %}
+		{% if event.missingParticipants > 0 %}
 			<div class="alert alert-warning my-2">
-				{% if event.missing_participants == 1 %}
+				{% if event.missingParticipants == 1 %}
 					{% translate "One missing participant." %}
 				{% else %}
-					{% blocktranslate with number_participants_missing=event.missing_participants|apnumber %}Still {{number_participants_missing}} registrations are missing.{% endblocktranslate %}
+					{% blocktranslate with number_participants_missing=event.missingParticipants|apnumber %}Still {{number_participants_missing}} registrations are missing.{% endblocktranslate %}
 				{% endif %}
-				{% if not event.organizer == request.user and not event.subs %}
+				{% if not event.organizer == request.user and not event.userIsSubscribed %}
 					<br>
 					{% translate "Nevertheless, please register if you want to join this event." %}
 				{% endif %}
@@ -115,13 +116,13 @@
 		{% endif %}
 	{% endif %}
 
-	{% if not event.orga and event.auth %}
-		{% if event.subs %}
+	{% if not event.userIsOrganizer and event.auth %}
+		{% if event.userIsSubscribed %}
 			<div class="my-2"> 
 				<button id="btn_event_participate_unset" class="btn btn-success" hx-post="{% url 'event_follow_unset' event.id %}">{% translate "Cancle participation" %}</button>
 			</div>
 		{% endif %}
-		{% if not event.subs and not event.full and not event.cancled %}
+		{% if not event.userIsSubscribed and not event.fullyBooked and not event.cancled %}
 			<div class="my-2"> 
 				<button id="btn_event_participate_set" class="btn btn-primary" hx-post="{% url 'event_follow_set' event.id %}">{% translate "Confirm participation" %}</button>
 			</div>
@@ -138,7 +139,7 @@
 
 			{% for p in event.participants.all %}
 				<li class="list-group-item" id="event-{{ event.id }}-participant-{{ p.id }}">
-					{% if not event.staff %}
+					{% if not event.userIsStaff %}
 					{{ p.username }}
 					{% else %}
 						<form class="form-inline">
@@ -157,7 +158,7 @@
 
 			{% for p in event.participants_txt.all %}
 				<li class="list-group-item" id="event-{{ event.id }}-participant_txt-{{ p.id }}">
-					{% if event.staff %}
+					{% if event.userIsStaff %}
 						<form class="form-inline">
 							<div class="input-group">
 								<input id="modify-txt-input" class="form-control text-center" name="txt" hx-trigger="input delay:2s" hx-post="{% url 'event_participant_txt_modify' event.id p.id %}" value="{{ p.txt}}">
