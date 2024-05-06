@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-05 20:46+0200\n"
+"POT-Creation-Date: 2024-05-05 20:51+0200\n"
 "PO-Revision-Date: 2024-05-05 20:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -584,17 +584,14 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:104
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:760
-#| msgid "Email address"
 msgid "Enter a valid URL."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:165
-#| msgid "Email address"
 msgid "Enter a valid integer."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:176
-#| msgid "Email address"
 msgid "Enter a valid email address."
 msgstr ""
 
@@ -612,19 +609,16 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:279
 #: venv/lib/python3.12/site-packages/django/core/validators.py:306
-#| msgid "Email address"
 msgid "Enter a valid IPv4 address."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:286
 #: venv/lib/python3.12/site-packages/django/core/validators.py:307
-#| msgid "Email address"
 msgid "Enter a valid IPv6 address."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/core/validators.py:298
 #: venv/lib/python3.12/site-packages/django/core/validators.py:305
-#| msgid "Email address"
 msgid "Enter a valid IPv4 or IPv6 address."
 msgstr ""
 
@@ -684,7 +678,6 @@ msgstr[1] ""
 #: venv/lib/python3.12/site-packages/django/core/validators.py:480
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:355
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:394
-#| msgid "December"
 msgid "Enter a number."
 msgstr ""
 
@@ -724,7 +717,6 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/base.py:1473
 #: venv/lib/python3.12/site-packages/django/forms/models.py:906
-#| msgid "End"
 msgid "and"
 msgstr ""
 
@@ -839,7 +831,6 @@ msgid "“%(value)s” value must be a decimal number."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1692
-#| msgid "December"
 msgid "Decimal number"
 msgstr ""
 
@@ -885,12 +876,10 @@ msgid "Small integer"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2177
-#| msgid "Email address"
 msgid "IPv4 address"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2208
-#| msgid "Email address"
 msgid "IP address"
 msgstr ""
 
@@ -973,7 +962,6 @@ msgid "A JSON object"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:28
-#| msgid "Email address"
 msgid "Value must be valid JSON."
 msgstr ""
 
@@ -1015,29 +1003,24 @@ msgid "This field is required."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:304
-#| msgid "December"
 msgid "Enter a whole number."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:475
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1252
-#| msgid "Email address"
 msgid "Enter a valid date."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:498
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1253
-#| msgid "Email address"
 msgid "Enter a valid time."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:525
-#| msgid "Email address"
 msgid "Enter a valid date/time."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:559
-#| msgid "Email address"
 msgid "Enter a valid duration."
 msgstr ""
 
@@ -1086,22 +1069,18 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:962
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1081
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1583
-#| msgid "Email address"
 msgid "Enter a list of values."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1082
-#| msgid "Email address"
 msgid "Enter a complete value."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1321
-#| msgid "Email address"
 msgid "Enter a valid UUID."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/fields.py:1351
-#| msgid "Email address"
 msgid "Enter a valid JSON."
 msgstr ""
 
@@ -1172,7 +1151,6 @@ msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/forms/models.py:1587
 #, python-format
-#| msgid "Email address"
 msgid "“%(pk)s” is not a valid value."
 msgstr ""
 
@@ -1298,12 +1276,10 @@ msgid "Sunday"
 msgstr "Sonntag"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:16
-#| msgid "Monday"
 msgid "Mon"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:17
-#| msgid "Tuesday"
 msgid "Tue"
 msgstr ""
 
@@ -1312,12 +1288,10 @@ msgid "Wed"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:19
-#| msgid "Tuesday"
 msgid "Thu"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:20
-#| msgid "Friday"
 msgid "Fri"
 msgstr ""
 
@@ -1326,7 +1300,6 @@ msgid "Sat"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:22
-#| msgid "Sunday"
 msgid "Sun"
 msgstr ""
 
@@ -1379,7 +1352,6 @@ msgid "December"
 msgstr "Dezember"
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:39
-#| msgid "End"
 msgid "jan"
 msgstr ""
 
@@ -1388,27 +1360,22 @@ msgid "feb"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:41
-#| msgid "May"
 msgid "mar"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:42
-#| msgid "May"
 msgid "apr"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:43
-#| msgid "May"
 msgid "may"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:44
-#| msgid "Sunday"
 msgid "jun"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:45
-#| msgid "Sunday"
 msgid "jul"
 msgstr ""
 
@@ -1443,31 +1410,26 @@ msgid "Feb."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:55
-#| msgid "March"
 msgctxt "abbrev. month"
 msgid "March"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:56
-#| msgid "April"
 msgctxt "abbrev. month"
 msgid "April"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:57
-#| msgid "May"
 msgctxt "abbrev. month"
 msgid "May"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:58
-#| msgid "June"
 msgctxt "abbrev. month"
 msgid "June"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:59
-#| msgid "July"
 msgctxt "abbrev. month"
 msgid "July"
 msgstr ""
@@ -1498,79 +1460,66 @@ msgid "Dec."
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:67
-#| msgid "January"
 msgctxt "alt. month"
 msgid "January"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:68
-#| msgid "February"
 msgctxt "alt. month"
 msgid "February"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:69
-#| msgid "March"
 msgctxt "alt. month"
 msgid "March"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:70
-#| msgid "April"
 msgctxt "alt. month"
 msgid "April"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:71
-#| msgid "May"
 msgctxt "alt. month"
 msgid "May"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:72
-#| msgid "June"
 msgctxt "alt. month"
 msgid "June"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:73
-#| msgid "July"
 msgctxt "alt. month"
 msgid "July"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:74
-#| msgid "August"
 msgctxt "alt. month"
 msgid "August"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:75
-#| msgid "September"
 msgctxt "alt. month"
 msgid "September"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:76
-#| msgid "October"
 msgctxt "alt. month"
 msgid "October"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:77
-#| msgid "November"
 msgctxt "alt. month"
 msgid "November"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/dates.py:78
-#| msgid "December"
 msgctxt "alt. month"
 msgid "December"
 msgstr ""
 
 #: venv/lib/python3.12/site-packages/django/utils/ipv6.py:8
-#| msgid "Email address"
 msgid "This is not a valid IPv6 address."
 msgstr ""
 
