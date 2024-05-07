@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+from django.db.models.signals import pre_save
+from .email import sendMail, Mail
 
 def validate_url(url):
     if not (url.startswith("http://") or url.startswith("https://")):
@@ -108,20 +110,28 @@ class Event(models.Model):
             return True
         return False
 
-    # def updateStats(self):
-    #     self.numParticipants = len(self.participants.all()) + len(self.participants_txt.all())
-    #     self.fullyBooked = self.numParticipants >= self.max_participants
-    #     if self.numParticipants == 0:
-    #         self.noParticipants = True
-    #     else:
-    #         self.noParticipants = False
-    #     self.freeSlots = self.max_participants - self.numParticipants
-    #     self.missingParticipants = self.min_participants - self.numParticipants
-    #     if self.missingParticipants <= 0:
-    #         self.sufficientParticipants = True
-    #     else:
-    #         self.sufficientParticipants = False
 
+    @staticmethod
+    def pre_save(sender, instance, **kwargs):           
+        if instance.id is None: # new object will be created
+            pass
+        else:
+            prev = Event.objects.get(id=instance.id)
+            if prev.min_participants != instance.min_participants:
+                if instance.numParticipants >= instance.min_participants and instance.numParticipants < prev.min_participants: #Changed to not missing participants by decreasing min_participants
+                    if instance.organization == None: #eventFlow c10|m3
+                        sendMail(instance, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                    else:
+                        sendMail(instance, Mail.EventConfirmedOpen) #eventFlow m1
+                if instance.numParticipants < instance.min_participants and instance.numParticipants >= prev.min_participants: #Changed to missing participants by increasing min_participants
+                    sendMail(instance, Mail.EventPendingOpen) #eventFlow c9|m2
+            if prev.max_participants != instance.max_participants:
+                if instance.numParticipants >= instance.max_participants and instance.numParticipants < prev.max_participants: #Changed to fully booked by decreasing max_participants
+                    sendMail(instance, Mail.EventFullyBooked) #eventFlow c12|m6
+                if instance.numParticipants < instance.max_participants and instance.numParticipants >= prev.max_participants: #Changed to not fully booked by increasing max_participants
+                    pass
+
+pre_save.connect(Event.pre_save, sender=Event)
 
 class Joined(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

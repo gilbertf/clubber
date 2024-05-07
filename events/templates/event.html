@@ -205,7 +205,7 @@
 			{% if event.freeSlots == 1 %}
 				{% translate "One slot remaining" %}
 			{% elif event.freeSlots > 1 %}
-				{% blocktranslate with num=event.freeSlots|apnumber|title %} {{ num }} free slots remaining{% endblocktranslate %}
+				{% blocktranslate with num=event.freeSlots|apnumber|title %}{{ num }} free slots remaining{% endblocktranslate %}
 			{% elif event.freeSlots == 0 %}
 				{% translate "No free slot available" %}
 			{% else %}

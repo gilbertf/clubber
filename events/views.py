@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
-from django.conf import settings
 from datetime import datetime, timedelta
 import pytz
 from django.http import HttpResponseRedirect
@@ -10,7 +9,6 @@ import operator
 from .models import Event, Typ, Joined, NameTxt, JoinedTxt
 from .forms import EventForm, EmailNotificationsForm
 from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 from django.contrib.auth import get_user_model
@@ -26,8 +24,9 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
 from django.utils import translation
-
 from datetime import date
+from django.conf import settings
+from .email import sendMail, Mail
 
 class TypListView(ListView):
     model = Typ
@@ -125,75 +124,7 @@ def prepare_event_list(request):
     return structured_el
 
 from django.db.models.query import QuerySet
-class Mail:
-    def __init__(self, templateName, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
-        self.templateName = templateName
-        self.allUsers = allUsers
-        self.allOrganizers = allOrganizers
-        self.eventParticipants = eventParticipants
-        self.eventOrganizer = eventOrganizer
-        self.newEventNotification = newEventNotification
-        self.modifyEventNotification = modifyEventNotification
-    
-    def mails(self, event):
-        mails = get_user_model().objects.none()
 
-        if self.allUsers:
-            mails |= get_user_model().objects.all()
-        if self.allOrganizers:
-            mails |= get_user_model().objects.filter(is_staff=True)
-        if self.eventParticipants:
-            mails |= event.participants.all()
-        if self.eventOrganizer and event.organizer != None:
-            mails |= get_user_model().objects.filter(id=event.organizer.id)
-
-        for user in mails:
-            if not (user.email_notification_new_event and self.newEventNotification) and not (user.email_notification_joined_event and self.modifyEventNotification):
-                mails.remove(user)
-
-        return mails
- 
-Mail.NewEvent = Mail("email_new_event", allUsers = True, newEventNotification = True, modifyEventNotification = False)
-
-
-def sendMail(event, mail, newEventIcs = None):
-    d = {
-        'date' : event.date,
-        "start_time" : event.start_time ,
-        "end_time" : event.end_time,
-        "typ" : event.typ,
-        "event_id" : event.id,
-    }
-    
-    text = get_template(mail.templateName + ".txt")
-    html = get_template(mail.templateName + ".html")
-    subject = get_template(mail.templateName + ".subject")
-
-    from_email = settings.DEFAULT_FROM_EMAIL
-
-    mails = mail.mails(event)
-
-    mailMsgs = []
-    for user in mails:
-        if user.email != None and len(user.email) > 0:
-            d["user_id"] = user.id
-            d["username"] = user.username
-
-            translation.activate(user.language)
-            html_r = html.render(d)
-            text_r = text.render(d)
-            subject_r = subject.render(d).strip()
-            translation.deactivate()
-
-            mailMsg = EmailMultiAlternatives(subject_r, text_r, from_email, [user.email])
-            mailMsg.attach_alternative(html_r, "text/html")
-            if newEventIcs != None:
-                mailMsg.attach("event.ics", newEventIcs, "text/calendar")
-            mailMsgs.append(mailMsg)
-
-    if len(mailMsgs) > 0:
-        connection = mailMsg.get_connection()
-        connection.send_messages(mailMsgs)
 
 def makeIcsForEvent(event):
     cal = ics.Calendar()
@@ -227,7 +158,6 @@ def event_modify(request):
             if event_form.is_valid():
                 event = event_form.save()
                 removeUserFromEvent(request.user, event)
-                event.save()
                 return redirect('/')
         else:
             event_form = EventForm()
@@ -235,7 +165,7 @@ def event_modify(request):
         event_form = EventForm()
     return render(request, "event_modify.html", context={"event_form":event_form, "event_id" : event_id})
 
-def event_add(request):
+def event_add(request): #eventFlow c5
     if not request.user.is_authenticated:
         return redirect("/login?next={request.path}")
 
@@ -245,11 +175,11 @@ def event_add(request):
         if event_form.is_valid():
             event = event_form.save()
             if settings.EMAIL_NOTIFICATION_ENABLE:
-                #mailParticipantsOrganizer = get_user_model().objects.all()
-                #sendMail(event, 'email_new_event', mailParticipantsOrganizer, newEvent = True, newEventIcs = makeIcsForEvent(event)) #eventFlow c5|m5
-                #if event.fullyBooked:
-                #    sendMail(event, 'email_fully_booked', mailOrganizers, xxxx) #eventFlow c5|m5
-                sendMail(event, Mail.NewEvent, newEventIcs = makeIcsForEvent(event))
+                if event.sufficientParticipants and event.organizer == None:
+                    sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                if event.fullyBooked:
+                    sendMail(event, Mail.EventFullyBooked) #eventFlow m6
+                sendMail(event, Mail.NewEvent, newEventIcs = makeIcsForEvent(event)) #eventFlow m5
             return redirect('/')
 
     context = dict()
@@ -322,37 +252,6 @@ def events_list(request, event_id = None):
     context["event_list"] = events
     return render(request, "events_list.html", context)
 
-def event_participant_delete(request, event_id, participant_id):
-    event = Event.objects.filter(id=event_id).get()
-    if request.user.is_staff:
-        user = get_user_model().objects.filter(id=participant_id).get()
-        removeUserFromEvent(user, event)
-    advanceEvent(request, event)
-    return render(request, 'event.html', {'event': event})
-
-def event_participant_txt_delete(request, event_id, participant_txt_id):
-    event = Event.objects.filter(id=event_id).get()
-    if request.user.is_staff:
-        t = event.participants_txt.filter(id=participant_txt_id).delete()
-        event.save()
-    advanceEvent(request, event)
-    return render(request, 'event.html', {'event': event})
-
-def event_participant_txt_add(request, event_id):
-    name = request.POST.get("username")
-    event = Event.objects.filter(id=event_id).get()
-    checkRet = username_check(name, event)
-    if checkRet[0]:
-        n = NameTxt(txt=name)
-        n.save()
-        if not event.fullyBooked:
-            jt = JoinedTxt(name_txt = n, event = event, date=datetime.now())
-            jt.save()
-    else:
-        messages.error(request, checkRet[1])
-    advanceEvent(request, event)
-    return render(request, 'event.html', {'event': event})
-
 def username_check(name, event):
     if len(name) > 0 and len(name) <= 20: #Max. Feldlänge sicherstellen, dann: Sicherstellen das niemand mit gleichem Namen bereits eingetragen ist
         others = event.participants.filter(username__iexact=name).count()
@@ -367,7 +266,7 @@ def username_check(name, event):
             else:
                 return False, _("Exceeding max. length")
 
-def event_participant_txt_modify(request, event_id, participant_txt_id):
+def eventParticipantTxtModify(request, event_id, participant_txt_id):
     if request.user.is_staff:
         event = Event.objects.filter(id=event_id).get()
         advanceEvent(request, event)
@@ -382,92 +281,126 @@ def event_participant_txt_modify(request, event_id, participant_txt_id):
             messages.error(request, checkRet[1])
     return render(request, 'event.html', {'event': event})
         
-def event_delete(request, event_id):
+def eventDelete(request, event_id): #eventFlow c7
     event = Event.objects.filter(id=event_id).get()
     advanceEvent(request, event)
-    if request.user.is_staff and event.cancled == True and event.is_empty():
+    if request.user.is_staff and event.cancled == True and event.noParticipants:
         event.delete()
         r = HttpResponse(status=200)
         r["HX-Refresh"] = "true"
         return r
     return render(request, 'event.html', {'event': event})
 
-def event_follow_set(request, event_id):
+def eventParticipantAdd(request, event_id): #eventFlow c3
     event = Event.objects.filter(id=event_id).get()
+    preSufficientParticipants = event.sufficientParticipants
+
     addUserToEvent(request.user, event)
+
+    if not preSufficientParticipants and event.sufficientParticipants and event.organizer == None:
+        sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+    if not preSufficientParticipants and event.sufficientParticipants and event.organizer != None:
+        sendMail(event, Mail.EventConfirmedOpen) #eventFlow m1
+    if event.fullyBooked:
+        sendMail(event, Mail.FullyBooked) #eventFlow m6
+
     advanceEvent(request, event)
     return render(request, 'event.html', {'event': event})
 
-def event_follow_unset(request, event_id):
+def eventParticipantTxtAdd(request, event_id):
+    name = request.POST.get("username")
     event = Event.objects.filter(id=event_id).get()
-    removeUserFromEvent(request.user, event)
+    checkRet = username_check(name, event)
+    if checkRet[0]:
+        n = NameTxt(txt=name)
+        n.save()
+        if not event.fullyBooked:
+            jt = JoinedTxt(name_txt = n, event = event, date=datetime.now())
+            jt.save()
+    else:
+        messages.error(request, checkRet[1])
+
     advanceEvent(request, event)
     return render(request, 'event.html', {'event': event})
 
-def event_cancle_set(request, event_id):
+def eventParticipantRemoveBase(request, event_id, participant_id = None, participant_txt_id = None, admin = False): #eventFlow c4
+    event = Event.objects.filter(id=event_id).get()
+    preSufficientParticipants = event.sufficientParticipants
+    
+    if admin and participant_txt_id != None: #Admin removing some participant without auser ccount from event
+        event.participants_txt.filter(id=participant_txt_id).delete()
+        event.save()
+    elif admin and request.user.is_staff and participant_id != None: #Admin removing some participant with user account from event
+        user = get_user_model().objects.filter(id=participant_id).get()
+        removeUserFromEvent(user, event)
+    elif not admin and participant_id == None and participant_txt_id == None: #User with account removing himself from event
+        event = Event.objects.filter(id=event_id).get()
+        removeUserFromEvent(request.user, event)
+
+    if preSufficientParticipants and not event.sufficientParticipants:
+        sendMail(event, Mail.EventPendingOpen) #eventFlow m2
+
+    advanceEvent(request, event)
+    return render(request, 'event.html', {'event': event})
+
+def eventParticipantRemove(request, event_id):
+    return eventParticipantRemoveBase(request, event_id, admin = False)
+
+def adminEventParticipantRemove(request, event_id, participant_id):
+    return eventParticipantRemoveBase(request, event_id, participant_id = participant_id, admin = True)
+
+def adminEventParticipantTxtRemove(request, event_id, participant_txt_id):
+    return eventParticipantRemoveBase(request, event_id, participant_txt_id = participant_txt_id, admin = True)
+
+def eventCancle(request, event_id): #eventFlow c6
     event = Event.objects.filter(id=event_id).get()
     advanceEvent(request, event)
     if request.user.is_staff:
+        if settings.EMAIL_NOTIFICATION_ENABLE:
+            sendMail(event, Mail.EventCancle) #eventFlow m4
         event.cancled = True
         event.organizer = None
+        event.participants.clear()
+        event.participants_txt.clear()
         event.save()
-        if settings.EMAIL_NOTIFICATION_ENABLE:
-            mailParticipantsOrganizer = event.participants.all()
-            if event.organizer != None:
-                mailParticipantsOrganizer |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMail(event, 'email_cancle_event', mailParticipantsOrganizer, changeEvent = True) #eventFlow c6|m4
     return render(request, 'event.html', {'event': event})
 
-def event_cancle_unset(request, event_id):
+def eventCancleUndo(request, event_id): #eventFlow c7
     event = Event.objects.filter(id=event_id).get()
     advanceEvent(request, event)
     if request.user.is_staff:
         event.cancled = False
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            mailParticipantsOrganizer = event.participants.all()
-            if event.organizer != None:
-                mailParticipantsOrganizer |= get_user_model().objects.filter(id=event.organizer.id)
-            mailOrganizers = get_user_model().objects.filter(is_staff=True)
-            mails = []
-            if event.organizer == None and event.fullyBooked:#c7|m2,m3,m6
-                mails.append(["pending_if_open", mailParticipantsOrganizer]) #m2
-                mails.append(["sufficient_participants_missing_organizer", mailParticipantsOrganizer]) #m3
-                mails.append(["fully_booked", mailOrganizers]) #m6
-            elif event.organizer == None and event.sufficientParticipants:#c7|m2,m3
-                mails.append(["pending_if_open", mailParticipantsOrganizer]) #m2
-                mails.append(["sufficient_participants_missing_organizer", mailParticipantsOrganizer]) #m3
-            elif event.organizer == None and not event.sufficientParticipants: #c7|m2
-                mails.append(["pending_if_open", mailParticipantsOrganizer]) #m2
+            if not event.sufficientParticipants:
+                sendMail(event, Mail.EventPendingOpen) #eventFlow m2
+            if event.sufficientParticipants and event.organizer == None:
+                sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+            if event.fullyBooked:
+                sendMail(event, Mail.FullyBooked) #eventFlow m6
 
-            for mail in mails:            
-                sendMail(event, mail[0], mail[1], changeEvent = True)
     return render(request, 'event.html', {'event': event})
 
-def event_open_set(request, event_id):
+def eventOrganizerSet(request, event_id): #eventFlow c1
     if request.user.is_staff:
         event = Event.objects.filter(id=event_id).get()
         event.organizer = request.user
         removeUserFromEvent(request.user, event)
-        event.cancled = False
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            mailParticipantsOrganizer = event.participants.all()
-            if event.organizer != None:
-                mailParticipantsOrganizer |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMail(event, 'email_will_open_event', mailParticipantsOrganizer, changeEvent = True)
+            if event.sufficientParticipants:
+                sendMail(event, Mail.EventConfirmedOpen) #eventFlow m1
     return render(request, 'event.html', {'event': event})
 
-def event_open_unset(request, event_id):
+def eventOrganizerClear(request, event_id): #eventFlow c2
     if request.user.is_staff:
         event = Event.objects.filter(id=event_id).get()
         event.organizer = None
         event.save()
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            mailParticipantsOrganizer = event.participants.all()
-            if event.organizer != None:
-                mailParticipantsOrganizer |= get_user_model().objects.filter(id=event.organizer.id)
-            sendMail(event, 'email_will_not_open_event', mailParticipantsOrganizer, changeEvent = True)
+            if event.sufficientParticipants:
+                sendMail(event, Mail.EventPendingOpen) #eventFlow m2
+                sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
     return render(request, 'event.html', {'event': event})

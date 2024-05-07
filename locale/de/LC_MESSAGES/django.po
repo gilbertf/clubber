@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-05 20:51+0200\n"
-"PO-Revision-Date: 2024-05-05 20:50+0200\n"
+"POT-Creation-Date: 2024-05-07 11:39+0200\n"
+"PO-Revision-Date: 2024-05-07 11:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -50,6 +50,18 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
+#: events/240506_view.py:338 events/views.py:336
+msgid " is already registered"
+msgstr " ist bereits eingetragen"
+
+#: events/240506_view.py:341 events/views.py:339
+msgid "You are required to enter a name"
+msgstr "Du musst einen Namen eingeben"
+
+#: events/240506_view.py:343 events/views.py:341
+msgid "Exceeding max. length"
+msgstr "Die maximale Länge vwurde überschritten"
+
 #: events/forms.py:21 events/models.py:47
 msgid "Language"
 msgstr "Sprache"
@@ -62,7 +74,11 @@ msgstr "Das Datum darf nicht in der Vergangenheit liegen."
 msgid "And end time earlier as start time is not allowd."
 msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
 
-#: events/forms.py:59
+#: events/forms.py:46
+msgid "Min participants > max participants is not allowed."
+msgstr ""
+
+#: events/forms.py:62
 msgid "Two events with overlapping times are not allowed."
 msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
 
@@ -120,16 +136,16 @@ msgstr "Begin"
 msgid "End"
 msgstr "Ende"
 
-#: events/templates/email_cancle_event.html:2
-#: events/templates/email_new_event.html:2
+#: events/templates/email/event_cancle.html:2
+#: events/templates/email/event_confirmed_open.html:2
+#: events/templates/email/event_pending_open.html:2
+#: events/templates/email/new_event.html:2
 #: events/templates/email_uncancle_event.html:2
-#: events/templates/email_will_not_open_event.html:2
-#: events/templates/email_will_open_event.html:2
 #, python-format
 msgid "Hello %(username)s,<br>"
 msgstr "Hallo %(username)s,<br>"
 
-#: events/templates/email_cancle_event.html:3
+#: events/templates/email/event_cancle.html:3
 #, python-format
 msgid ""
 "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
@@ -138,21 +154,21 @@ msgstr ""
 "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
 "%(end_time)s wurde abgesagt."
 
-#: events/templates/email_cancle_event.subject:2
+#: events/templates/email/event_cancle.subject:2
 #, python-format
 msgid "%(typ)s on %(date)s cancled"
 msgstr "%(typ)s am %(date)s abgesagt"
 
-#: events/templates/email_cancle_event.txt:2
-#: events/templates/email_new_event.txt:2
+#: events/templates/email/event_cancle.txt:2
+#: events/templates/email/event_confirmed_open.txt:2
+#: events/templates/email/event_pending_open.txt:2
+#: events/templates/email/new_event.txt:2
 #: events/templates/email_uncancle_event.txt:2
-#: events/templates/email_will_not_open_event.txt:2
-#: events/templates/email_will_open_event.txt:2
 #, python-format
 msgid "Hello %(username)s,"
 msgstr "Hallo %(username)s,"
 
-#: events/templates/email_cancle_event.txt:3
+#: events/templates/email/event_cancle.txt:3
 #, python-format
 msgid ""
 "the event \"%(typ)s\" on %(date)s from %(start_time)s till %(end_time)s is "
@@ -161,7 +177,37 @@ msgstr ""
 "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
 "%(end_time)s wurde abgesagt."
 
-#: events/templates/email_new_event.html:3
+#: events/templates/email/event_confirmed_open.html:3
+#: events/templates/email/event_confirmed_open.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
+"be opened."
+msgstr ""
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wird geöffnet."
+
+#: events/templates/email/event_confirmed_open.subject:2
+#, python-format
+msgid "%(typ)s on %(date)s will open"
+msgstr "%(typ)s am %(date)s wird geöffnet"
+
+#: events/templates/email/event_pending_open.html:3
+#: events/templates/email/event_pending_open.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
+"not be opened."
+msgstr ""
+"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s wird nicht geöffnet."
+
+#: events/templates/email/event_pending_open.subject:2
+#, python-format
+msgid "%(typ)s on %(date)s will not be opened"
+msgstr "%(typ)s am %(date)s wird nicht geöffnet"
+
+#: events/templates/email/new_event.html:3
 #, python-format
 msgid ""
 "a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
@@ -172,12 +218,12 @@ msgstr ""
 "%(end_time)s ist verfügbar. Zum anmelden hier <a href=%(SITE_URL)s/join/"
 "%(user_id)s/%(event_id)s>bestätigen</a>."
 
-#: events/templates/email_new_event.subject:2
+#: events/templates/email/new_event.subject:2
 #, python-format
 msgid "New %(typ)s on %(date)s"
 msgstr "Neues %(typ)s am %(date)s"
 
-#: events/templates/email_new_event.txt:3
+#: events/templates/email/new_event.txt:3
 #, python-format
 msgid ""
 "a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
@@ -201,36 +247,6 @@ msgstr ""
 #, python-format
 msgid "%(typ)s on %(date)s confirmed"
 msgstr "%(typ)s am %(date)s zugesagt"
-
-#: events/templates/email_will_not_open_event.html:3
-#: events/templates/email_will_not_open_event.txt:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
-"not be opened."
-msgstr ""
-"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s wird nicht geöffnet."
-
-#: events/templates/email_will_not_open_event.subject:2
-#, python-format
-msgid "%(typ)s on %(date)s will not be opened"
-msgstr "%(typ)s am %(date)s wird nicht geöffnet"
-
-#: events/templates/email_will_open_event.html:3
-#: events/templates/email_will_open_event.txt:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
-"be opened."
-msgstr ""
-"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s wird geöffnet."
-
-#: events/templates/email_will_open_event.subject:2
-#, python-format
-msgid "%(typ)s on %(date)s will open"
-msgstr "%(typ)s am %(date)s wird geöffnet"
 
 #: events/templates/event.html:37
 msgid "Additional information"
@@ -269,57 +285,57 @@ msgstr "Ich öffne nicht"
 msgid "Cancle"
 msgstr "Absagen"
 
-#: events/templates/event.html:94
+#: events/templates/event.html:95
 msgid "This event is cancled"
 msgstr "Dieses Treffen wurde abgesagt"
 
-#: events/templates/event.html:99
+#: events/templates/event.html:100
 msgid "Currently nobody has volunteered to open."
 msgstr "Es hat sich noch niemand gefunden der öffnen wird."
 
-#: events/templates/event.html:106
+#: events/templates/event.html:107
 msgid "One missing participant."
 msgstr "Es fehlt noch eine Anmeldung."
 
-#: events/templates/event.html:108
+#: events/templates/event.html:109
 #, python-format
 msgid "Still %(number_participants_missing)s registrations are missing."
 msgstr "Es fehlen noch %(number_participants_missing)s Anmeldungen."
 
-#: events/templates/event.html:112
+#: events/templates/event.html:113
 msgid "Nevertheless, please register if you want to join this event."
 msgstr "Trage dich gerne trotzdem schon ein."
 
-#: events/templates/event.html:121
+#: events/templates/event.html:122
 msgid "Cancle participation"
 msgstr "Teilnahme absagen"
 
-#: events/templates/event.html:126
+#: events/templates/event.html:127
 msgid "Confirm participation"
 msgstr "Teilnahme zusagen"
 
-#: events/templates/event.html:135
+#: events/templates/event.html:136
 msgid "opens"
 msgstr "öffnet"
 
-#: events/templates/event.html:183
+#: events/templates/event.html:184
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:205
+#: events/templates/event.html:206
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:207
+#: events/templates/event.html:208
 #, python-format
-msgid " %(num)s free slots remaining"
-msgstr "Noch %(num)s freie Plätze"
+msgid "%(num)s free slots remaining"
+msgstr "%(num)s freie Plätze"
 
-#: events/templates/event.html:209
+#: events/templates/event.html:210
 msgid "No free slot available"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:211
+#: events/templates/event.html:212
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
@@ -472,18 +488,6 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 #: events/templates/settings_users.html:46
 msgid "Delete user"
 msgstr "Benutzer löschen"
-
-#: events/views.py:327
-msgid " is already registered"
-msgstr " ist bereits eingetragen"
-
-#: events/views.py:330
-msgid "You are required to enter a name"
-msgstr "Du musst einen Namen eingeben"
-
-#: events/views.py:332
-msgid "Exceeding max. length"
-msgstr "Die maximale Länge vwurde überschritten"
 
 #: templates/registration/login.html:19
 msgid "You can reset you password <a href=/account/reset>here</a>."

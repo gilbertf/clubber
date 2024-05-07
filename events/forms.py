@@ -42,6 +42,9 @@ class EventForm(forms.ModelForm):
         if self.cleaned_data["start_time"] >= self.cleaned_data["end_time"]:
             raise ValidationError(_("And end time earlier as start time is not allowd."))
 
+        if self.cleaned_data["min_participants"] > self.cleaned_data["max_participants"]:
+            raise ValidationError(_("Min participants > max participants is not allowed."))
+
         #Zeitliche Überschneidung von Veranstaltungen verhindern
         if not settings.EVENT_TIME_OVERLAP_ALLOW:
             sameTime = False
