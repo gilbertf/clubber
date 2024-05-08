@@ -6,8 +6,8 @@ from . import views
 urlpatterns = [
     path("", views.events_list, name="events_list"),
     path("event/<int:event_id>/show", views.events_list, name="events_list_show"),
-    path("add", views.event_add, name="event_add"),
-    path("modify", views.event_modify, name="event_modify"),
+    path("event/add", views.event_add, name="event_add"),
+    path("event/modify", views.event_modify, name="event_modify"),
     path("users", views.settings_users, name="settings_users"),
     path("user/<int:user_id>/delete", views.settings_users_delete, name="settings_users_delete"),
     path("email", views.settings_email, name="settings_email"),
@@ -26,6 +26,6 @@ urlpatterns = [
     path("event/<int:event_id>/participant/<int:participant_id>/delete", views.adminEventParticipantRemove, name="event_participant_delete"),
     path("typ/list", views.TypListView.as_view(), name="typ-list"),
     path("typ/<int:pk>/delete", views.TypDeleteView.as_view(), name="typ-delete"),
-    path("typ/<int:pk>/modify", views.TypUpdateView.as_view(), name="typ-modify"),
-    path("typ/add", views.TypAddView.as_view(), name="typ-add"),
+    path("typ/<int:typ_id>/modify", views.typ_modify, name="typ-modify"),
+    path("typ/add", views.typ_add, name="typ_add"),
 ]

@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+	{% translate "Modify typ" %}
+{% endblock %}
+
+{% block content %}
+	{% if typ_form %}
+			<div class="container text-left">
+				<form  method="post">
+					{% csrf_token %}
+					{{ typ_form|crispy }}
+					<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" value={{typ_id}} type="submit">{% translate "Modify event" %}</button>
+				</form>
+			</div>
+	{% endif %}
+{% endblock %}

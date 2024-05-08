@@ -13,6 +13,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import pre_save
 from .email import sendMail, Mail
+from modeltranslation.forms import TranslationModelForm
 
 def validate_url(url):
     if not (url.startswith("http://") or url.startswith("https://")):
@@ -60,9 +61,11 @@ class Person(AbstractBaseUser):
 class NameTxt(models.Model):
     txt = models.CharField(max_length=20)
 
+#class Typ(TranslationModelForm):
 class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
+    description = models.TextField(default="", blank=True, verbose_name=_("Desciption"))
 
     def __str__(self):
         return self.name
@@ -71,6 +74,7 @@ class Typ(models.Model):
         return reverse("typ-modify", kwargs={"pk": self.pk})
 
 class Event(models.Model):
+#class Event(TranslationModelForm):
     typ = models.ForeignKey(Typ, on_delete=models.CASCADE, blank=False, verbose_name=_("Event type"), default=1)
     max_participants = models.IntegerField(default=settings.EVENT_PARTICIPANTS_MAX_DEFAULT, verbose_name=_("Maximum number of participants"), validators=[MaxValueValidator(settings.EVENT_PARTICIPANTS_MAX_LIMIT)])
     min_participants = models.IntegerField(default=settings.EVENT_PARTICIPANTS_MIN_DEFAULT, verbose_name=_("Minimal number of participants"), validators=[MinValueValidator(settings.EVENT_PARTICIPANTS_MIN_LIMIT)])

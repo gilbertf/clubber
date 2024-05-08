@@ -32,11 +32,15 @@
 	hx-target="#event-{{ event.id }}"
 	hx-swap="outerHTML" >
 
-	<div class="col">
-		{% if event.typ.url != "" %}
-		<a href="{{ event.typ.url }}"{% translate "Additional information" %}</a>
-		{% endif %}
-	</div>
+	{% if event.typ.description != "" %}
+		<div class="text-sm-start">
+			{{ event.typ.description }}
+			{% if event.typ.url != "" %}
+				<br><a href="{{ event.typ.url }}">{% translate "Additional information" %}</a>
+			{% endif %}
+		</div>
+
+	{% endif %}
 
 	{% if event.userIsStaff %}
 		<div class="alert my-2">

@@ -9,6 +9,18 @@ from django.db import models
 from .models import Event, Typ, Person
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.forms import TranslationModelForm
+
+class TypForm(forms.ModelForm):
+#class TypForm(TranslationModelForm):
+    class Meta:
+        model = Typ
+        fields = ["name_en", "name_de", "description_en", "description_de", "url"]
+        labels = { "name_en": _("Name in English"),
+                  "name_de": _("Name in German"),
+                  "description_en": _("Description in English"),
+                  "description_de": _("Description in German"),
+                  }
 
 class EmailNotificationsForm(forms.ModelForm):
     class Meta:
@@ -17,8 +29,7 @@ class EmailNotificationsForm(forms.ModelForm):
             fields = [ "email", "language", "email_notification_new_event", "email_notification_joined_event" ]
         else:
             fields = [ "email", "language" ]
-        labels = { "email": _("Email address") }
-        labels = { "language": _("Language") }
+        labels = { "email": _("Email address"), "language": _("Language") }
 
 class EventForm(forms.ModelForm):
     class Meta:
