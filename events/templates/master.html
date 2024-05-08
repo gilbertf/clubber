@@ -65,7 +65,7 @@
 
 									{% if user.is_superuser %}
 		            					<li><hr class="dropdown-divider"></li>
-										<a id="btn_users"class="dropdown-item{% url 'users_list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}"">{% translate "User management" %}</a>
+										<a id="btn_users"class="dropdown-item{% url 'user_list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}"">{% translate "User management" %}</a>
 										<a id="btn_event_types" class="dropdown-item{% url 'typ-list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}">{% translate "Event types" %}</a>
 									{% endif %}
 								 </ul>

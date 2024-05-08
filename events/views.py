@@ -191,14 +191,14 @@ def event_add(request): #eventFlow c5
         context["empty_type"] = True
     return render(request, "event_add.html", context)
 
-def settings_users_delete(request, user_id):
+def user_delete(request, user_id):
     if request.user.is_staff:
         user = get_user_model().objects.filter(id=user_id).get()
         if user != request.user:
             user.delete()
             return HttpResponse(status=200)
 
-def users_list(request):
+def user_list(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
         return redirect("/login?next={request.path}")
 
@@ -232,7 +232,7 @@ def users_list(request):
                 u.is_superuser = False
                 u.save()
 
-    return render(request, "users_list.html", {"users": get_user_model().objects.all()})
+    return render(request, "user_list.html", {"users": get_user_model().objects.all()})
 
 def events_list(request, event_id = None):
     context = dict()
