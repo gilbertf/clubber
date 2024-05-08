@@ -14,7 +14,12 @@ from modeltranslation.forms import TranslationModelForm
 class TypForm(forms.ModelForm):
     class Meta:
         model = Typ
-        fields = ["name_en", "name_de", "description_en", "description_de", "url"]
+        fields = [
+                  "name_de",
+                  "description_de",
+                  "name_en",
+                  "description_en",
+                  "url"]
         labels = { "name_en": _("Name in English"),
                   "name_de": _("Name in German"),
                   "description_en": _("Description in English"),

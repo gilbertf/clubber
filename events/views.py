@@ -30,6 +30,8 @@ from .email import sendMail, Mail
 
 class TypListView(ListView):
     model = Typ
+    template_name = "typ_list.html"
+
 
 class TypUpdateView(UserPassesTestMixin, UpdateView):
     model = Typ
@@ -150,7 +152,7 @@ def typ_add(request):
         typ_form = TypForm(request.POST)
         if typ_form.is_valid():
             typ_form.save()
-            return redirect('/')
+            return redirect('/typ/list')
 
     return render(request, "typ_add.html", {"typ_form": typ_form})
 
@@ -172,7 +174,7 @@ def typ_modify(request, typ_id):
             if typ_form.is_valid():
                 typ_form.save()
 
-    return redirect('/')
+    return redirect('/typ/list')
 
 
 
