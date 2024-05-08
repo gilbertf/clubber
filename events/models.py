@@ -66,7 +66,11 @@ class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
     description = models.TextField(default="", blank=True, verbose_name=_("Description"))
-
+    labels = { "name_en": _("Name in English"),
+                  "name_de": _("Name in German"),
+                  "description_en": _("Description in English"),
+                  "description_de": _("Description in German"),
+                  }
     def __str__(self):
         return self.name
 

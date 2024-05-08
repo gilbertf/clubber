@@ -32,11 +32,19 @@ class TypListView(ListView):
     model = Typ
     template_name = "typ_list.html"
 
-
-class TypUpdateView(UserPassesTestMixin, UpdateView):
+class TypAddView(UserPassesTestMixin, CreateView):
     model = Typ
-    template_name = "events/typ_edit_form.html"
-    fields = ["name", "url", "description"]
+    template_name = "typ_add.html"
+    form_class = TypForm
+    success_url = reverse_lazy("typ-list")
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+class TypModifyView(UserPassesTestMixin, UpdateView):
+    model = Typ
+    template_name = "typ_modify.html"
+    form_class = TypForm
+    
     success_url = reverse_lazy("typ-list")
     def test_func(self):
         return self.request.user.is_superuser
@@ -46,14 +54,6 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
     success_url = reverse_lazy("typ-list")
     def test_func(self):
         return self.request.user.is_superuser
-
-# class TypAddView(UserPassesTestMixin, CreateView):
-#     model = Typ
-#     template_name = "events/typ_add_form.html"
-#     fields = ["name", "url", "description"]
-#     success_url = reverse_lazy("typ-list")
-#     def test_func(self):
-#         return self.request.user.is_superuser
 
 def settings_email(request):
     if request.method == 'POST':
@@ -140,42 +140,6 @@ def makeIcsForEvent(event):
     calEvent.url = settings.EMAIL_SITE_URL + "/event/" + str(event.id) + "/show"
     cal.events.add(calEvent)
     return cal.serialize()
-
-
-def typ_add(request):
-    if not request.user.is_authenticated:
-        return redirect("/login?next={request.path}")
-
-    typ_form = TypForm()
-    
-    if request.method == "POST":
-        typ_form = TypForm(request.POST)
-        if typ_form.is_valid():
-            typ_form.save()
-            return redirect('/typ/list')
-
-    return render(request, "typ_add.html", {"typ_form": typ_form})
-
-def typ_modify(request, typ_id):
-    if not request.user.is_authenticated:
-        return redirect("/login?next={request.path}")
-
-    if request.method == "GET":
-        typ = Typ.objects.filter(id=typ_id).get()
-        typ_form = TypForm(instance=typ)
-
-        return render(request, "typ_modify.html", {"typ_form": typ_form, "typ_id": typ_id})
-
-    if request.method == "POST":
-        if "modify" in request.POST:
-            typ_id = request.POST.get("modify")
-            typ = Typ.objects.filter(id=typ_id).get()
-            typ_form = TypForm(request.POST, instance=typ)
-            if typ_form.is_valid():
-                typ_form.save()
-
-    return redirect('/typ/list')
-
 
 
 def event_modify(request):

@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block content %}
-	{% if typ_form %}
+	{% if form %}
 			<div class="container text-left">
 				<form  method="post">
 					{% csrf_token %}
-					{{ typ_form|crispy }}
+					{{ form|crispy }}
 					<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" value={{typ_id}} type="submit">{% translate "Update" %}</button>
 				</form>
 			</div>
