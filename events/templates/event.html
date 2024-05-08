@@ -146,13 +146,15 @@
 					{% if not event.userIsStaff %}
 					{{ p.username }}
 					{% else %}
-						<form class="form-inline">
-							<div class="form-group mb-2">
-								{{ p.username }}
-								<button class="btn btn-danger mx-2 btn-lg" hx-post="{% url 'event_participant_delete' event.id p.id %}">
-									<svg clas="bi" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill icon-baseline" viewBox="0 0 16 16">
+					<form class="form-inline">
+							<div class="input-group">
+								<input class="form-control text-center" typ="text" value="{{ p.username}}" disabled readonly>
+								</input>
+								<button class="btn btn-danger" hx-post="{% url 'event_participant_delete' event.id p.id %}">
+									<svg id="delete-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle-fill icon-baseline" viewBox="0 0 16 16">
 										<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
 									</svg>
+									<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_delete" role="status"></div>
 								</button>
 							</div>
 						</form>
