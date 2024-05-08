@@ -1,7 +1,8 @@
 {% extends "master.html" %}
+{% load i18n %}
 
 {% block title %}
-Veranstaltungsarten (Einstellungen)
+{% translate "Event types" %}
 {% endblock %}
 
 {% block content %}
@@ -17,11 +18,11 @@ Veranstaltungsarten (Einstellungen)
 			<div class="ms-2">
 				<form hx-swap="delete" hx-target="#typ-{{ typ.id }}" hx-confirm="Wenn du einen Veranstaltungsart löscht werden auch die zugehörigen Veranstaltungen nicht mehr angezeigt. Bist du sicher, dass {{ typ }} gelöscht werden soll?">
 					{% csrf_token %}
-					<button class="my-2 mx-2 btn btn-danger" hx-post="/typ/{{ typ.id }}/delete">löschen</button>
+					<button class="my-2 mx-2 btn btn-danger" hx-post="/typ/{{ typ.id }}/delete">{% translate "Delete" %}</button>
 				</form>
 				<form method="GET" action="/typ/{{ typ.id }}/modify">
 					{% csrf_token %}
-					<button class="my-2 mx-2 btn btn-success">bearbeiten</button>
+					<button class="my-2 mx-2 btn btn-success">{% translate "Modify" %}</button>
 				</form>
 			</div>
 		</li>
@@ -32,6 +33,6 @@ Veranstaltungsarten (Einstellungen)
 
 <form method="GET" action="/typ/add">
 	{% csrf_token %}
-	<button class="mx-2 btn btn-success">Neue Veranstaltungsart anlegen</button>
+	<button class="mx-2 btn btn-success" id="btn_typ_add">{% translate "Add new event type" %}</button>
 </form>
 {% endblock %}

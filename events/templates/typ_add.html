@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+	{% translate "New event typ" %}
+{% endblock %}
+
+{% block content %}
+	{% if typ_form %}
+			<div class="container text-left">
+				<form  method="post">
+					{% csrf_token %}
+					{{ typ_form|crispy }}
+					<button class="btn btn-primary" id="btn_typ_add_confirm" name="add" type="submit">{% translate "Add event typ" %}</button>
+				</form>
+			</div>
+	{% endif %}
+{% endblock %}

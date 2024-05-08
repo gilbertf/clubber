@@ -1,5 +1,5 @@
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, ChangeForm, ResetForm
+from .forms import NewUserForm, PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login
@@ -37,8 +37,11 @@ def login_request(request, user_id = None):
                  fm.fields["username"].initial = user.username
          return render(request, "registration/login.html", context={"form":fm})
 
+from django.utils import translation    
 def register_request(request):
     new_user_form = NewUserForm()
+    new_user_form["language"].initial = translation.get_language()
+
     if request.method == 'POST':
         new_user_form = NewUserForm(request.POST)
         if new_user_form.is_valid():
@@ -47,9 +50,9 @@ def register_request(request):
             return redirect('/')
     return render(request, "registration/register.html", context={"new_user_form":new_user_form})
 
-def change_request(request):
+def password_change_request(request):
     if request.method == 'POST':
-        change_form = ChangeForm(request.user, request.POST)
+        change_form = PasswordChangeForm(request.user, request.POST)
         if change_form.is_valid():
             user = change_form.save()
             update_session_auth_hash(request, user)  # Important!
@@ -58,18 +61,18 @@ def change_request(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:       
-        change_form = ChangeForm(request.user)
-    return render(request, "registration/change.html", context={"change_form":change_form})
+        change_form = PasswordChangeForm(request.user)
+    return render(request, "registration/password_change.html", context={"change_form":change_form})
 
-def reset_request(request):
+def password_reset_request(request):
     if request.method == 'POST':
-        reset_form = ResetForm(request.POST)
+        reset_form = PasswordResetForm(request.POST)
         if reset_form.is_valid():
-            reset_form.save(request=request) #, html_email_template_name="password_reset.html")
+            reset_form.save(request=request)
             return redirect('/')
         else:
             messages.error(request, 'Please correct the error below.')
    
     else:
-        reset_form = ResetForm()
-    return render(request, "registration/reset.html", context={"reset_form":reset_form})
+        reset_form = PasswordResetForm()
+    return render(request, "registration/password_reset.html", context={"reset_form":reset_form})

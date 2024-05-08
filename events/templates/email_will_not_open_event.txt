@@ -1,5 +1,0 @@
-Hallo {{ username }},
-das {{ typ }} am {{ date }} von {{ start_time }} - {{ end_time }} wird nicht geöffnet.
-
-Viele Grüße
-Gilbert

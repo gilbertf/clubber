@@ -31,10 +31,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.humanize",
     "django.contrib.staticfiles",
-#    "django_flatpickr",
     'crispy_forms',
     "crispy_bootstrap5",
     "pwa",
+    "modeltranslation",
 ]
 
 PWA_APP_NAME = 'Clubber'
@@ -90,11 +90,13 @@ PWA_APP_SCREENSHOTS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "middleware.language.language_middleware",
 ]
 
 ROOT_URLCONF = "clubber.urls"
@@ -144,14 +146,23 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
-LANGUAGE_CODE = "de-DE"
+from django.utils.translation import gettext_lazy as _
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('de', gettext('German')),
+    ('en', gettext('English')),
+)
+
+LANGUAGE_CODE = "de"
 TIME_ZONE = "Europe/Berlin"
 USE_I18N = True
 USE_TZ = False
+import os
+LOCALE_PATHS = ( os.path.join(BASE_DIR, 'locale'), )
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static"

@@ -8,16 +8,27 @@ from django.db.models.functions import Now
 from django.db import models
 from .models import Event, Typ, Person
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+from modeltranslation.forms import TranslationModelForm
 
+class TypForm(forms.ModelForm):
+    class Meta:
+        model = Typ
+        fields = ["name_en", "name_de", "description_en", "description_de", "url"]
+        labels = { "name_en": _("Name in English"),
+                  "name_de": _("Name in German"),
+                  "description_en": _("Description in English"),
+                  "description_de": _("Description in German"),
+                  }
 
 class EmailNotificationsForm(forms.ModelForm):
     class Meta:
         model = Person
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            fields = [ "email", "email_notification_new_event", "email_notification_joined_event" ]
+            fields = [ "email", "language", "email_notification_new_event", "email_notification_joined_event" ]
         else:
-            fields = [ "email" ]
-        labels = { "email": "E-Mail-Adresse" }
+            fields = [ "email", "language" ]
+        labels = { "email": _("Email address"), "language": _("Language") }
 
 class EventForm(forms.ModelForm):
     class Meta:
@@ -36,10 +47,13 @@ class EventForm(forms.ModelForm):
     
     def clean(self):
         if self.cleaned_data["date"] < datetime.now().date():
-            raise ValidationError("The date cannot be in the past!")
+            raise ValidationError(_("The date cannot be in the past."))
 
         if self.cleaned_data["start_time"] >= self.cleaned_data["end_time"]:
-            raise ValidationError("Es wird erwartet, dass die Endzeit später als die Startzeit liegt.")
+            raise ValidationError(_("And end time earlier as start time is not allowd."))
+
+        if self.cleaned_data["min_participants"] > self.cleaned_data["max_participants"]:
+            raise ValidationError(_("Min participants > max participants is not allowed."))
 
         #Zeitliche Überschneidung von Veranstaltungen verhindern
         if not settings.EVENT_TIME_OVERLAP_ALLOW:
@@ -55,6 +69,6 @@ class EventForm(forms.ModelForm):
                     else:
                         sameTime = True
             if sameTime:
-                raise ValidationError("Zeitliche Überschneidung zweier Treffen ist nicht zulässig")
+                raise ValidationError(_("Two events with overlapping times are not allowed."))
 
         return self.cleaned_data
