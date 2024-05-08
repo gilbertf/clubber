@@ -53,7 +53,7 @@ class NewUserForm(forms.ModelForm):
 class PasswordChangeForm(SetPasswordForm):
 	class Meta:
 		model = User
-		fields = ("password1", "password2")
+		fields = [ "password1", "password2" ]
 
 	def save(self, commit=True):
 		user = super(PasswordChangeForm, self).save(commit=False)
@@ -64,4 +64,7 @@ class PasswordChangeForm(SetPasswordForm):
 class PasswordResetForm(PasswordResetForm):
     class Meta:
         model = User
-        fields = ("email")
+        fields = [ "email" ]
+        labels = {
+            "email": _("Eaaamail address"),
+        }
