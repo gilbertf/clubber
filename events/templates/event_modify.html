@@ -9,7 +9,6 @@
 {% block content %}
 	{% if event_form %}
 	<div class="container text-left">
-		<h1>{% translate "Modify event" %}</h1>
 		<form  method="post">
 			{% csrf_token %}
 			{{ event_form|crispy }}

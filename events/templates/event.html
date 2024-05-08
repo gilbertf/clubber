@@ -32,18 +32,8 @@
 	hx-target="#event-{{ event.id }}"
 	hx-swap="outerHTML" >
 
-	{% if event.typ.description != "" %}
-		<div class="text-sm-start">
-			{{ event.typ.description }}
-			{% if event.typ.url != "" %}
-				<br><a href="{{ event.typ.url }}">{% translate "Additional information" %}</a>
-			{% endif %}
-		</div>
-
-	{% endif %}
-
 	{% if event.userIsStaff %}
-		<div class="alert my-2">
+		<div class="alert">
 			<ul class="list-group">
 				<li class="list-group-item">
 					<div class="container text-center">
@@ -54,7 +44,7 @@
 						</div>
 						<div class="row">
 							<div class="col">
-								<form method="post" action="/modify">
+								<form method="post" action="/event/modify">
 								{% csrf_token %}
 								<button class="btn mx-2 btn-lg" id="btn_event_modify" name="modify" value={{ event.id }}>
 									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square icon-baseline" viewBox="0 0 16 16">
@@ -93,6 +83,12 @@
 		</div>
 	{% endif %}
 
+	<div class="text-sm-start">
+		{{ event.typ.description }}
+		{% if event.typ.url != "" %}
+			<br><a href="{{ event.typ.url }}">{% translate "Additional information" %}</a>
+		{% endif %}
+	</div>
 		
 	{% if event.cancled %}
 		<div class="alert alert-danger my-2">

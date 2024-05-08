@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'crispy_forms',
     "crispy_bootstrap5",
+    "django_flatpickr",
     "pwa",
     "modeltranslation",
 ]
@@ -148,11 +149,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 from django.utils.translation import gettext_lazy as _
 
-gettext = lambda s: s
-LANGUAGES = (
-    ('de', gettext('German')),
-    ('en', gettext('English')),
-)
+LANGUAGES = [
+        ("de", _("German")),
+        ("en", _("English")),
+        ]
 
 LANGUAGE_CODE = "de"
 TIME_ZONE = "Europe/Berlin"

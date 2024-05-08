@@ -13,6 +13,14 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+Fetch submodules and install django-pwd:
+```
+git submodule init
+git submodule update
+cd django-pwa
+python -m pip install .
+```
+
 Configure clubber in `config/settings.yml` and place your custom `logo.png` and `favicon.png` pictures in the `config` folder. Plase add `config/impressum-cust.html` with your impressum.
 
 For postgres create database

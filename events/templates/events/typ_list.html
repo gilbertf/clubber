@@ -16,7 +16,7 @@
 				{% endif %}
 			</div>
 			<div class="ms-2">
-				<form hx-swap="delete" hx-target="#typ-{{ typ.id }}" hx-confirm="Wenn du einen Veranstaltungsart löscht werden auch die zugehörigen Veranstaltungen nicht mehr angezeigt. Bist du sicher, dass {{ typ }} gelöscht werden soll?">
+				<form hx-swap="delete" hx-target="#typ-{{ typ.id }}" hx-confirm="{% translate "By deleting a event type, all events of this type will disapear. Please confirm to delete the event type {{ typ }}." %}">
 					{% csrf_token %}
 					<button class="my-2 mx-2 btn btn-danger" hx-post="/typ/{{ typ.id }}/delete">{% translate "Delete" %}</button>
 				</form>

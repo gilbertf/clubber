@@ -12,7 +12,7 @@
 				<form  method="post">
 					{% csrf_token %}
 					{{ typ_form|crispy }}
-					<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" value={{typ_id}} type="submit">{% translate "Modify event" %}</button>
+					<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" value={{typ_id}} type="submit">{% translate "Update" %}</button>
 				</form>
 			</div>
 	{% endif %}

@@ -60,11 +60,3 @@ class PasswordChangeForm(SetPasswordForm):
 		if commit:
 			user.save()
 		return user
-
-class PasswordResetForm(PasswordResetForm):
-    class Meta:
-        model = User
-        fields = [ "email" ]
-        labels = {
-            "email": _("Eaaamail address"),
-        }
