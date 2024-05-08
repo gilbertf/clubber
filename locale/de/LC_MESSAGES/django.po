@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-08 14:12+0200\n"
-"PO-Revision-Date: 2024-05-08 14:27+0200\n"
+"POT-Creation-Date: 2024-05-08 14:31+0200\n"
+"PO-Revision-Date: 2024-05-08 14:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -42,11 +42,11 @@ msgstr ""
 msgid "Password mismatch"
 msgstr "Passwörter stimmen nicht überein"
 
-#: clubber/settings.py:103
+#: clubber/settings.py:153
 msgid "German"
 msgstr "Deutsch"
 
-#: clubber/settings.py:104
+#: clubber/settings.py:154
 msgid "English"
 msgstr "Englisch"
 
@@ -357,9 +357,9 @@ msgstr "Neues Treffen"
 #, python-format
 msgid ""
 "You have to create at least one event type first. Goto <a "
-"href=%(typ_list_url)s>event types</a> in the settings section."
+"href=%(typ_add_url)s>event types</a> in the settings section."
 msgstr ""
-"Du musst zuerst mindestens eine <a href=%(typ_list_url)s>Veranstaltungsart</"
+"Du musst zuerst mindestens eine <a href=%(typ_add_url)s>Veranstaltungsart</"
 "a> in den Einstellungen unter Veranstaltungsarten anlegen."
 
 #: events/templates/event_add.html:19
