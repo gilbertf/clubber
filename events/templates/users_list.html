@@ -10,7 +10,7 @@
 <ol class="list-group">
 	{% for user in users %}
 		<li class="list-group-item d-flex justify-content-between align-items-start" id="user-{{ user.id }}">
-			<div class="ms-2 me-auto">
+			<div class="ms-2">
 	      			<div class="fw-bold">{{ user }} {% if request.user == user %} ({% translate "you" %}){% endif %}</div>
 				{{ user.email }}
 
@@ -38,7 +38,7 @@
 					});
 				</script>
 			</div>
-			<div class="ms-2 me-auto">
+			<div class="ms-2">
 				{% if request.user.is_superuser and not request.user == user %}
 					<div class="">
 						<form hx-swap="delete" hx-target="#user-{{ user.id }}" hx-confirm="{% blocktranslate %}Confirm to delete user {{ user }}{% endblocktranslate%}">

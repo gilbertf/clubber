@@ -46,7 +46,7 @@
 
 						{% if user.is_authenticated %}
 							<li class="nav-item dropdown">
-								  <a id="btn_settings" class="nav-link dropdown-toggle{% if request.path == "/account/change" or request.path == "/email" or request.path == "/users" %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% translate "Settings" %}</a>
+								  <a id="btn_settings" class="nav-link dropdown-toggle{% if request.path == "/account/change" or request.path == "/email" or request.path == "/user/list" %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% translate "Settings" %}</a>
 								<ul class="dropdown-menu">
 									<a class="dropdown-item{% if request.path == "/account/change" %} active{% endif %}" href="/account/change">{% translate "Change password" %}"</a>
 									<a class="dropdown-item{% if request.path == "/email" %} active{% endif %}" href="/email">{% translate "Email and language" %}</a>
@@ -65,7 +65,7 @@
 
 									{% if user.is_superuser %}
 		            					<li><hr class="dropdown-divider"></li>
-										<a id="btn_users"class="dropdown-item{% url 'settings_users' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}"">{% translate "User management" %}</a>
+										<a id="btn_users"class="dropdown-item{% url 'users_list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}"">{% translate "User management" %}</a>
 										<a id="btn_event_types" class="dropdown-item{% url 'typ-list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}">{% translate "Event types" %}</a>
 									{% endif %}
 								 </ul>

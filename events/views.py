@@ -198,7 +198,7 @@ def settings_users_delete(request, user_id):
             user.delete()
             return HttpResponse(status=200)
 
-def settings_users(request):
+def users_list(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
         return redirect("/login?next={request.path}")
 
@@ -232,7 +232,7 @@ def settings_users(request):
                 u.is_superuser = False
                 u.save()
 
-    return render(request, "settings_users.html", {"users": get_user_model().objects.all()})
+    return render(request, "users_list.html", {"users": get_user_model().objects.all()})
 
 def events_list(request, event_id = None):
     context = dict()
