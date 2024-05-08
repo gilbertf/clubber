@@ -44,7 +44,7 @@ class CustomUserManager(BaseUserManager):
                                     
 class Person(AbstractBaseUser):
     username = models.CharField(max_length=20, unique=True, verbose_name=_("Username"))
-    email = models.CharField(max_length=50)
+    email = models.CharField(max_length=50, unique=True)
     USERNAME_FIELD = "username"
     EMAIL_FIELD = "email"
     language = models.CharField(max_length=10, choices=settings.LANGUAGES, verbose_name=_("Language"))

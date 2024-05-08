@@ -14,13 +14,14 @@
 				{% if typ.name_de != None %}
 					{{ typ.name_de }} (de)
 				{% endif %}
-<br>
+				<br>
 				{% if typ.name_en != None %}
 					{{ typ.name_en }} (en)
 				{% endif %}
-				
+				<br>
+				<br>
 				{% if typ.url != "" %}
-					(<a href="{{ typ.url }}">{{ typ.url }}</a>)
+					<a href="{{ typ.url }}">{{ typ.url }}</a>
 				{% endif %}
 			</div>
 			<div class="ms-2">
