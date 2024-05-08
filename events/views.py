@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import pytz
 from django.http import HttpResponseRedirect
 import operator
-from .models import Event, Typ, Joined, NameTxt, JoinedTxt
+from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person
 from .forms import EventForm, TypForm, EmailNotificationsForm
 from django.core.mail import send_mail
 from django.template.loader import get_template
@@ -55,15 +55,11 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
-def settings_email(request):
-    if request.method == 'POST':
-        settings_email_form = EmailNotificationsForm(request.POST, instance=request.user)
-        if settings_email_form.is_valid():
-            settings_email_form.save()
-        return redirect('/')
-    else:
-        settings_email_form = EmailNotificationsForm(instance=request.user)
-    return render(request, "settings_email.html", context={"settings_email_form":settings_email_form})
+class SettingsEmailView(UpdateView):
+    model = Person
+    template_name = "settings_email.html"
+
+    form_class = EmailNotificationsForm
 
 def addUserToEvent(user, event):
     if not user in event.participants.all(): #Verhindern das durch wiederholtes POST Doppeleinträge erzeugt werden
