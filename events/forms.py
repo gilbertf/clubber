@@ -12,7 +12,6 @@ from django.utils.translation import gettext_lazy as _
 from modeltranslation.forms import TranslationModelForm
 
 class TypForm(forms.ModelForm):
-#class TypForm(TranslationModelForm):
     class Meta:
         model = Typ
         fields = ["name_en", "name_de", "description_en", "description_de", "url"]
