@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+{% load i18n %}
+
+{% block title %}
+{% translate "Event types" %}
+{% endblock %}
+
+{% block content %}
+<ol class="list-group">
+        {% for typ in object_list %}
+		<li class="list-group-item d-flex justify-content-between align-items-start" id="typ-{{ typ.id }}">
+			<div class="ms-2">
+				
+				{% if typ.name_de != None %}
+					{{ typ.name_de }} (de)
+				{% endif %}
+<br>
+				{% if typ.name_en != None %}
+					{{ typ.name_en }} (en)
+				{% endif %}
+				
+				{% if typ.url != "" %}
+					(<a href="{{ typ.url }}">{{ typ.url }}</a>)
+				{% endif %}
+			</div>
+			<div class="ms-2">
+				<form hx-swap="delete" hx-target="#typ-{{ typ.id }}" hx-confirm="{% translate "By deleting a event type, all events of this type will disapear. Please confirm to delete the event type {{ typ }}." %}">
+					{% csrf_token %}
+					<button class="my-2 mx-2 btn btn-danger" hx-post="/typ/{{ typ.id }}/delete">{% translate "Delete" %}</button>
+				</form>
+				<form method="GET" action="/typ/{{ typ.id }}/modify">
+					{% csrf_token %}
+					<button class="my-2 mx-2 btn btn-success">{% translate "Modify" %}</button>
+				</form>
+			</div>
+		</li>
+        {% endfor %}
+</ol>
+
+<br>
+
+<form method="GET" action="/typ/add">
+	{% csrf_token %}
+	<button class="mx-2 btn btn-success" id="btn_typ_add">{% translate "Add new event type" %}</button>
+</form>
+{% endblock %}
