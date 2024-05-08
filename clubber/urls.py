@@ -26,4 +26,5 @@ urlpatterns = [
     path("login/<int:user_id>", views.login_request, name="login"),
     path("account/change", views.change_request, name="change"),
     path("account/reset", views.reset_request, name="reset"),
+    path('', include('pwa.urls')),
 ]

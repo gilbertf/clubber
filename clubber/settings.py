@@ -34,6 +34,57 @@ INSTALLED_APPS = [
     "django_flatpickr",
     'crispy_forms',
     "crispy_bootstrap5",
+    "pwa",
+]
+
+PWA_APP_NAME = 'Clubber'
+PWA_APP_DESCRIPTION = "Simple event organizer"
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/logo-160.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/logo-160.png',
+        'sizes': '160x160'
+    }
+]
+#PWA_APP_SPLASH_SCREEN = [
+#    {
+#        'src': '/static/images/icons/splash-640x1136.png',
+#        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+#    }
+#]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'de-DE'
+#PWA_APP_SHORTCUTS = [
+#    {
+#        'name': 'Shortcut',
+#        'url': '/target',
+#        'description': 'Shortcut to a page in my application'
+#    }
+#]
+PWA_APP_SCREENSHOTS = [
+    {
+      'src': '/static/logo.png',
+      'sizes': '838x401',
+      "type": "image/png",
+      "form_factor": "wide",
+    },
+    {
+      'src': '/static/logo.png',
+      'sizes': '838x401',
+      "type": "image/png",
+    }
 ]
 
 MIDDLEWARE = [
