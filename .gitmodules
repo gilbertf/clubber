@@ -1,0 +1,3 @@
+[submodule "django-pwa"]
+	path = django-pwa
+	url = https://github.com/silviolleite/django-pwa.git
