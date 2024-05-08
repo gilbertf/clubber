@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.humanize",
     "django.contrib.staticfiles",
-    "django_flatpickr",
+#    "django_flatpickr",
     'crispy_forms',
     "crispy_bootstrap5",
     "pwa",
