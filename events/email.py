@@ -46,6 +46,7 @@ def sendMail(event, mail, newEventIcs = None):
         "end_time" : event.end_time,
         "typ" : event.typ,
         "event_id" : event.id,
+        "EMAIL_SITE_URL": settings.EMAIL_SITE_URL,
     }
     
     text = get_template(mail.templateName + ".txt")
