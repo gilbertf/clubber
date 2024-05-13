@@ -1,3 +1,3 @@
 {% load i18n %}
 {% blocktranslate %}Hello {{ username }},<br>{% endblocktranslate %}
-{% blocktranslate %}a new event "{{ typ }}" at {{ date }} from {{ start_time }} to {{ end_time }} is available. To join click <a href={{ SITE_URL }}/join/{{user_id}}/{{event_id }}>here</a>.{% endblocktranslate %}
+{% blocktranslate %}a new event "{{ typ }}" at {{ date }} from {{ start_time }} to {{ end_time }} is available. To join click <a href={{ EMAIL_SITE_URL }}/join/{{user_id}}/{{event_id }}>here</a>.{% endblocktranslate %}
