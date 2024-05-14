@@ -50,26 +50,36 @@
 							</form>
 						</div>
 						<div class="row">
-							<div class="col">
 								{% if event.cancled %}
-									<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm" %}</button>
+									<div class="col">
+										<button id="btn_event_cancle_unset"class="btn btn-danger" hx-post="{% url 'event_cancle_unset' event.id %}">{% translate "Confirm" %}</button>
+									</div>
 									{% if event.userIsStaff and event.noParticipants %}
-										<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
-											<button id="btn_event_delete" class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">{% translate "Delete event" %}</button>
+										<div class="col">
+											<div hx-target="#accordion-event-{{ event.id }}" hx-confirm="{% translate "Confirm to delete this event" %}" hx-swap="delete"> 
+												<button id="btn_event_delete" class="btn btn-danger" hx-post="{% url 'event_delete' event.id %}">{% translate "Delete event" %}</button>
+											</div>
 										</div>
 									{% endif %}
 								{% else %}
 									{% if event.organizer == None %}
-										<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}</button>
-									{% else %}
+										<div class="col">
+											<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %}</button>
+										</div>
+										{% else %}
 										{% if event.organizer != request.user %}
-											<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %} {% translate "instead of" %} {{ event.organizer }}</button>
+											<div class="col">
+												<button id="btn_event_open_set" class="btn btn-success" hx-post="{% url 'event_open_set' event.id %}">{% translate "I will open" %} {% translate "instead of" %} {{ event.organizer }}</button>
+											</div>
 										{% endif %}
-										<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
+											<div class="col">
+												<button id="btn_event_open_unset"class="btn btn-warning" hx-post="{% url 'event_open_unset' event.id %}">{% translate "I will not open" %}</button>
+											</div>
 									{% endif %}
-									<button id="btn_event_cancle_set" class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle" %}</button>
+									<div class="col">
+										<button id="btn_event_cancle_set" class="btn btn-success" hx-post="{% url 'event_cancle_set' event.id %}">{% translate "Cancle" %}</button>
+									</div>
 								{% endif %}
-							</div>
 						</div>
 
 						<div class="row my-2">

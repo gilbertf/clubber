@@ -323,7 +323,7 @@
 <text text-anchor="middle" x="1290" y="-961.26" font-family="Times,serif" font-size="14.00">Condition</text>
 <polyline fill="none" stroke="black" points="1177.38,-953.31 1402.62,-953.31"/>
 <text text-anchor="start" x="1185.38" y="-936.01" font-family="Times,serif" font-size="14.00">c1 Organizer set</text>
-<text text-anchor="start" x="1185.38" y="-918.76" font-family="Times,serif" font-size="14.00">c2 Organizer reset</text>
+<text text-anchor="start" x="1185.38" y="-918.76" font-family="Times,serif" font-size="14.00">c2 Organizer clear</text>
 <text text-anchor="start" x="1185.38" y="-901.51" font-family="Times,serif" font-size="14.00">c3 Participant added</text>
 <text text-anchor="start" x="1185.38" y="-884.26" font-family="Times,serif" font-size="14.00">c4 Participant removed</text>
 <text text-anchor="start" x="1185.38" y="-867.01" font-family="Times,serif" font-size="14.00">c5 New event created</text>

@@ -181,12 +181,7 @@ def event_add(request): #eventFlow c5
         event_form = EventForm(request.POST)
         if event_form.is_valid():
             event = event_form.save()
-            if settings.EMAIL_NOTIFICATION_ENABLE:
-                if event.sufficientParticipants and event.organizer == None:
-                    sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
-                if event.fullyBooked:
-                    sendMail(event, Mail.EventFullyBooked) #eventFlow m6
-                sendMail(event, Mail.NewEvent, newEventIcs = makeIcsForEvent(event)) #eventFlow m5
+            sendMailNewEvent(event)
             return redirect('/')
 
     context = dict()
@@ -288,7 +283,18 @@ def eventParticipantTxtModify(request, event_id, participant_txt_id):
             messages.error(request, checkRet[1])
     return render(request, 'event.html', {'event': event})
         
+def sendMailNewEvent(event):
+    if settings.EMAIL_NOTIFICATION_ENABLE:
+                if event.sufficientParticipants and event.organizer == None:
+                    sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                if event.fullyBooked:
+                    sendMail(event, Mail.EventFullyBooked) #eventFlow m6
+                sendMail(event, Mail.NewEvent, newEventIcs = makeIcsForEvent(event)) #eventFlow m5
+
 def eventReplicate(request, event_id):
+    if not request.user.is_authenticated:
+        return redirect("/login?next={request.path}")
+    
     if request.user.is_staff:
         event = Event.objects.filter(id=event_id).get()
         inDays = int(request.GET.get("inDays"))
@@ -298,6 +304,8 @@ def eventReplicate(request, event_id):
             event.cancled = False
             event.date += timedelta(days=inDays)
             event.save()
+            sendMailNewEvent(event)
+
     return redirect('/')
 
 def eventDelete(request, event_id): #eventFlow c7

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-13 11:50+0200\n"
-"PO-Revision-Date: 2024-05-14 08:29+0200\n"
+"POT-Creation-Date: 2024-05-14 09:10+0200\n"
+"PO-Revision-Date: 2024-05-14 09:11+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -42,27 +42,27 @@ msgstr ""
 msgid "Password mismatch"
 msgstr "Passwörter stimmen nicht überein"
 
-#: clubber/settings.py:153
+#: clubber/settings.py:164
 msgid "German"
 msgstr "Deutsch"
 
-#: clubber/settings.py:154
+#: clubber/settings.py:165
 msgid "English"
 msgstr "Englisch"
 
-#: events/forms.py:23 events/models.py:69
+#: events/forms.py:23 events/models.py:68
 msgid "Name in English"
 msgstr "Englische Bezeichnung"
 
-#: events/forms.py:24 events/models.py:70
+#: events/forms.py:24 events/models.py:69
 msgid "Name in German"
 msgstr "Deutsche Bezeichnung"
 
-#: events/forms.py:25 events/models.py:71
+#: events/forms.py:25 events/models.py:70
 msgid "Description in English"
 msgstr "Englische Beschreibung"
 
-#: events/forms.py:26 events/models.py:72
+#: events/forms.py:26 events/models.py:71
 msgid "Description in German"
 msgstr "Deutsche Beschreibung"
 
@@ -106,45 +106,56 @@ msgstr ""
 "Benachrichtigung, wenn sich Änderungen bei einer Veranstaltung ergeben bei "
 "welcher du angemeldet bist"
 
-#: events/models.py:66
+#: events/models.py:65
 msgid "Name"
 msgstr "Bezeichnung"
 
-#: events/models.py:67
+#: events/models.py:66
 msgid "Address (URL)"
 msgstr "Internetadresse (URL)"
 
-#: events/models.py:68
+#: events/models.py:67
 msgid "Description"
 msgstr "Beschreibung"
 
-#: events/models.py:82
+#: events/models.py:80
 msgid "Event type"
 msgstr "Veranstaltungsart"
 
-#: events/models.py:83
+#: events/models.py:81
 msgid "Maximum number of participants"
 msgstr "Maximale Teilnehmerzahl"
 
-#: events/models.py:84
+#: events/models.py:82
 msgid "Minimal number of participants"
 msgstr "Minimale Teilnehmerzahl"
 
-#: events/models.py:85
+#: events/models.py:83
 msgid "Who is organizing?"
 msgstr "Wer öffnet?"
 
-#: events/models.py:86
+#: events/models.py:84
 msgid "Date"
 msgstr "Datum"
 
-#: events/models.py:87
+#: events/models.py:85
 msgid "Begin"
 msgstr "Begin"
 
-#: events/models.py:88
+#: events/models.py:86
 msgid "End"
 msgstr "Ende"
+
+#: events/templates/email.html:6
+msgid "Email and language settings"
+msgstr "E-Mail und Spracheinstellungen"
+
+#: events/templates/email.html:13 events/templates/event_modify.html:15
+#: events/templates/typ_modify.html:15
+#: templates/registration/password_change.html:13
+#: templates/registration/password_reset_confirm.html:14
+msgid "Update"
+msgstr "Aktualisieren"
 
 #: events/templates/email/event_cancle.html:2
 #: events/templates/email/event_confirmed_open.html:2
@@ -228,8 +239,8 @@ msgstr ""
 
 #: events/templates/email/new_event.subject:2
 #, python-format
-msgid "New %(typ)s on %(date)s"
-msgstr "Neues %(typ)s am %(date)s"
+msgid "New event %(typ)s on %(date)s"
+msgstr "Neues Treffen %(typ)s am %(date)s"
 
 #: events/templates/email/new_event.txt:3
 #, python-format
@@ -241,11 +252,11 @@ msgstr ""
 "%(end_time)s ist verfügbar. Zum anmelden gehe zu %(EMAIL_SITE_URL)s/join/"
 "%(user_id)s/%(event_id)s."
 
-#: events/templates/event.html:44 events/templates/event_modify.html:6
+#: events/templates/event.html:43 events/templates/event_modify.html:6
 msgid "Modify event"
 msgstr "Treffen bearbeiten"
 
-#: events/templates/event.html:57
+#: events/templates/event.html:55
 msgid "Confirm"
 msgstr "Zusagen"
 
@@ -258,77 +269,85 @@ msgstr ""
 msgid "Delete event"
 msgstr "Treffen löschen"
 
-#: events/templates/event.html:65 events/templates/event.html:68
+#: events/templates/event.html:67 events/templates/event.html:72
 msgid "I will open"
 msgstr "Ich öffne"
 
-#: events/templates/event.html:68
+#: events/templates/event.html:72
 msgid "instead of"
 msgstr "anstelle von"
 
-#: events/templates/event.html:70
+#: events/templates/event.html:76
 msgid "I will not open"
 msgstr "Ich öffne nicht"
 
-#: events/templates/event.html:72
+#: events/templates/event.html:80
 msgid "Cancle"
 msgstr "Absagen"
 
-#: events/templates/event.html:85
+#: events/templates/event.html:91 events/templates/events_list.html:45
+msgid "days"
+msgstr "Tagen"
+
+#: events/templates/event.html:94
+msgid "Replicate event"
+msgstr "Treffen duplizieren"
+
+#: events/templates/event.html:108
 msgid "Additional information"
 msgstr "Zusätzliche Informationen"
 
-#: events/templates/event.html:91
+#: events/templates/event.html:114
 msgid "This event is cancled"
 msgstr "Dieses Treffen wurde abgesagt"
 
-#: events/templates/event.html:96
+#: events/templates/event.html:119
 msgid "Currently nobody has volunteered to open."
 msgstr "Es hat sich noch niemand gefunden der öffnen wird."
 
-#: events/templates/event.html:103
+#: events/templates/event.html:126
 msgid "One missing participant."
 msgstr "Es fehlt noch eine Anmeldung."
 
-#: events/templates/event.html:105
+#: events/templates/event.html:128
 #, python-format
 msgid "Still %(number_participants_missing)s registrations are missing."
 msgstr "Es fehlen noch %(number_participants_missing)s Anmeldungen."
 
-#: events/templates/event.html:109
+#: events/templates/event.html:132
 msgid "Nevertheless, please register if you want to join this event."
 msgstr "Trage dich gerne trotzdem schon ein."
 
-#: events/templates/event.html:118
+#: events/templates/event.html:141
 msgid "Cancle participation"
 msgstr "Teilnahme absagen"
 
-#: events/templates/event.html:123
+#: events/templates/event.html:146
 msgid "Confirm participation"
 msgstr "Teilnahme zusagen"
 
-#: events/templates/event.html:132
+#: events/templates/event.html:155
 msgid "opens"
 msgstr "öffnet"
 
-#: events/templates/event.html:182
+#: events/templates/event.html:205
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:204
+#: events/templates/event.html:227
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:206
+#: events/templates/event.html:229
 #, python-format
 msgid "%(num)s free slots remaining"
 msgstr "%(num)s freie Plätze"
 
-#: events/templates/event.html:208
+#: events/templates/event.html:231
 msgid "No free slot available"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:210
+#: events/templates/event.html:233
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
@@ -348,13 +367,6 @@ msgstr ""
 #: events/templates/event_add.html:19
 msgid "Add event"
 msgstr "Neues Treffen anlegen"
-
-#: events/templates/event_modify.html:15
-#: events/templates/settings_email.html:13 events/templates/typ_modify.html:15
-#: templates/registration/password_change.html:13
-#: templates/registration/password_reset_confirm.html:14
-msgid "Update"
-msgstr "Aktualisieren"
 
 #: events/templates/events_list.html:29
 msgid ""
@@ -379,10 +391,6 @@ msgstr "Morgen"
 #: events/templates/events_list.html:45
 msgid "In"
 msgstr "In"
-
-#: events/templates/events_list.html:45
-msgid "days"
-msgstr "Tagen"
 
 #: events/templates/events_list.html:71
 msgid "No scheduled events"
@@ -429,10 +437,6 @@ msgstr "Veranstaltungsarten"
 #: events/templates/master.html:90
 msgid "Impressum"
 msgstr "Impressum"
-
-#: events/templates/settings_email.html:6
-msgid "Email and language settings"
-msgstr "E-Mail und Spracheinstellungen"
 
 #: events/templates/typ_add.html:6
 msgid "New event typ"
@@ -489,15 +493,15 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:261
+#: events/views.py:264
 msgid " is already registered"
 msgstr " ist bereits eingetragen"
 
-#: events/views.py:264
+#: events/views.py:267
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:266
+#: events/views.py:269
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
