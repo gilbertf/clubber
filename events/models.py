@@ -88,6 +88,32 @@ class Event(models.Model):
     participants_txt = models.ManyToManyField(NameTxt, through="JoinedTxt")
     cancled = models.BooleanField(default=False)
 
+    def clean(self):
+        if self.date < datetime.now().date():
+            raise ValidationError(_("The date cannot be in the past."))
+
+        if self.start_time >= self.end_time:
+            raise ValidationError(_("And end time earlier as start time is not allowd."))
+
+        if self.min_participants > self.max_participants:
+            raise ValidationError(_("Min participants > max participants is not allowed."))
+
+        #Zeitliche Überschneidung von Veranstaltungen verhindern
+        if not settings.EVENT_TIME_OVERLAP_ALLOW:
+            sameTime = False
+            for e in Event.objects.all():
+                if hasattr(self, "event_id") and self.event_id == e.id:
+                    continue
+                if self.date == e.date: #Gleicher Tag
+                    if self.start_time >= e.end_time:
+                        sameTime = False
+                    elif e.start_time >= self.end_time:
+                        sameTime = False
+                    else:
+                        sameTime = True
+            if sameTime:
+                raise ValidationError(_("Two events with overlapping times are not allowed."))
+    
     @property
     def numParticipants(self):
         return len(self.participants.all()) + len(self.participants_txt.all())

@@ -87,5 +87,8 @@ def sendMail(event, mail, newEventIcs = None):
             mailMsgs.append(mailMsg)
 
     if len(mailMsgs) > 0:
-        connection = mailMsg.get_connection()
-        connection.send_messages(mailMsgs)
+        try:
+            connection = mailMsg.get_connection()
+            connection.send_messages(mailMsgs)
+        except Exception as e:
+            print("Error sending mail", e)

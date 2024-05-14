@@ -297,6 +297,8 @@ def sendMailNewEvent(event):
                     sendMail(event, Mail.EventFullyBooked) #eventFlow m6
                 sendMail(event, Mail.NewEvent, newEventIcs = makeIcsForEvent(event)) #eventFlow m5
 
+from django.core.exceptions import ValidationError
+
 def eventReplicate(request, event_id):
     if not request.user.is_authenticated:
         return redirect("/login?next={request.path}")
@@ -309,9 +311,16 @@ def eventReplicate(request, event_id):
             event.organizer = None
             event.cancled = False
             event.date += timedelta(days=inDays)
+            
+            try:
+                event.clean()
+            except ValidationError as e:
+                print(e)
+                return redirect('/')
+
             event.save()
             sendMailNewEvent(event)
-
+            
     return redirect('/')
 
 def eventDelete(request, event_id): #eventFlow c7

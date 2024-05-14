@@ -47,33 +47,4 @@ class EventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
             super(EventForm, self).__init__(*args, **kwargs) 
-            #if self.instance and self.instance.pk:
             self.fields['organizer'].queryset = get_user_model().objects.filter(is_staff=True)
-    
-    def clean(self):
-        if self.cleaned_data["date"] < datetime.now().date():
-            raise ValidationError(_("The date cannot be in the past."))
-
-        if self.cleaned_data["start_time"] >= self.cleaned_data["end_time"]:
-            raise ValidationError(_("And end time earlier as start time is not allowd."))
-
-        if self.cleaned_data["min_participants"] > self.cleaned_data["max_participants"]:
-            raise ValidationError(_("Min participants > max participants is not allowed."))
-
-        #Zeitliche Überschneidung von Veranstaltungen verhindern
-        if not settings.EVENT_TIME_OVERLAP_ALLOW:
-            sameTime = False
-            for e in Event.objects.all():
-                if hasattr(self, "event_id") and self.event_id == e.id:
-                    continue
-                if self.cleaned_data["date"] == e.date: #Gleicher Tag
-                    if self.cleaned_data["start_time"] >= e.end_time:
-                        sameTime = False
-                    elif e.start_time >= self.cleaned_data["end_time"]:
-                        sameTime = False
-                    else:
-                        sameTime = True
-            if sameTime:
-                raise ValidationError(_("Two events with overlapping times are not allowed."))
-
-        return self.cleaned_data
