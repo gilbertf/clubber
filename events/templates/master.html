@@ -65,15 +65,15 @@
 
 									{% if user.is_superuser %}
 		            					<li><hr class="dropdown-divider"></li>
-										<a id="btn_users"class="dropdown-item{% url 'user_list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}"">{% translate "User management" %}</a>
-										<a id="btn_event_types" class="dropdown-item{% url 'typ-list' as url %}{% if request.path == url %} active{% endif %}" href="{{ url}}">{% translate "Event types" %}</a>
+										<a id="btn_users"class="dropdown-item{% url 'user_list' as url %}{% if request.path == url %} active{% endif %}" href={{ url}}>{% translate "User management" %}</a>
+										<a id="btn_event_types" class="dropdown-item{% url 'typ_list' as url %}{% if request.path == url %} active{% endif %}" href={{ url }}>{% translate "Event types" %}</a>
 									{% endif %}
 								 </ul>
 							</li>
 						{% endif %}
 
 						{% if user.is_staff %}
-							<a id="btn_event_add" class="nav-item nav-link{% if request.path == "/event/add" %} active{% endif %}" href="/event/add">{% translate "New event" %}</a>
+							<a id="btn_event_add" class="nav-item nav-link{% url 'event_add' as url %}{% if request.path == url %} active{% endif %}" href={{ url }}>{% translate "New event" %}</a>
 						{% endif %}
 			    		</div>
 			  	</div>
@@ -87,7 +87,7 @@
 
 		<footer class="py-3 my-4">
 		      <ul class="nav justify-content-center border-top pb-3 mb-3">
-				<li class="nav-item"><a href="/impressum" class="nav-link px-2 {% if request.path == "/impressum" %}text-dark{% else %}text-body-secondary{% endif %}">{% translate "Impressum" %}</a></li>
+				<li class="nav-item">{% url 'impressum' as url %}<a href="{{ url }}" class="nav-link px-2 {% if request.path == url %}text-dark{% else %}text-body-secondary{% endif %}">{% translate "Impressum" %}</a></li>
 				<li class="nav-item"><a href="https://github.com/gilbertf/clubber" class="nav-link px-2 text-body-secondary">Clubber</a></li>
 		      </ul>
 		</footer>

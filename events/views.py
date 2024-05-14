@@ -36,7 +36,7 @@ class TypAddView(UserPassesTestMixin, CreateView):
     model = Typ
     template_name = "typ_add.html"
     form_class = TypForm
-    success_url = reverse_lazy("typ-list")
+    success_url = reverse_lazy("typ_list")
     def test_func(self):
         return self.request.user.is_superuser
     
@@ -45,19 +45,19 @@ class TypModifyView(UserPassesTestMixin, UpdateView):
     template_name = "typ_modify.html"
     form_class = TypForm
     
-    success_url = reverse_lazy("typ-list")
+    success_url = reverse_lazy("typ_list")
     def test_func(self):
         return self.request.user.is_superuser
 
 class TypDeleteView(UserPassesTestMixin, DeleteView):
     model = Typ
-    success_url = reverse_lazy("typ-list")
+    success_url = reverse_lazy("typ_list")
     def test_func(self):
         return self.request.user.is_superuser
 
 class SettingsEmailView(UpdateView):
     model = Person
-    template_name = "settings_email.html"
+    template_name = "email.html"
     success_url = reverse_lazy("events_list")
     form_class = EmailNotificationsForm
 

@@ -75,7 +75,7 @@ class Typ(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("typ-modify", kwargs={"pk": self.pk})
+        return reverse("typ_modify", kwargs={"pk": self.pk})
 
 class Event(models.Model):
 #class Event(TranslationModelForm):
