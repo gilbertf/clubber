@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-14 09:10+0200\n"
-"PO-Revision-Date: 2024-05-14 09:11+0200\n"
+"POT-Creation-Date: 2024-05-14 12:18+0200\n"
+"PO-Revision-Date: 2024-05-14 12:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -42,11 +42,11 @@ msgstr ""
 msgid "Password mismatch"
 msgstr "Passwörter stimmen nicht überein"
 
-#: clubber/settings.py:164
+#: clubber/settings.py:153
 msgid "German"
 msgstr "Deutsch"
 
-#: clubber/settings.py:165
+#: clubber/settings.py:154
 msgid "English"
 msgstr "Englisch"
 
@@ -160,6 +160,7 @@ msgstr "Aktualisieren"
 #: events/templates/email/event_cancle.html:2
 #: events/templates/email/event_confirmed_open.html:2
 #: events/templates/email/event_pending_open.html:2
+#: events/templates/email/event_sufficient_participants_missing_organizer.html:2
 #: events/templates/email/new_event.html:2
 #, python-format
 msgid "Hello %(username)s,<br>"
@@ -182,6 +183,7 @@ msgstr "%(typ)s am %(date)s abgesagt"
 #: events/templates/email/event_cancle.txt:2
 #: events/templates/email/event_confirmed_open.txt:2
 #: events/templates/email/event_pending_open.txt:2
+#: events/templates/email/event_sufficient_participants_missing_organizer.txt:2
 #: events/templates/email/new_event.txt:2
 #, python-format
 msgid "Hello %(username)s,"
@@ -225,6 +227,22 @@ msgstr ""
 #, python-format
 msgid "%(typ)s on %(date)s will not be opened"
 msgstr "%(typ)s am %(date)s wird nicht geöffnet"
+
+#: events/templates/email/event_sufficient_participants_missing_organizer.html:3
+#: events/templates/email/event_sufficient_participants_missing_organizer.txt:3
+#, python-format
+msgid ""
+"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s with "
+"sufficient registered participants is missing an organizer."
+msgstr ""
+"für die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+"%(end_time)s fehlt noch ein Organisator. Ausreichend Teilnehmer sind schon "
+"angemeldet."
+
+#: events/templates/email/event_sufficient_participants_missing_organizer.subject:2
+#, python-format
+msgid "%(typ)s on %(date)s is missing organizer"
+msgstr "%(typ)s am %(date)s benötigt noch einen Organisator"
 
 #: events/templates/email/new_event.html:3
 #, python-format
@@ -447,13 +465,14 @@ msgid "Add event typ"
 msgstr "Neue Veranstaltungsart anlegen"
 
 #: events/templates/typ_list.html:28
+#, python-format
 msgid ""
 "By deleting a event type, all events of this type will disapear. Please "
-"confirm to delete the event type {{ typ }}."
+"confirm to delete the event type %(typ)s."
 msgstr ""
 "Wenn du einen Veranstaltungsart löscht werden auch die zugehörigen "
-"Veranstaltungen nicht mehr angezeigt. Bist du sicher, dass {{ typ }} "
-"gelöscht werden soll?"
+"Veranstaltungen nicht mehr angezeigt. Bist du sicher, dass %(typ)s gelöscht "
+"werden soll?"
 
 #: events/templates/typ_list.html:30
 #: venv/lib/python3.12/site-packages/django/forms/formsets.py:499

@@ -25,11 +25,11 @@
 				{% endif %}
 			</div>
 			<div class="ms-2">
-				<form hx-swap="delete" hx-target="#typ-{{ typ.id }}" hx-confirm="{% translate "By deleting a event type, all events of this type will disapear. Please confirm to delete the event type {{ typ }}." %}">
+				<form hx-swap="delete" hx-target="#typ-{{ typ.id }}" hx-confirm="{% blocktranslate %}By deleting a event type, all events of this type will disapear. Please confirm to delete the event type {{ typ }}.{% endblocktranslate %}">
 					{% csrf_token %}
-					<button class="my-2 mx-2 btn btn-danger" hx-post="/typ/{{ typ.id }}/delete">{% translate "Delete" %}</button>
+					<button class="my-2 mx-2 btn btn-danger" hx-post={% url 'typ_delete' typ.id %}>{% translate "Delete" %}</button>
 				</form>
-				<form method="GET" action="/typ/{{ typ.id }}/modify">
+				<form method="GET" action={% url 'typ_modify' typ.id %}>
 					{% csrf_token %}
 					<button class="my-2 mx-2 btn btn-success">{% translate "Modify" %}</button>
 				</form>
@@ -40,7 +40,7 @@
 
 <br>
 
-<form method="GET" action="/typ/add">
+<form method="GET" action={% url 'typ_add' %}>
 	{% csrf_token %}
 	<button class="mx-2 btn btn-success" id="btn_typ_add">{% translate "Add new event type" %}</button>
 </form>
