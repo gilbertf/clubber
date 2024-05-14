@@ -9,7 +9,7 @@
 {% block content %} 
     <form method="POST">
         {% csrf_token %}
-        {{ settings_email_form|crispy }}                    
+        {{ form|crispy }}                    
         <button class="btn btn-primary" type="submit">{% translate "Update" %}</button>
     </form>
 {% endblock %}

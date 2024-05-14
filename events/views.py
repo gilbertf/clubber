@@ -58,8 +58,12 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
 class SettingsEmailView(UpdateView):
     model = Person
     template_name = "settings_email.html"
-
+    success_url = reverse_lazy("events_list")
     form_class = EmailNotificationsForm
+
+    def get_object(self):
+        model_instance = Person.objects.get(pk=self.request.user.id)
+        return model_instance
 
 def addUserToEvent(user, event):
     if not user in event.participants.all(): #Verhindern das durch wiederholtes POST Doppeleinträge erzeugt werden
