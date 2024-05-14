@@ -231,10 +231,9 @@ def users_list(request):
                 u.is_superuser = False
                 u.save()
 
-    return render(request, "user_list.html", {"users": get_user_model().objects.all()})
+    return render(request, "users_list.html", {"users": get_user_model().objects.all()})
 
 def events_list_intern(request):
-    print("X")
     return events_list(request, None, True)
 
 def events_list(request, event_id = None, intern = False):

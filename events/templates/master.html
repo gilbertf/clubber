@@ -52,8 +52,8 @@
 								{% url 'typ_list' as url_typ_list %}
 								<a id="btn_settings" class="nav-link dropdown-toggle{% if request.path == url_user_password_change or request.path == url_user_settings or request.path == url_users_list or request.path == url_typ_list %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% translate "Settings" %}</a>
 								<ul class="dropdown-menu">	
-									<a class="dropdown-item{% if request.path == url_user_password_change %} active{% endif %}" href={{ url_user_password_change }}>{% translate "Change password" %}</a>
 									<a class="dropdown-item{% if request.path == url_user_settings %} active{% endif %}" href={{ url_user_settings }}>{% translate "User settings" %}</a>
+									<a class="dropdown-item{% if request.path == url_user_password_change %} active{% endif %}" href={{ url_user_password_change }}>{% translate "Change password" %}</a>
 									<form id="form-logout" action="{% url 'logout' %}" method="post">
 										{% csrf_token %}
 									    <input type="hidden"></input>
