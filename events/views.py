@@ -7,7 +7,7 @@ import pytz
 from django.http import HttpResponseRedirect
 import operator
 from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person
-from .forms import EventForm, TypForm, EmailNotificationsForm
+from .forms import EventForm, TypForm, SettingsForm
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
@@ -55,11 +55,11 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
-class SettingsEmailView(UpdateView):
+class UserSettingsView(UpdateView):
     model = Person
-    template_name = "email.html"
+    template_name = "settings.html"
     success_url = reverse_lazy("events_list")
-    form_class = EmailNotificationsForm
+    form_class = SettingsForm
 
     def get_object(self):
         model_instance = Person.objects.get(pk=self.request.user.id)
@@ -197,7 +197,7 @@ def user_delete(request, user_id):
             user.delete()
             return HttpResponse(status=200)
 
-def user_list(request):
+def users_list(request):
     if not request.user.is_authenticated or not request.user.is_superuser:
         return redirect("/login?next={request.path}")
 

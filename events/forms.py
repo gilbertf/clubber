@@ -26,13 +26,13 @@ class TypForm(forms.ModelForm):
                   "description_de": _("Description in German"),
                   }
 
-class EmailNotificationsForm(forms.ModelForm):
+class SettingsForm(forms.ModelForm):
     class Meta:
         model = Person
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            fields = [ "email", "language", "email_notification_new_event", "email_notification_joined_event" ]
+            fields = [ "username", "email", "language", "email_notification_new_event", "email_notification_joined_event" ]
         else:
-            fields = [ "email", "language" ]
+            fields = [ "username", "email", "language" ]
         labels = { "email": _("Email address"), "language": _("Language") }
 
 class EventForm(forms.ModelForm):
