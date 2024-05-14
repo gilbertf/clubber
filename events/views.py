@@ -233,7 +233,11 @@ def user_list(request):
 
     return render(request, "user_list.html", {"users": get_user_model().objects.all()})
 
-def events_list(request, event_id = None):
+def events_list_intern(request):
+    print("X")
+    return events_list(request, None, True)
+
+def events_list(request, event_id = None, intern = False):
     context = dict()
     events = prepare_event_list(request)
 
@@ -252,7 +256,10 @@ def events_list(request, event_id = None):
                 event.expand = True
     
     context["event_list"] = events
-    return render(request, "events_list.html", context)
+    if intern:
+        return render(request, "events_list_intern.html", context)
+    else:
+        return render(request, "events_list.html", context)
 
 def username_check(name, event):
     if len(name) > 0 and len(name) <= 20: #Max. Feldlänge sicherstellen, dann: Sicherstellen das niemand mit gleichem Namen bereits eingetragen ist

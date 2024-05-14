@@ -7,7 +7,7 @@
 	{% translate Events %}
 {% endblock %}
 
-{% block content %}
+{% block content %}	
 	<style>
 		.icon-baseline{
 		  display:flex;
@@ -23,51 +23,12 @@
 		}
 	</style>
 
-
 	{% if not user.is_authenticated %}
 		<div class="alert alert-warning" role="alert">
 			{% translate "It is possible to register to events without an account. As consequence it is not possible to change your entry at a later time and you will not receive notification mails. To register click <a href=/account/register>here</a>." %}
 		</div>
 	{% endif %}
 	
-	{% if event_list %}
-		<div class="container text-center">
-			<div class="accordion accordion-flush" id="accordion-all">
-				<div class="row align-items-start">
-					{% for day in event_list %}
-						<div class="col-12 col-md-4 mb-5">
-							<div class="h5">
-								{% if day.0.daysFuture == 0 %}
-									{% translate "Today" %}
-								{% elif day.0.daysFuture == 1 %}
-									{% translate "Tomorrow" %}
-								{% else %}
-									{% translate "In" %} {{ day.0.daysFuture|apnumber }} {% translate "days" %}
-								{% endif %}
-							</div>
-							<div class="h5">
-								{{ day.0.date|date:"l, j. F" }}
-							</div>
-							{% for event in day %}
-								<div class="accordion-item" id="accordion-event-{{ event.id }}">
-									<h2 class="accordion-header" id="accordion-heading-{{ event.id }}">
-										<button class="accordion-button{% if not event.expand %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-collapse-{{ event.id }}">
-											{{ event.start_time }} - {{ event.end_time }} &nbsp&nbsp <b>{{ event.typ }}</b>
-										</button>
-									</h2>
-									<div id="accordion-collapse-{{ event.id }}" class="accordion-collapse collapse{% if event.expand %} show{% endif %}" data-bs-parent="#accordion-all">
-										<div class="accordion-body">
-											{% include "event.html" %}    
-										</div>
-									</div>
-								</div>
-							{% endfor %}
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-	{% else %}
-		<p>{% translate "No scheduled events" %}</p>
-	{% endif %}
+	{% include "events_list_intern.html" %}    
+	
 {% endblock %}
