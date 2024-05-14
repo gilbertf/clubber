@@ -88,7 +88,7 @@
 									<div class="input-group">
 										<select name="inDays" class="form-select" aria-label="Default select example">
 											{% for nextDay in event.nextDays %}
-												<option value="{{ forloop.counter }}">{{ nextDay | date:"l" }} (in {{ forloop.counter }} {% translate "days" %})</option>
+												<option {% if forloop.counter == 7 %}selected{% endif %} value="{{ forloop.counter }}">{{ nextDay | date:"l" }} (in {{ forloop.counter }} {% translate "days" %})</option>
 											{% endfor %}
 										</select>
 										<input class="btn btn-danger" type="submit" value="{% translate "Replicate event" %}">

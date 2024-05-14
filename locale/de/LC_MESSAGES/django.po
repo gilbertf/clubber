@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-14 12:18+0200\n"
-"PO-Revision-Date: 2024-05-14 12:19+0200\n"
+"POT-Creation-Date: 2024-05-14 18:00+0200\n"
+"PO-Revision-Date: 2024-05-14 18:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -145,17 +145,6 @@ msgstr "Begin"
 #: events/models.py:86
 msgid "End"
 msgstr "Ende"
-
-#: events/templates/email.html:6
-msgid "Email and language settings"
-msgstr "E-Mail und Spracheinstellungen"
-
-#: events/templates/email.html:13 events/templates/event_modify.html:15
-#: events/templates/typ_modify.html:15
-#: templates/registration/password_change.html:13
-#: templates/registration/password_reset_confirm.html:14
-msgid "Update"
-msgstr "Aktualisieren"
 
 #: events/templates/email/event_cancle.html:2
 #: events/templates/email/event_confirmed_open.html:2
@@ -303,7 +292,7 @@ msgstr "Ich öffne nicht"
 msgid "Cancle"
 msgstr "Absagen"
 
-#: events/templates/event.html:91 events/templates/events_list.html:45
+#: events/templates/event.html:91 events/templates/events_list_intern.html:17
 msgid "days"
 msgstr "Tagen"
 
@@ -369,7 +358,7 @@ msgstr "Das Treffen ist  ausgebucht"
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
-#: events/templates/event_add.html:6 events/templates/master.html:76
+#: events/templates/event_add.html:6 events/templates/master.html:79
 msgid "New event"
 msgstr "Neues Treffen"
 
@@ -386,7 +375,14 @@ msgstr ""
 msgid "Add event"
 msgstr "Neues Treffen anlegen"
 
-#: events/templates/events_list.html:29
+#: events/templates/event_modify.html:15 events/templates/settings.html:13
+#: events/templates/typ_modify.html:15
+#: templates/registration/password_change.html:13
+#: templates/registration/password_reset_confirm.html:14
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: events/templates/events_list.html:28
 msgid ""
 "It is possible to register to events without an account. As consequence it "
 "is not possible to change your entry at a later time and you will not "
@@ -398,19 +394,19 @@ msgstr ""
 "auch keine Benachrichtigungen per E-Mail, z.B. für neue Treffen, erhältst. "
 "Zur Registrierung geht es <a href=/account/register>hier</a>."
 
-#: events/templates/events_list.html:41
+#: events/templates/events_list_intern.html:13
 msgid "Today"
 msgstr "Heute"
 
-#: events/templates/events_list.html:43
+#: events/templates/events_list_intern.html:15
 msgid "Tomorrow"
 msgstr "Morgen"
 
-#: events/templates/events_list.html:45
+#: events/templates/events_list_intern.html:17
 msgid "In"
 msgstr "In"
 
-#: events/templates/events_list.html:71
+#: events/templates/events_list_intern.html:43
 msgid "No scheduled events"
 msgstr "Aktuell sind keine Treffen geplant"
 
@@ -428,31 +424,31 @@ msgstr "Anmelden"
 msgid "Register"
 msgstr "Registrieren"
 
-#: events/templates/master.html:49
+#: events/templates/master.html:53
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: events/templates/master.html:51
+#: events/templates/master.html:55 events/templates/settings.html:6
+msgid "User settings"
+msgstr "Benutzereinstellungen"
+
+#: events/templates/master.html:56
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: events/templates/master.html:52
-msgid "Email and language"
-msgstr "E-Mail und Sprache"
-
-#: events/templates/master.html:64
+#: events/templates/master.html:67
 msgid "Logout"
 msgstr "Abmelden"
 
-#: events/templates/master.html:68 events/templates/user_list.html:6
+#: events/templates/master.html:71 events/templates/users_list.html:6
 msgid "User management"
 msgstr "Benutzerverwaltung"
 
-#: events/templates/master.html:69 events/templates/typ_list.html:5
+#: events/templates/master.html:72 events/templates/typ_list.html:5
 msgid "Event types"
 msgstr "Veranstaltungsarten"
 
-#: events/templates/master.html:90
+#: events/templates/master.html:93
 msgid "Impressum"
 msgstr "Impressum"
 
@@ -491,36 +487,36 @@ msgstr "Neue Veranstaltungsart anlegen"
 msgid "Modify typ"
 msgstr "Bearbeiten"
 
-#: events/templates/user_list.html:14
+#: events/templates/users_list.html:14
 msgid "you"
 msgstr "du selber"
 
-#: events/templates/user_list.html:21
+#: events/templates/users_list.html:21
 msgid "Manage events"
 msgstr "Veranstaltungen verwalten"
 
-#: events/templates/user_list.html:25
+#: events/templates/users_list.html:25
 msgid "Manage users and event types"
 msgstr "Veranstaltungsarten und Benutzer verwalten"
 
-#: events/templates/user_list.html:44
+#: events/templates/users_list.html:44
 #, python-format
 msgid "Confirm to delete user %(user)s"
 msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 
-#: events/templates/user_list.html:46
+#: events/templates/users_list.html:46
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:264
+#: events/views.py:270
 msgid " is already registered"
 msgstr " ist bereits eingetragen"
 
-#: events/views.py:267
+#: events/views.py:273
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:269
+#: events/views.py:275
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
@@ -1794,3 +1790,14 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/modeltranslation/widgets.py:24
 msgid "None"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Settings"
+#~ msgid "User Settings"
+#~ msgstr "Einstellungen"
+
+#~ msgid "Email and language settings"
+#~ msgstr "E-Mail und Spracheinstellungen"
+
+#~ msgid "Email and language"
+#~ msgstr "E-Mail und Sprache"

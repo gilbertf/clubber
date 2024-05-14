@@ -56,7 +56,6 @@
 									<a class="dropdown-item{% if request.path == url_user_password_change %} active{% endif %}" href={{ url_user_password_change }}>{% translate "Change password" %}</a>
 									<form id="form-logout" action="{% url 'logout' %}" method="post">
 										{% csrf_token %}
-									    <input type="hidden"></input>
 									</form>
 									<script>
 										$(document).ready(function(){
@@ -69,7 +68,7 @@
 
 									{% if user.is_superuser %}
 		            					<li><hr class="dropdown-divider"></li>
-										<a id="btn_users"class="dropdown-item{% if request.path == url_users_list %} active{% endif %}" href={{ url_users_list }}>{% translate "User management" %}</a>
+										<a id="btn_users" class="dropdown-item{% if request.path == url_users_list %} active{% endif %}" href={{ url_users_list }}>{% translate "User management" %}</a>
 										<a id="btn_event_types" class="dropdown-item{% if request.path == url_typ_list %} active{% endif %}" href={{ url_typ_list }}>{% translate "Event types" %}</a>
 									{% endif %}
 								 </ul>
