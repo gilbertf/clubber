@@ -49,7 +49,16 @@ def sendMail(event, mail, newEventIcs = None):
         "EMAIL_SITE_URL": settings.EMAIL_SITE_URL,
     }
 
-    print("Sending mail", mail.templateName, "to", "allUsers", mail.allUsers, "allOrganizers", mail.allOrganizers, "eventParticipants", mail.eventParticipants, "eventOrganizer", mail.eventOrganizer)    
+    s = "Sending mail " + mail.templateName + " to"
+    if mail.allUsers:
+        s += " allUsers"
+    if mail.allOrganizers:
+        s += " allOrganizers"
+    if mail.eventParticipants:
+        s += " eventParticipants"
+    if mail.eventOrganizer:
+        s += " eventOrganizer"
+    print(s)    
 
     text = get_template(mail.templateName + ".txt")
     html = get_template(mail.templateName + ".html")

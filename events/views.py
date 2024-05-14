@@ -256,7 +256,7 @@ def events_list(request, event_id = None):
 
 def username_check(name, event):
     if len(name) > 0 and len(name) <= 20: #Max. Feldlänge sicherstellen, dann: Sicherstellen das niemand mit gleichem Namen bereits eingetragen ist
-        others = event.participants.filter(username__iexact=name).count()
+        others = get_user_model().objects.filter(username__iexact=name).count()
         others_txt = event.participants_txt.filter(txt__iexact=name).count()
         if others == 0 and others_txt == 0:
             return True, ""
@@ -318,12 +318,7 @@ def eventDelete(request, event_id): #eventFlow c7
         return r
     return render(request, 'event.html', {'event': event})
 
-def eventParticipantAdd(request, event_id): #eventFlow c3
-    event = Event.objects.filter(id=event_id).get()
-    preSufficientParticipants = event.sufficientParticipants
-
-    addUserToEvent(request.user, event)
-
+def mailEventParticipantAdd(event, preSufficientParticipants):
     if not preSufficientParticipants and event.sufficientParticipants and event.organizer == None:
         sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
     if not preSufficientParticipants and event.sufficientParticipants and event.organizer != None:
@@ -331,19 +326,28 @@ def eventParticipantAdd(request, event_id): #eventFlow c3
     if event.fullyBooked:
         sendMail(event, Mail.FullyBooked) #eventFlow m6
 
+def eventParticipantAdd(request, event_id): #eventFlow c3
+    event = Event.objects.filter(id=event_id).get()
+    preSufficientParticipants = event.sufficientParticipants
+
+    addUserToEvent(request.user, event)
+    mailEventParticipantAdd(event, preSufficientParticipants)
+
     advanceEvent(request, event)
     return render(request, 'event.html', {'event': event})
 
 def eventParticipantTxtAdd(request, event_id):
     name = request.POST.get("username")
     event = Event.objects.filter(id=event_id).get()
+    preSufficientParticipants = event.sufficientParticipants
+
     checkRet = username_check(name, event)
-    if checkRet[0]:
+    if checkRet[0] and not event.fullyBooked:
         n = NameTxt(txt=name)
         n.save()
-        if not event.fullyBooked:
-            jt = JoinedTxt(name_txt = n, event = event, date=datetime.now())
-            jt.save()
+        jt = JoinedTxt(name_txt = n, event = event, date=datetime.now())
+        jt.save()
+        mailEventParticipantAdd(event, preSufficientParticipants)
     else:
         messages.error(request, checkRet[1])
 
