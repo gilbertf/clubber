@@ -20,6 +20,7 @@ urlpatterns = [
     path("event/<int:event_id>/follow/set", views.eventParticipantAdd, name="event_follow_set"),
     path("event/<int:event_id>/follow/unset", views.eventParticipantRemove, name="event_follow_unset"),
     path("event/<int:event_id>/delete", views.eventDelete, name="event_delete"),
+    path("event/<int:event_id>/replicate", views.eventReplicate, name="event_replicate"),
     path("event/<int:event_id>/participant__txt/<int:participant_txt_id>/modify", views.eventParticipantTxtModify, name="event_participant_txt_modify"),
     path("event/<int:event_id>/participant_txt/<int:participant_txt_id>/delete", views.adminEventParticipantTxtRemove, name="event_participant_txt_delete"),
     path("event/<int:event_id>/participant_txt/add", views.eventParticipantTxtAdd, name="event_participant_txt_add"),

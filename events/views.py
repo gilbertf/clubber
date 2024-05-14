@@ -95,6 +95,10 @@ def advanceEvent(request, event):
         if request.user.is_authenticated: #Wir brauchen diese Info um Anmeldung/Abmeldung Schalter ein/auszublenden
             event.auth = True
 
+        if request.user.is_staff:
+            event.nextDays = [event.date + timedelta(days=i+1) for i in range(7) ]
+
+
 def prepare_event_list(request):
     event_list = Event.objects.filter(date__gte=datetime.now() + timedelta(days=0)).order_by('date') #Hide all events that started more than 1 day ago -> maybe delete or "archive" as statistical data without names in the future
     #In allen veranstaltungen markieren, ob der Nutzer bereits angemeldet ist und ob es sich um einen Admin handelt
@@ -280,6 +284,18 @@ def eventParticipantTxtModify(request, event_id, participant_txt_id):
             messages.error(request, checkRet[1])
     return render(request, 'event.html', {'event': event})
         
+def eventReplicate(request, event_id):
+    if request.user.is_staff:
+        event = Event.objects.filter(id=event_id).get()
+        inDays = int(request.GET.get("inDays"))
+        if inDays > 0 and inDays < 8 and event != None:
+            event.pk = None #make as new object by deleting id
+            event.organizer = None
+            event.cancled = False
+            event.date += timedelta(days=inDays)
+            event.save()
+    return redirect('/')
+
 def eventDelete(request, event_id): #eventFlow c7
     event = Event.objects.filter(id=event_id).get()
     advanceEvent(request, event)
