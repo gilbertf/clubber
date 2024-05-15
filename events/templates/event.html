@@ -116,7 +116,7 @@
 	{% else %}
 		{% if event.organizer == None %}
 			<div class="alert alert-warning my-2">
-						{% translate "Currently nobody has volunteered to open." %}
+						{% translate "Currently nobody has volunteered to open. Please check again later." %}
 			</div>
 		{% endif %}
 
@@ -125,7 +125,7 @@
 				{% if event.missingParticipants == 1 %}
 					{% translate "One missing participant." %}
 				{% else %}
-					{% blocktranslate with number_participants_missing=event.missingParticipants|apnumber %}Still {{number_participants_missing}} registrations are missing.{% endblocktranslate %}
+					{% blocktranslate with number_participants_missing=event.missingParticipants|apnumber %}Still {{number_participants_missing}} registrations are missing. Please check again later.{% endblocktranslate %}
 				{% endif %}
 				{% if not event.organizer == request.user and not event.userIsSubscribed %}
 					<br>

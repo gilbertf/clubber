@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-14 18:00+0200\n"
-"PO-Revision-Date: 2024-05-14 18:00+0200\n"
+"POT-Creation-Date: 2024-05-15 10:14+0200\n"
+"PO-Revision-Date: 2024-05-15 10:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -70,24 +70,6 @@ msgstr "Deutsche Beschreibung"
 msgid "Language"
 msgstr "Sprache"
 
-#: events/forms.py:55
-msgid "The date cannot be in the past."
-msgstr "Das Datum darf nicht in der Vergangenheit liegen."
-
-#: events/forms.py:58
-msgid "And end time earlier as start time is not allowd."
-msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
-
-#: events/forms.py:61
-msgid "Min participants > max participants is not allowed."
-msgstr ""
-"Es ist nicht erlaubt, das die Mindestteilnehmerzahl die "
-"Maximalteilnehmerzahl übersteigt."
-
-#: events/forms.py:77
-msgid "Two events with overlapping times are not allowed."
-msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
-
 #: events/models.py:20
 msgid " does not start with http:// or https://"
 msgstr " beginnt nicht mit http:// oder https://"
@@ -145,6 +127,24 @@ msgstr "Begin"
 #: events/models.py:86
 msgid "End"
 msgstr "Ende"
+
+#: events/models.py:93
+msgid "The date cannot be in the past."
+msgstr "Das Datum darf nicht in der Vergangenheit liegen."
+
+#: events/models.py:96
+msgid "And end time earlier as start time is not allowd."
+msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
+
+#: events/models.py:99
+msgid "Min participants > max participants is not allowed."
+msgstr ""
+"Es ist nicht erlaubt, das die Mindestteilnehmerzahl die "
+"Maximalteilnehmerzahl übersteigt."
+
+#: events/models.py:115
+msgid "Two events with overlapping times are not allowed."
+msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
 
 #: events/templates/email/event_cancle.html:2
 #: events/templates/email/event_confirmed_open.html:2
@@ -309,8 +309,10 @@ msgid "This event is cancled"
 msgstr "Dieses Treffen wurde abgesagt"
 
 #: events/templates/event.html:119
-msgid "Currently nobody has volunteered to open."
-msgstr "Es hat sich noch niemand gefunden der öffnen wird."
+msgid "Currently nobody has volunteered to open. Please check again later."
+msgstr ""
+"Es hat sich noch niemand gefunden der öffnen wird. Bitte schau später noch "
+"einmal vorbei."
 
 #: events/templates/event.html:126
 msgid "One missing participant."
@@ -318,8 +320,12 @@ msgstr "Es fehlt noch eine Anmeldung."
 
 #: events/templates/event.html:128
 #, python-format
-msgid "Still %(number_participants_missing)s registrations are missing."
-msgstr "Es fehlen noch %(number_participants_missing)s Anmeldungen."
+msgid ""
+"Still %(number_participants_missing)s registrations are missing. Please "
+"check again later."
+msgstr ""
+"Es fehlen noch %(number_participants_missing)s Anmeldungen. Bitte schau "
+"später noch einmal vorbei."
 
 #: events/templates/event.html:132
 msgid "Nevertheless, please register if you want to join this event."
@@ -337,24 +343,24 @@ msgstr "Teilnahme zusagen"
 msgid "opens"
 msgstr "öffnet"
 
-#: events/templates/event.html:205
+#: events/templates/event.html:206
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:227
+#: events/templates/event.html:232
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:229
+#: events/templates/event.html:234
 #, python-format
 msgid "%(num)s free slots remaining"
 msgstr "%(num)s freie Plätze"
 
-#: events/templates/event.html:231
+#: events/templates/event.html:236
 msgid "No free slot available"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:233
+#: events/templates/event.html:238
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
@@ -508,15 +514,15 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:270
+#: events/views.py:272
 msgid " is already registered"
 msgstr " ist bereits eingetragen"
 
-#: events/views.py:273
+#: events/views.py:275
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:275
+#: events/views.py:277
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
