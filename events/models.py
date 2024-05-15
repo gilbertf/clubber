@@ -102,7 +102,7 @@ class Event(models.Model):
         if not settings.EVENT_TIME_OVERLAP_ALLOW:
             sameTime = False
             for e in Event.objects.all():
-                if hasattr(self, "event_id") and self.event_id == e.id:
+                if hasattr(self, "id") and self.id == e.id:
                     continue
                 if self.date == e.date: #Gleicher Tag
                     if self.start_time >= e.end_time:
