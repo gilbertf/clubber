@@ -67,9 +67,11 @@ class UserSettingsView(UpdateView):
 
 def addUserToEvent(user, event):
     if not user in event.participants.all(): #Verhindern das durch wiederholtes POST Doppeleinträge erzeugt werden
-        if not event.fullyBooked:
+        if not event.fullyBooked and not event.cancled:
             j = Joined(user = user, event = event, date=datetime.now())
             j.save()
+            return True
+    return False
 
 def removeUserFromEvent(user, event):
     if user in event.participants.all():
@@ -345,8 +347,8 @@ def eventParticipantAdd(request, event_id): #eventFlow c3
     event = Event.objects.filter(id=event_id).get()
     preSufficientParticipants = event.sufficientParticipants
 
-    addUserToEvent(request.user, event)
-    mailEventParticipantAdd(event, preSufficientParticipants)
+    if addUserToEvent(request.user, event):
+        mailEventParticipantAdd(event, preSufficientParticipants)
 
     advanceEvent(request, event)
     return render(request, 'event.html', {'event': event})
@@ -357,7 +359,7 @@ def eventParticipantTxtAdd(request, event_id):
     preSufficientParticipants = event.sufficientParticipants
 
     checkRet = username_check(name, event)
-    if checkRet[0] and not event.fullyBooked:
+    if checkRet[0] and not event.fullyBooked and not event.cancled:
         n = NameTxt(txt=name)
         n.save()
         jt = JoinedTxt(name_txt = n, event = event, date=datetime.now())

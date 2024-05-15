@@ -38,7 +38,7 @@
 				<li class="list-group-item">
 					<div class="container text-center">
 						<div class="row">
-							<form method="post" action="/event/modify">
+							<form method="post" action={% url 'event_modify' %}>
 								{% csrf_token %}
 								{% translate "Modify event" %}
 								<button class="btn mx-2 btn-lg" id="btn_event_modify" name="modify" value={{ event.id }}>
@@ -198,40 +198,46 @@
 				</li>
 			{% endfor %}
 
-			<li class="list-group-item">
-				{% if event.freeSlots > 0 %}
-					<form method="post" class="form-inline">
-						<div class="input-group">
-							<input class="form-control text-center" name="username" maxlength="20" type="text" placeholder="{% translate "Name of participant" %}" name="name_text">
-							<button class="btn btn-primary" hx-post="{% url 'event_participant_txt_add' event.id %}">
-								<svg id="add-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-center bi-plus-circle-fill icon-baseline" viewBox="0 0 16 16">
-									<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-								</svg>
-								<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_add" role="status"></div>
-							</button>
+			{% if event.freeSlots > 0 %}
+				{% if not event.cancled %}
+					<li class="list-group-item">
+						<form method="post" class="form-inline">
+							<div class="input-group">
+								<input class="form-control text-center" name="username" maxlength="20" type="text" placeholder="{% translate "Name of participant" %}" name="name_text">
+								<button class="btn btn-primary" hx-post="{% url 'event_participant_txt_add' event.id %}">
+									<svg id="add-name-txt-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-center bi-plus-circle-fill icon-baseline" viewBox="0 0 16 16">
+										<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+									</svg>
+									<div class="spinner-border spinner-border-sm htmx-indicator" id="event_participant_txt_add" role="status"></div>
+								</button>
+							</div>
+						</form>
+						<div class="my-2">
+							{% if messages %}
+									{% for message in messages %}
+									{% if  message.tags == "error" %}
+										<div class="alert alert-block alert-danger">{{ message}}</div>
+									{% endif %}
+									{% endfor %}
+							{% endif %}
 						</div>
-					</form>
-					<div class="my-2">
-						{% if messages %}
-							    {% for message in messages %}
-								{% if  message.tags == "error" %}
-									<div class="alert alert-block alert-danger">{{ message}}</div>
-								{% endif %}
-							    {% endfor %}
-						{% endif %}
-					</div>
+					</li>
 				{% endif %}
-		</ul>
-		<div class="my-2">
-			{% if event.freeSlots == 1 %}
-				{% translate "One slot remaining" %}
-			{% elif event.freeSlots > 1 %}
-				{% blocktranslate with num=event.freeSlots|apnumber|title %}{{ num }} free slots remaining{% endblocktranslate %}
-			{% elif event.freeSlots == 0 %}
-				{% translate "No free slot available" %}
-			{% else %}
-				{% translate "Too many registrations" %}
 			{% endif %}
-		</div>
+		</ul>
+
+		{% if not event.cancled %}
+			<div class="my-2">
+				{% if event.freeSlots == 1 %}
+					{% translate "One slot remaining" %}
+				{% elif event.freeSlots > 1 %}
+					{% blocktranslate with num=event.freeSlots|apnumber|title %}{{ num }} free slots remaining{% endblocktranslate %}
+				{% elif event.freeSlots == 0 %}
+					{% translate "No free slot available" %}
+				{% else %}
+					{% translate "Too many registrations" %}
+				{% endif %}
+			</div>
+		{% endif %}
 	</div>
 </div>
