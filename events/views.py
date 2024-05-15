@@ -402,7 +402,6 @@ def adminEventParticipantTxtRemove(request, event_id, participant_txt_id):
 
 def eventCancle(request, event_id): #eventFlow c6
     event = Event.objects.filter(id=event_id).get()
-    advanceEvent(request, event)
     if request.user.is_staff:
         if settings.EMAIL_NOTIFICATION_ENABLE:
             sendMail(event, Mail.EventCancle) #eventFlow m4
@@ -411,6 +410,8 @@ def eventCancle(request, event_id): #eventFlow c6
         event.participants.clear()
         event.participants_txt.clear()
         event.save()
+
+    advanceEvent(request, event)
     return render(request, 'event.html', {'event': event})
 
 def eventCancleUndo(request, event_id): #eventFlow c7
