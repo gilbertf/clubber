@@ -6,10 +6,43 @@ from django_flatpickr.schemas import FlatpickrOptions
 from django.contrib.auth import get_user_model
 from django.db.models.functions import Now
 from django.db import models
-from .models import Event, Typ, Person
+from .models import Event, Typ, Person, Configuration
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.forms import TranslationModelForm
+
+class ConfigurationForm(forms.ModelForm):
+    class Meta:
+        model = Configuration
+        fields = [
+            "impressum_de",
+            "impressum_en",
+            "email_confirm_open_subject_de",
+            "email_confirm_open_txt_de",
+            "email_confirm_open_subject_en",
+            "email_confirm_open_txt_en",
+            "email_new_event_subject_de",
+            "email_new_event_txt_de",
+            "email_new_event_subject_en",
+            "email_new_event_txt_en",
+            "email_fully_booked_subject_de",
+            "email_fully_booked_txt_de",
+            "email_fully_booked_subject_en",
+            "email_fully_booked_txt_en",
+            "email_sufficient_participants_missing_organizer_subject_de",
+            "email_sufficient_participants_missing_organizer_txt_de",
+            "email_sufficient_participants_missing_organizer_subject_en",
+            "email_sufficient_participants_missing_organizer_txt_en",
+            "email_cancle_subject_de",
+            "email_cancle_txt_de",
+            "email_cancle_subject_en",
+            "email_cancle_txt_en",
+            "email_pending_open_subject_de",
+            "email_pending_open_txt_de",
+            "email_pending_open_subject_en",
+            "email_pending_open_txt_en"
+        ]
+
 
 class TypForm(forms.ModelForm):
     class Meta:

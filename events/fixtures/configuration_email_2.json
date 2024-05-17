@@ -1,0 +1,34 @@
+[
+    {
+        "model": "events.configuration",
+        "pk": 1,
+        "fields": {
+            "impressum_de": null,
+            "impressum_en": null,
+            "email_confirm_open_subject_de": "{{ typ }} am {{ date }} wird stattfinden",
+            "email_confirm_open_subject_en": "{{ typ }} on {{ date }} will open",
+            "email_confirm_open_txt_de": "Hallo {{ username }},<br>die Veranstaltung {{ typ}} am {{ date }} von {{ start_time }} bis {{ end_time }} wird stattfinden.",
+            "email_confirm_open_txt_en": "Hello {{ username }},<br>the event {{ typ }} at {{ date }} from {{ start_time }} to {{ end_time }} will be opened.",
+            "email_new_event_subject_de": "Neues Treffen {{ typ }} am {{ date }}",
+            "email_new_event_subject_en": "New event {{ typ }} on {{ date }}",
+            "email_new_event_txt_de": "Hallo {{ username }},<br>eine neues Treffen {{ typ}} am {{ date }} von {{ start_time }} bis {{ end_time }} ist verfügbar. Zum anmelden klick <a href={{ EMAIL_SITE_URL }}/join/{{user_id}}/{{event_id }}>hier</a>.",
+            "email_new_event_txt_en": "Hello {{ username }},<br>a new event {{ typ }} at {{ date }} from {{ start_time }} to {{ end_time }} is available. To join click <a href={{ EMAIL_SITE_URL }}/join/{{user_id}}/{{event_id }}>here</a>.",
+            "email_fully_booked_subject_de": null,
+            "email_fully_booked_subject_en": null,
+            "email_fully_booked_txt_de": null,
+            "email_fully_booked_txt_en": null,
+            "email_sufficient_participants_missing_organizer_subject_de": "{{ typ }} am {{ date }} benötigt noch einen Organisator",
+            "email_sufficient_participants_missing_organizer_subject_en": "{{ typ }} on {{ date }} is missing organizer",
+            "email_sufficient_participants_missing_organizer_txt_de": "Hallo {{ username }},<br>für die Veranstaltung {{ typ}} am {{ date }} von {{ start_time }} bis {{ end_time }} fehlt noch ein Organisator. Ausreichend Teilnehmer sind schon angemeldet.",
+            "email_sufficient_participants_missing_organizer_txt_en": "Hello {{ username }},<br>the event {{ typ }} at {{ date }} from {{ start_time }} to {{ end_time }} with sufficient registered participants is missing an organizer.",
+            "email_cancle_subject_de": "{{ typ }} am {{ date }} wurde abgesagt",
+            "email_cancle_subject_en": "{{ typ }} on {{ date }} cancled",
+            "email_cancle_txt_de": "Hallo {{ username }},<br>die Veranstaltung {{ typ}} am {{ date }} von {{ start_time }} bis {{ end_time }} wurde abgesagt.",
+            "email_cancle_txt_en": "Hello {{ username }},<br>the event {{ typ }} at {{ date }} from {{ start_time }} to {{ end_time }} is cancled.",
+            "email_pending_open_subject_de": "{{ typ }} am {{ date }} wird nicht geöffnet",
+            "email_pending_open_subject_en": "{{ typ }} on {{ date }} will not be opened",
+            "email_pending_open_txt_de": "Hallo {{ username }},<br>die Veranstaltung {{ typ}} am {{ date }} von {{ start_time }} bis {{ end_time }} wird nicht geöffnet.",
+            "email_pending_open_txt_en": "Hello {{ username }},<br>the event {{ typ }} at {{ date }} from {{ start_time }} to {{ end_time }} will not be opened."
+        }
+    }
+]

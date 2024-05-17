@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django_flatpickr",
     "pwa",
     "modeltranslation",
+    "solo",
 ]
 
 PWA_APP_NAME = 'Clubber'
@@ -155,6 +156,7 @@ LANGUAGES = [
         ]
 
 LANGUAGE_CODE = "de"
+
 TIME_ZONE = "Europe/Berlin"
 USE_I18N = True
 USE_TZ = False

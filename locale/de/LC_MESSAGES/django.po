@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-15 10:14+0200\n"
-"PO-Revision-Date: 2024-05-15 10:15+0200\n"
+"POT-Creation-Date: 2024-05-16 11:27+0200\n"
+"PO-Revision-Date: 2024-05-16 11:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -27,7 +27,7 @@ msgstr "Passwort"
 msgid "Confirm password"
 msgstr "Passwort zur Bestätigung"
 
-#: clubber/forms.py:26 events/forms.py:36
+#: clubber/forms.py:26 events/forms.py:48
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
 msgid "Email address"
 msgstr "E-Mail Adresse"
@@ -42,109 +42,130 @@ msgstr ""
 msgid "Password mismatch"
 msgstr "Passwörter stimmen nicht überein"
 
-#: clubber/settings.py:153
+#: clubber/settings.py:154
 msgid "German"
 msgstr "Deutsch"
 
-#: clubber/settings.py:154
+#: clubber/settings.py:155
 msgid "English"
 msgstr "Englisch"
 
-#: events/forms.py:23 events/models.py:68
+#: events/forms.py:35 events/models.py:69
 msgid "Name in English"
 msgstr "Englische Bezeichnung"
 
-#: events/forms.py:24 events/models.py:69
+#: events/forms.py:36 events/models.py:70
 msgid "Name in German"
 msgstr "Deutsche Bezeichnung"
 
-#: events/forms.py:25 events/models.py:70
+#: events/forms.py:37 events/models.py:71
 msgid "Description in English"
 msgstr "Englische Beschreibung"
 
-#: events/forms.py:26 events/models.py:71
+#: events/forms.py:38 events/models.py:72
 msgid "Description in German"
 msgstr "Deutsche Beschreibung"
 
-#: events/forms.py:36 events/models.py:50
+#: events/forms.py:48 events/models.py:51
 msgid "Language"
 msgstr "Sprache"
 
-#: events/models.py:20
+#: events/models.py:21
 msgid " does not start with http:// or https://"
 msgstr " beginnt nicht mit http:// oder https://"
 
-#: events/models.py:46
+#: events/models.py:47
 msgid "Username"
 msgstr "Benutzername"
 
-#: events/models.py:56
+#: events/models.py:57
 msgid "Notify on new events"
 msgstr "Benachrichtigung erhalten, wenn eine neues Treffen angeboten wird"
 
-#: events/models.py:57
+#: events/models.py:58
 msgid "Notify on changes to events you are registered"
 msgstr ""
 "Benachrichtigung, wenn sich Änderungen bei einer Veranstaltung ergeben bei "
 "welcher du angemeldet bist"
 
-#: events/models.py:65
+#: events/models.py:66
 msgid "Name"
 msgstr "Bezeichnung"
 
-#: events/models.py:66
+#: events/models.py:67
 msgid "Address (URL)"
 msgstr "Internetadresse (URL)"
 
-#: events/models.py:67
+#: events/models.py:68
 msgid "Description"
 msgstr "Beschreibung"
 
-#: events/models.py:80
+#: events/models.py:81 events/templates/master.html:99
+msgid "Impressum"
+msgstr "Impressum"
+
+#: events/models.py:82
+msgid "{{ typ }} on {{ date }} will open"
+msgstr "{{ typ }} am {{ date }} wird geöffnet"
+
+#: events/models.py:87
 msgid "Event type"
 msgstr "Veranstaltungsart"
 
-#: events/models.py:81
+#: events/models.py:88
 msgid "Maximum number of participants"
 msgstr "Maximale Teilnehmerzahl"
 
-#: events/models.py:82
+#: events/models.py:89
 msgid "Minimal number of participants"
 msgstr "Minimale Teilnehmerzahl"
 
-#: events/models.py:83
+#: events/models.py:90
 msgid "Who is organizing?"
 msgstr "Wer öffnet?"
 
-#: events/models.py:84
+#: events/models.py:91
 msgid "Date"
 msgstr "Datum"
 
-#: events/models.py:85
+#: events/models.py:92
 msgid "Begin"
 msgstr "Begin"
 
-#: events/models.py:86
+#: events/models.py:93
 msgid "End"
 msgstr "Ende"
 
-#: events/models.py:93
+#: events/models.py:100
 msgid "The date cannot be in the past."
 msgstr "Das Datum darf nicht in der Vergangenheit liegen."
 
-#: events/models.py:96
+#: events/models.py:103
 msgid "And end time earlier as start time is not allowd."
 msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
 
-#: events/models.py:99
+#: events/models.py:106
 msgid "Min participants > max participants is not allowed."
 msgstr ""
 "Es ist nicht erlaubt, das die Mindestteilnehmerzahl die "
 "Maximalteilnehmerzahl übersteigt."
 
-#: events/models.py:115
+#: events/models.py:122
 msgid "Two events with overlapping times are not allowed."
 msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
+
+#: events/templates/configuration_modify.html:6
+#: events/templates/typ_modify.html:6
+msgid "Modify typ"
+msgstr "Bearbeiten"
+
+#: events/templates/configuration_modify.html:15
+#: events/templates/event_modify.html:15 events/templates/settings.html:13
+#: events/templates/typ_modify.html:15
+#: templates/registration/password_change.html:13
+#: templates/registration/password_reset_confirm.html:14
+msgid "Update"
+msgstr "Aktualisieren"
 
 #: events/templates/email/event_cancle.html:2
 #: events/templates/email/event_confirmed_open.html:2
@@ -364,7 +385,7 @@ msgstr "Das Treffen ist  ausgebucht"
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
-#: events/templates/event_add.html:6 events/templates/master.html:79
+#: events/templates/event_add.html:6 events/templates/master.html:85
 msgid "New event"
 msgstr "Neues Treffen"
 
@@ -380,13 +401,6 @@ msgstr ""
 #: events/templates/event_add.html:19
 msgid "Add event"
 msgstr "Neues Treffen anlegen"
-
-#: events/templates/event_modify.html:15 events/templates/settings.html:13
-#: events/templates/typ_modify.html:15
-#: templates/registration/password_change.html:13
-#: templates/registration/password_reset_confirm.html:14
-msgid "Update"
-msgstr "Aktualisieren"
 
 #: events/templates/events_list.html:28
 msgid ""
@@ -430,33 +444,33 @@ msgstr "Anmelden"
 msgid "Register"
 msgstr "Registrieren"
 
-#: events/templates/master.html:53
+#: events/templates/master.html:56
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: events/templates/master.html:55 events/templates/settings.html:6
+#: events/templates/master.html:58 events/templates/settings.html:6
 msgid "User settings"
 msgstr "Benutzereinstellungen"
 
-#: events/templates/master.html:56
+#: events/templates/master.html:59
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: events/templates/master.html:67
+#: events/templates/master.html:70
 msgid "Logout"
 msgstr "Abmelden"
 
-#: events/templates/master.html:71 events/templates/users_list.html:6
+#: events/templates/master.html:74 events/templates/users_list.html:6
 msgid "User management"
 msgstr "Benutzerverwaltung"
 
-#: events/templates/master.html:72 events/templates/typ_list.html:5
+#: events/templates/master.html:75 events/templates/typ_list.html:5
 msgid "Event types"
 msgstr "Veranstaltungsarten"
 
-#: events/templates/master.html:93
-msgid "Impressum"
-msgstr "Impressum"
+#: events/templates/master.html:76
+msgid "Server configuration"
+msgstr ""
 
 #: events/templates/typ_add.html:6
 msgid "New event typ"
@@ -489,10 +503,6 @@ msgstr "Bearbeiten"
 msgid "Add new event type"
 msgstr "Neue Veranstaltungsart anlegen"
 
-#: events/templates/typ_modify.html:6
-msgid "Modify typ"
-msgstr "Bearbeiten"
-
 #: events/templates/users_list.html:14
 msgid "you"
 msgstr "du selber"
@@ -514,15 +524,15 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:272
+#: events/views.py:286
 msgid " is already registered"
 msgstr " ist bereits eingetragen"
 
-#: events/views.py:275
+#: events/views.py:289
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:277
+#: events/views.py:291
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 

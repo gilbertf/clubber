@@ -1,12 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.utils import translation
 from django.template.loader import get_template
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMessage
 from django.conf import settings
+from .models import Configuration
+from django.template import Template, Context
 
 class Mail:
-    def __init__(self, templateName, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
-        self.templateName = templateName
+    def __init__(self, subject, txt, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
+        self.subject = subject
+        self.txt = txt
         self.allUsers = allUsers
         self.allOrganizers = allOrganizers
         self.eventParticipants = eventParticipants
@@ -26,30 +29,72 @@ class Mail:
         if self.eventOrganizer and event.organizer != None:
             mails |= get_user_model().objects.filter(id=event.organizer.id)
 
-        for user in mails:
-            if not (user.email_notification_new_event and self.newEventNotification) and not (user.email_notification_joined_event and self.modifyEventNotification):
-                mails.remove(user)
+        #for user in mails:
+        #    if not (user.email_notification_new_event and self.newEventNotification) and not (user.email_notification_joined_event and self.modifyEventNotification):
+        #        mails.remove(user)
 
         return mails
  
-Mail.NewEvent = Mail("email/new_event", allUsers = True, newEventNotification = True)
-Mail.EventFullyBooked = Mail("email/event_fully_booked", allOrganizers = True, modifyEventNotification = True)
-Mail.EventSufficientParticipantsMissingOrganizer = Mail("email/event_sufficient_participants_missing_organizer", allOrganizers = True, modifyEventNotification = True)
-Mail.EventCancle = Mail("email/event_cancle", eventParticipants = True, eventOrganizer = True, modifyEventNotification = True)
-Mail.EventConfirmedOpen = Mail("email/event_confirmed_open", eventParticipants = True, eventOrganizer = True, modifyEventNotification = True)
-Mail.EventPendingOpen = Mail("email/event_pending_open", eventParticipants = True, eventOrganizer = True, modifyEventNotification = True)
+configuration = Configuration.get_solo()
+Mail.NewEvent = Mail(
+    Template(configuration.email_new_event_subject),
+    Template(configuration.email_new_event_txt),
+    allUsers = True,
+    newEventNotification = True
+)
+
+Mail.EventFullyBooked = Mail(
+    Template(configuration.email_fully_booked_subject),
+    Template(configuration.email_fully_booked_txt),
+    allOrganizers = True,
+    modifyEventNotification = True
+)
+
+Mail.EventSufficientParticipantsMissingOrganizer = Mail(
+    Template(configuration.email_sufficient_participants_missing_organizer_subject),
+    Template(configuration.email_sufficient_participants_missing_organizer_txt),
+    allOrganizers = True,
+    modifyEventNotification = True
+)
+
+Mail.EventCancle = Mail(
+    Template(configuration.email_cancle_subject),
+    Template(configuration.email_cancle_txt),
+    eventParticipants = True,
+    eventOrganizer = True,
+    modifyEventNotification = True
+)
+
+Mail.EventConfirmedOpen = Mail(
+    Template(configuration.email_confirm_open_subject),
+    Template(configuration.email_confirm_open_txt),
+    eventParticipants = True,
+    eventOrganizer = True,
+    modifyEventNotification = True
+)
+
+Mail.EventPendingOpen = Mail(
+    Template(configuration.email_pending_open_subject),
+    Template(configuration.email_pending_open_txt),
+    eventParticipants = True,
+    eventOrganizer = True,
+    modifyEventNotification = True
+)
 
 def sendMail(event, mail, newEventIcs = None):
-    d = {
+    if mail == None:
+        return
+    
+    d = Context({
         'date' : event.date,
         "start_time" : event.start_time ,
         "end_time" : event.end_time,
         "typ" : event.typ,
         "event_id" : event.id,
         "EMAIL_SITE_URL": settings.EMAIL_SITE_URL,
-    }
+    })
 
-    s = "Sending mail " + mail.templateName + " to"
+    s = "Sending mail to"
     if mail.allUsers:
         s += " allUsers"
     if mail.allOrganizers:
@@ -58,11 +103,7 @@ def sendMail(event, mail, newEventIcs = None):
         s += " eventParticipants"
     if mail.eventOrganizer:
         s += " eventOrganizer"
-    print(s)    
-
-    text = get_template(mail.templateName + ".txt")
-    html = get_template(mail.templateName + ".html")
-    subject = get_template(mail.templateName + ".subject")
+    print(s)
 
     from_email = settings.DEFAULT_FROM_EMAIL
 
@@ -75,13 +116,11 @@ def sendMail(event, mail, newEventIcs = None):
             d["username"] = user.username
 
             translation.activate(user.language)
-            html_r = html.render(d)
-            text_r = text.render(d)
-            subject_r = subject.render(d).strip()
+            txt_r = mail.txt.render(d)
+            subject_r = mail.subject.render(d).strip()
             translation.deactivate()
 
-            mailMsg = EmailMultiAlternatives(subject_r, text_r, from_email, [user.email])
-            mailMsg.attach_alternative(html_r, "text/html")
+            mailMsg = EmailMessage(subject_r, txt_r, from_email, [user.email])
             if newEventIcs != None:
                 mailMsg.attach("event.ics", newEventIcs, "text/calendar")
             mailMsgs.append(mailMsg)

@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 import pytz
 from django.http import HttpResponseRedirect
 import operator
-from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person
-from .forms import EventForm, TypForm, SettingsForm
+from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person, Configuration
+from .forms import EventForm, TypForm, SettingsForm, ConfigurationForm
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
@@ -55,6 +55,20 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
+class ConfigurationModifyView(UserPassesTestMixin, UpdateView):
+    model = Configuration
+    template_name = "configuration_modify.html"
+    form_class = ConfigurationForm
+    
+    success_url = reverse_lazy("events_list")
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get_object(self):
+        model_instance = Configuration.get_solo()
+        return model_instance
+
+    
 class UserSettingsView(UpdateView):
     model = Person
     template_name = "settings.html"

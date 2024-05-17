@@ -1,3 +1,0 @@
-{% load i18n %}
-{% blocktranslate %}Hello {{ username }},{% endblocktranslate %}
-{% blocktranslate %}the event "{{ typ }}" at {{ date }} from {{ start_time }} to {{ end_time }} with sufficient registered participants is missing an organizer.{% endblocktranslate %}
