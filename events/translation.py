@@ -23,5 +23,4 @@ class ConfigurationTranslationOptions(TranslationOptions):
         'email_pending_open_subject', 
         'email_pending_open_txt'
     )
-    required_languages = ('en','de')
 translator.register(Configuration, ConfigurationTranslationOptions)
