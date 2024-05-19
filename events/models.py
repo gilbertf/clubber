@@ -12,9 +12,9 @@ from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import pre_save
-#from .email import sendMail, Mail
 from modeltranslation.forms import TranslationModelForm
 from solo.models import SingletonModel
+from .email import sendMail, Mail
 
 def validate_url(url):
     if not (url.startswith("http://") or url.startswith("https://")):
@@ -66,11 +66,7 @@ class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
     description = models.TextField(default="", blank=True, verbose_name=_("Description"))
-    labels = { "name_en": _("Name in English"),
-                  "name_de": _("Name in German"),
-                  "description_en": _("Description in English"),
-                  "description_de": _("Description in German"),
-                  }
+    
     def __str__(self):
         return self.name
 
@@ -91,7 +87,7 @@ class Configuration(SingletonModel):
     email_cancle_txt = models.TextField()
     email_pending_open_subject = models.CharField(max_length=250)
     email_pending_open_txt = models.TextField()
-    
+
 class Event(models.Model):
     typ = models.ForeignKey(Typ, on_delete=models.CASCADE, blank=False, verbose_name=_("Event type"), default=1)
     max_participants = models.IntegerField(default=settings.EVENT_PARTICIPANTS_MAX_DEFAULT, verbose_name=_("Maximum number of participants"), validators=[MaxValueValidator(settings.EVENT_PARTICIPANTS_MAX_LIMIT)])
@@ -157,7 +153,6 @@ class Event(models.Model):
         if self.missingParticipants <= 0:
             return True
         return False
-
 
     @staticmethod
     def pre_save(sender, instance, **kwargs):           

@@ -1,10 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.utils import translation
 from django.template.loader import get_template
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from .models import Configuration
 from django.template import Template, Context
+from django.utils.html import strip_tags
 
 class Mail:
     def __init__(self, subject, txt, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
@@ -17,23 +18,19 @@ class Mail:
         self.newEventNotification = newEventNotification
         self.modifyEventNotification = modifyEventNotification
     
-    def mails(self, event):
-        mails = get_user_model().objects.none()
+    def persons(self, event):
+        persons = get_user_model().objects.none()
 
         if self.allUsers:
-            mails |= get_user_model().objects.all()
+            persons |= get_user_model().objects.all()
         if self.allOrganizers:
-            mails |= get_user_model().objects.filter(is_staff=True)
+            persons |= get_user_model().objects.filter(is_staff=True)
         if self.eventParticipants:
-            mails |= event.participants.all()
+            persons |= event.participants.all()
         if self.eventOrganizer and event.organizer != None:
-            mails |= get_user_model().objects.filter(id=event.organizer.id)
+            persons |= get_user_model().objects.filter(id=event.organizer.id)
 
-        #for user in mails:
-        #    if not (user.email_notification_new_event and self.newEventNotification) and not (user.email_notification_joined_event and self.modifyEventNotification):
-        #        mails.remove(user)
-
-        return mails
+        return persons
  
 configuration = Configuration.get_solo()
 Mail.NewEvent = Mail(
@@ -84,7 +81,11 @@ Mail.EventPendingOpen = Mail(
 def sendMail(event, mail, newEventIcs = None):
     if mail == None:
         return
-    
+
+    if mail.txt == "" or mail.subject == "":
+        print("Skipping send mail due to missing mail txt")
+        return
+       
     d = Context({
         'date' : event.date,
         "start_time" : event.start_time ,
@@ -107,23 +108,32 @@ def sendMail(event, mail, newEventIcs = None):
 
     from_email = settings.DEFAULT_FROM_EMAIL
 
-    mails = mail.mails(event)
+    persons = mail.persons(event)
 
     mailMsgs = []
-    for user in mails:
+    for user in persons:
+        if not (user.email_notification_new_event and mail.newEventNotification) and not (user.email_notification_joined_event and mail.modifyEventNotification):
+            print("c")
+            continue
         if user.email != None and len(user.email) > 0:
+            print("a")
             d["user_id"] = user.id
             d["username"] = user.username
 
             translation.activate(user.language)
-            txt_r = mail.txt.render(d)
+            html_r = mail.txt.render(d)
             subject_r = mail.subject.render(d).strip()
             translation.deactivate()
 
-            mailMsg = EmailMessage(subject_r, txt_r, from_email, [user.email])
+            txt_r = strip_tags(html_r)
+            mailMsg = EmailMultiAlternatives(subject_r, txt_r, from_email, [user.email])
+            mailMsg.attach_alternative(html_r, "text/html")
+
             if newEventIcs != None:
                 mailMsg.attach("event.ics", newEventIcs, "text/calendar")
             mailMsgs.append(mailMsg)
+
+    print("m", mailMsgs)
 
     if len(mailMsgs) > 0:
         try:

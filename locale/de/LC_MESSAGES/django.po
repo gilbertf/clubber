@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-16 11:27+0200\n"
-"PO-Revision-Date: 2024-05-16 11:28+0200\n"
+"POT-Creation-Date: 2024-05-19 22:05+0200\n"
+"PO-Revision-Date: 2024-05-19 22:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -27,7 +27,7 @@ msgstr "Passwort"
 msgid "Confirm password"
 msgstr "Passwort zur Bestätigung"
 
-#: clubber/forms.py:26 events/forms.py:48
+#: clubber/forms.py:26 events/forms.py:69
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
 msgid "Email address"
 msgstr "E-Mail Adresse"
@@ -50,23 +50,23 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#: events/forms.py:35 events/models.py:69
+#: events/forms.py:56 events/models.py:69
 msgid "Name in English"
 msgstr "Englische Bezeichnung"
 
-#: events/forms.py:36 events/models.py:70
+#: events/forms.py:57 events/models.py:70
 msgid "Name in German"
 msgstr "Deutsche Bezeichnung"
 
-#: events/forms.py:37 events/models.py:71
+#: events/forms.py:58 events/models.py:71
 msgid "Description in English"
 msgstr "Englische Beschreibung"
 
-#: events/forms.py:38 events/models.py:72
+#: events/forms.py:59 events/models.py:72
 msgid "Description in German"
 msgstr "Deutsche Beschreibung"
 
-#: events/forms.py:48 events/models.py:51
+#: events/forms.py:69 events/models.py:51
 msgid "Language"
 msgstr "Sprache"
 
@@ -100,57 +100,153 @@ msgstr "Internetadresse (URL)"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: events/models.py:81 events/templates/master.html:99
-msgid "Impressum"
-msgstr "Impressum"
+#: events/models.py:97
+msgid "Impressum in German"
+msgstr "Deutsches Impressum"
 
-#: events/models.py:82
-msgid "{{ typ }} on {{ date }} will open"
-msgstr "{{ typ }} am {{ date }} wird geöffnet"
+#: events/models.py:98
+msgid "Impressum in English"
+msgstr "Englisches Impressum"
 
-#: events/models.py:87
+#: events/models.py:99
+msgid "Email Confirm Open Subject in German"
+msgstr ""
+
+#: events/models.py:100
+msgid "Email Confirm Open Text in German"
+msgstr ""
+
+#: events/models.py:101
+msgid "Email Confirm Open Subject in English"
+msgstr ""
+
+#: events/models.py:102
+msgid "Email Confirm Open Text in English"
+msgstr ""
+
+#: events/models.py:103
+msgid "Email New Event Subject in German"
+msgstr ""
+
+#: events/models.py:104
+msgid "Email New Event Text in German"
+msgstr ""
+
+#: events/models.py:105
+msgid "Email New Event Subject in English"
+msgstr ""
+
+#: events/models.py:106
+msgid "Email New Event Text in English"
+msgstr ""
+
+#: events/models.py:107
+msgid "Email Fully Booked Subject in German"
+msgstr ""
+
+#: events/models.py:108
+msgid "Email Fully Booked Text in German"
+msgstr ""
+
+#: events/models.py:109
+msgid "Email Fully Booked Subject in English"
+msgstr ""
+
+#: events/models.py:110
+msgid "Email Fully Booked Text in English"
+msgstr ""
+
+#: events/models.py:111
+msgid "Email Sufficient Participants Missing Organizer Subject in German"
+msgstr ""
+
+#: events/models.py:112
+msgid "Email Sufficient Participants Missing Organizer Text in German"
+msgstr ""
+
+#: events/models.py:113
+msgid "Email Sufficient Participants Missing Organizer Subject in English"
+msgstr ""
+
+#: events/models.py:114
+msgid "Email Sufficient Participants Missing Organizer Text in English"
+msgstr ""
+
+#: events/models.py:115
+msgid "Email Cancel Subject in German"
+msgstr ""
+
+#: events/models.py:116
+msgid "Email Cancel Text in German"
+msgstr ""
+
+#: events/models.py:117
+msgid "Email Cancel Subject in English"
+msgstr ""
+
+#: events/models.py:118
+msgid "Email Cancel Text in English"
+msgstr ""
+
+#: events/models.py:119
+msgid "Email Pending Open Subject in German"
+msgstr ""
+
+#: events/models.py:120
+msgid "Email Pending Open Text in German"
+msgstr ""
+
+#: events/models.py:121
+msgid "Email Pending Open Subject in English"
+msgstr ""
+
+#: events/models.py:122
+msgid "Email Pending Open Text in English"
+msgstr ""
+
+#: events/models.py:126
 msgid "Event type"
 msgstr "Veranstaltungsart"
 
-#: events/models.py:88
+#: events/models.py:127
 msgid "Maximum number of participants"
 msgstr "Maximale Teilnehmerzahl"
 
-#: events/models.py:89
+#: events/models.py:128
 msgid "Minimal number of participants"
 msgstr "Minimale Teilnehmerzahl"
 
-#: events/models.py:90
+#: events/models.py:129
 msgid "Who is organizing?"
 msgstr "Wer öffnet?"
 
-#: events/models.py:91
+#: events/models.py:130
 msgid "Date"
 msgstr "Datum"
 
-#: events/models.py:92
+#: events/models.py:131
 msgid "Begin"
 msgstr "Begin"
 
-#: events/models.py:93
+#: events/models.py:132
 msgid "End"
 msgstr "Ende"
 
-#: events/models.py:100
+#: events/models.py:139
 msgid "The date cannot be in the past."
 msgstr "Das Datum darf nicht in der Vergangenheit liegen."
 
-#: events/models.py:103
+#: events/models.py:142
 msgid "And end time earlier as start time is not allowd."
 msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
 
-#: events/models.py:106
+#: events/models.py:145
 msgid "Min participants > max participants is not allowed."
 msgstr ""
 "Es ist nicht erlaubt, das die Mindestteilnehmerzahl die "
 "Maximalteilnehmerzahl übersteigt."
 
-#: events/models.py:122
+#: events/models.py:161
 msgid "Two events with overlapping times are not allowed."
 msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
 
@@ -166,119 +262,6 @@ msgstr "Bearbeiten"
 #: templates/registration/password_reset_confirm.html:14
 msgid "Update"
 msgstr "Aktualisieren"
-
-#: events/templates/email/event_cancle.html:2
-#: events/templates/email/event_confirmed_open.html:2
-#: events/templates/email/event_pending_open.html:2
-#: events/templates/email/event_sufficient_participants_missing_organizer.html:2
-#: events/templates/email/new_event.html:2
-#, python-format
-msgid "Hello %(username)s,<br>"
-msgstr "Hallo %(username)s,<br>"
-
-#: events/templates/email/event_cancle.html:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
-"cancled."
-msgstr ""
-"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s wurde abgesagt."
-
-#: events/templates/email/event_cancle.subject:2
-#, python-format
-msgid "%(typ)s on %(date)s cancled"
-msgstr "%(typ)s am %(date)s abgesagt"
-
-#: events/templates/email/event_cancle.txt:2
-#: events/templates/email/event_confirmed_open.txt:2
-#: events/templates/email/event_pending_open.txt:2
-#: events/templates/email/event_sufficient_participants_missing_organizer.txt:2
-#: events/templates/email/new_event.txt:2
-#, python-format
-msgid "Hello %(username)s,"
-msgstr "Hallo %(username)s,"
-
-#: events/templates/email/event_cancle.txt:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" on %(date)s from %(start_time)s till %(end_time)s is "
-"cancled."
-msgstr ""
-"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s wurde abgesagt."
-
-#: events/templates/email/event_confirmed_open.html:3
-#: events/templates/email/event_confirmed_open.txt:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
-"be opened."
-msgstr ""
-"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s wird geöffnet."
-
-#: events/templates/email/event_confirmed_open.subject:2
-#, python-format
-msgid "%(typ)s on %(date)s will open"
-msgstr "%(typ)s am %(date)s wird geöffnet"
-
-#: events/templates/email/event_pending_open.html:3
-#: events/templates/email/event_pending_open.txt:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s will "
-"not be opened."
-msgstr ""
-"die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s wird nicht geöffnet."
-
-#: events/templates/email/event_pending_open.subject:2
-#, python-format
-msgid "%(typ)s on %(date)s will not be opened"
-msgstr "%(typ)s am %(date)s wird nicht geöffnet"
-
-#: events/templates/email/event_sufficient_participants_missing_organizer.html:3
-#: events/templates/email/event_sufficient_participants_missing_organizer.txt:3
-#, python-format
-msgid ""
-"the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s with "
-"sufficient registered participants is missing an organizer."
-msgstr ""
-"für die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s fehlt noch ein Organisator. Ausreichend Teilnehmer sind schon "
-"angemeldet."
-
-#: events/templates/email/event_sufficient_participants_missing_organizer.subject:2
-#, python-format
-msgid "%(typ)s on %(date)s is missing organizer"
-msgstr "%(typ)s am %(date)s benötigt noch einen Organisator"
-
-#: events/templates/email/new_event.html:3
-#, python-format
-msgid ""
-"a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
-"available. To join click <a href=%(EMAIL_SITE_URL)s/join/%(user_id)s/"
-"%(event_id)s>here</a>."
-msgstr ""
-"eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s ist verfügbar. Zum anmelden hier <a href=%(EMAIL_SITE_URL)s/"
-"join/%(user_id)s/%(event_id)s>bestätigen</a>."
-
-#: events/templates/email/new_event.subject:2
-#, python-format
-msgid "New event %(typ)s on %(date)s"
-msgstr "Neues Treffen %(typ)s am %(date)s"
-
-#: events/templates/email/new_event.txt:3
-#, python-format
-msgid ""
-"a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
-"available. To join go to %(EMAIL_SITE_URL)s/join/%(user_id)s/%(event_id)s."
-msgstr ""
-"eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-"%(end_time)s ist verfügbar. Zum anmelden gehe zu %(EMAIL_SITE_URL)s/join/"
-"%(user_id)s/%(event_id)s."
 
 #: events/templates/event.html:43 events/templates/event_modify.html:6
 msgid "Modify event"
@@ -470,7 +453,11 @@ msgstr "Veranstaltungsarten"
 
 #: events/templates/master.html:76
 msgid "Server configuration"
-msgstr ""
+msgstr "Servereinstellungen"
+
+#: events/templates/master.html:99
+msgid "Impressum"
+msgstr "Impressum"
 
 #: events/templates/typ_add.html:6
 msgid "New event typ"
@@ -1806,6 +1793,98 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/modeltranslation/widgets.py:24
 msgid "None"
 msgstr ""
+
+#~ msgid "{{ typ }} on {{ date }} will open"
+#~ msgstr "{{ typ }} am {{ date }} wird geöffnet"
+
+#, python-format
+#~ msgid "Hello %(username)s,<br>"
+#~ msgstr "Hallo %(username)s,<br>"
+
+#, python-format
+#~ msgid ""
+#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
+#~ "cancled."
+#~ msgstr ""
+#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s wurde abgesagt."
+
+#, python-format
+#~ msgid "%(typ)s on %(date)s cancled"
+#~ msgstr "%(typ)s am %(date)s abgesagt"
+
+#, python-format
+#~ msgid "Hello %(username)s,"
+#~ msgstr "Hallo %(username)s,"
+
+#, python-format
+#~ msgid ""
+#~ "the event \"%(typ)s\" on %(date)s from %(start_time)s till %(end_time)s "
+#~ "is cancled."
+#~ msgstr ""
+#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s wurde abgesagt."
+
+#, python-format
+#~ msgid ""
+#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
+#~ "will be opened."
+#~ msgstr ""
+#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s wird geöffnet."
+
+#, python-format
+#~ msgid "%(typ)s on %(date)s will open"
+#~ msgstr "%(typ)s am %(date)s wird geöffnet"
+
+#, python-format
+#~ msgid ""
+#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
+#~ "will not be opened."
+#~ msgstr ""
+#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s wird nicht geöffnet."
+
+#, python-format
+#~ msgid "%(typ)s on %(date)s will not be opened"
+#~ msgstr "%(typ)s am %(date)s wird nicht geöffnet"
+
+#, python-format
+#~ msgid ""
+#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
+#~ "with sufficient registered participants is missing an organizer."
+#~ msgstr ""
+#~ "für die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s fehlt noch ein Organisator. Ausreichend Teilnehmer sind "
+#~ "schon angemeldet."
+
+#, python-format
+#~ msgid "%(typ)s on %(date)s is missing organizer"
+#~ msgstr "%(typ)s am %(date)s benötigt noch einen Organisator"
+
+#, python-format
+#~ msgid ""
+#~ "a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
+#~ "is available. To join click <a href=%(EMAIL_SITE_URL)s/join/%(user_id)s/"
+#~ "%(event_id)s>here</a>."
+#~ msgstr ""
+#~ "eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s ist verfügbar. Zum anmelden hier <a href=%(EMAIL_SITE_URL)s/"
+#~ "join/%(user_id)s/%(event_id)s>bestätigen</a>."
+
+#, python-format
+#~ msgid "New event %(typ)s on %(date)s"
+#~ msgstr "Neues Treffen %(typ)s am %(date)s"
+
+#, python-format
+#~ msgid ""
+#~ "a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
+#~ "is available. To join go to %(EMAIL_SITE_URL)s/join/%(user_id)s/"
+#~ "%(event_id)s."
+#~ msgstr ""
+#~ "eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
+#~ "%(end_time)s ist verfügbar. Zum anmelden gehe zu %(EMAIL_SITE_URL)s/join/"
+#~ "%(user_id)s/%(event_id)s."
 
 #, fuzzy
 #~| msgid "Settings"

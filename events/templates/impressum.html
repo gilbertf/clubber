@@ -7,9 +7,6 @@ Impressum
 {% endblock %}
 
 {% block content %}
-{% get_solo 'events.Configuration' as configuration %}
-
-{{ configuration.impressum|safe }}
-
-{{ configuration.email_confirm_open_subject|safe }}
+    {% get_solo 'events.Configuration' as configuration %}
+    {{ configuration.impressum|safe }}
 {% endblock %}
