@@ -1,7 +1,29 @@
 # Clubber
 A simple booking system, details will follow.
 
-## Installation 
+## Docker
+Clone repository and init subodules
+```
+git clone git@github.com:gilbertf/clubber.git
+git submodule init
+git submodule update
+```
+
+
+Modify config/settings.py to your needs and add ssl certificates. tbd.
+
+Import default configuration, mainly email templates and impressum stored in database
+```
+sudo docker compose run web python manage.py loaddata configuration
+```
+
+Run clubber
+```
+sudo docker compose up
+```
+
+
+## Manual Installation (Not recommended anymore)
 Create python environment, e.g. in /var/clubber
 ```
 python3 -m venv venv
