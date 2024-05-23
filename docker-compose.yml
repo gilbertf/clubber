@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    expose:
+      - 8000
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - migration
+      - db
+  migration:
+    build: .
+    command: python manage.py migrate --noinput
+    volumes:
+      - .:/code
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+  collectstatic:
+    build: .
+    command: python manage.py collectstatic --noinput
+    volumes:
+      - .:/code
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    volumes:
+      - ./static_ext:/static
+    depends_on:
+      - web
