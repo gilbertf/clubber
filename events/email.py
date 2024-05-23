@@ -3,7 +3,7 @@ from django.utils import translation
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-from .models import Configuration
+from .model_configuration import Configuration
 from django.template import Template, Context
 from django.utils.html import strip_tags
 

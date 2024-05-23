@@ -11,18 +11,22 @@ from django.utils import timezone
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from django.db.models.signals import pre_save
 from modeltranslation.forms import TranslationModelForm
-from solo.models import SingletonModel
+from .model_configuration import Configuration
 from .email import sendMail, Mail
+from django.db.models.signals import pre_save
 
-def validate_url(url):
-    if not (url.startswith("http://") or url.startswith("https://")):
-        raise ValidationError(url + _(" does not start with http:// or https://"))
 
 def validate_date_future(d):
     if d < datetime.now().date():
         raise ValidationError("Date is in the past")
+
+class NameTxt(models.Model):
+    txt = models.CharField(max_length=20)
+
+def validate_url(url):
+    if not (url.startswith("http://") or url.startswith("https://")):
+        raise ValidationError(url + _(" does not start with http:// or https://"))
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, password, email = None, email_notification_new_event = False, email_notification_joined_event = False):
@@ -59,9 +63,6 @@ class Person(AbstractBaseUser):
     
     objects = CustomUserManager()
 
-class NameTxt(models.Model):
-    txt = models.CharField(max_length=20)
-
 class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
@@ -72,21 +73,6 @@ class Typ(models.Model):
 
     def get_absolute_url(self):
         return reverse("typ_modify", kwargs={"pk": self.pk})
-
-class Configuration(SingletonModel):
-    impressum = models.TextField()
-    email_confirm_open_subject = models.CharField(max_length=250)
-    email_confirm_open_txt = models.TextField()
-    email_new_event_subject = models.CharField(max_length=250)
-    email_new_event_txt = models.TextField()
-    email_fully_booked_subject = models.CharField(max_length=250)
-    email_fully_booked_txt = models.TextField()
-    email_sufficient_participants_missing_organizer_subject = models.CharField(max_length=250)
-    email_sufficient_participants_missing_organizer_txt = models.TextField()
-    email_cancle_subject = models.CharField(max_length=250)
-    email_cancle_txt = models.TextField()
-    email_pending_open_subject = models.CharField(max_length=250)
-    email_pending_open_txt = models.TextField()
 
 class Event(models.Model):
     typ = models.ForeignKey(Typ, on_delete=models.CASCADE, blank=False, verbose_name=_("Event type"), default=1)
