@@ -13,7 +13,7 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.forms import TranslationModelForm
 from .model_configuration import Configuration
-from .email import sendMail, Mail
+from .email import sendMail, MailConf
 from django.db.models.signals import pre_save
 
 
@@ -149,14 +149,14 @@ class Event(models.Model):
             if prev.min_participants != instance.min_participants:
                 if instance.numParticipants >= instance.min_participants and instance.numParticipants < prev.min_participants: #Changed to not missing participants by decreasing min_participants
                     if instance.organization == None: #eventFlow c10|m3
-                        sendMail(instance, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                        sendMail(instance, MailConf.EventSufficientParticipantsMissingOrganizer()) #eventFlow m3
                     else:
-                        sendMail(instance, Mail.EventConfirmedOpen) #eventFlow m1
+                        sendMail(instance, MailConf.EventConfirmedOpen()) #eventFlow m1
                 if instance.numParticipants < instance.min_participants and instance.numParticipants >= prev.min_participants: #Changed to missing participants by increasing min_participants
-                    sendMail(instance, Mail.EventPendingOpen) #eventFlow c9|m2
+                    sendMail(instance, MailConf.EventPendingOpen()) #eventFlow c9|m2
             if prev.max_participants != instance.max_participants:
                 if instance.numParticipants >= instance.max_participants and instance.numParticipants < prev.max_participants: #Changed to fully booked by decreasing max_participants
-                    sendMail(instance, Mail.EventFullyBooked) #eventFlow c12|m6
+                    sendMail(instance, MailConf.EventFullyBooked()) #eventFlow c12|m6
                 if instance.numParticipants < instance.max_participants and instance.numParticipants >= prev.max_participants: #Changed to not fully booked by increasing max_participants
                     pass
 

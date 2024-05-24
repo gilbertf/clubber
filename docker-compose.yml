@@ -19,11 +19,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     depends_on:
-      - migration
+      - migrations
       - db
-  migration:
+  migrations:
     build: .
-    command: python manage.py migrate --noinput
+    command: bash -c "python manage.py makemigrations events --noinput && python manage.py migrate --noinput"
     volumes:
       - .:/code
     environment:

@@ -17,6 +17,11 @@ Import default configuration, mainly email templates and impressum stored in dat
 sudo docker compose run web python manage.py loaddata configuration
 ```
 
+Add admin user
+```
+sudo docker compose run web python manage.py createAdmin
+```
+
 Run clubber
 ```
 sudo docker compose up
