@@ -21,3 +21,5 @@ class Command(BaseCommand):
             user.email_notification_joined_event = True
             user.language = "de"
             user.save()
+        else:
+            print("Already have some users")

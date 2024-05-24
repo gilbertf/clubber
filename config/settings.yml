@@ -37,4 +37,5 @@ LOGO_ENABLE: False
 #Optional: Link, when clicking on header logo
 #LOGO_URL: "https://www.test.de"
 
-DEBUG: False
+#DEBUG: False
+DEBUG: True

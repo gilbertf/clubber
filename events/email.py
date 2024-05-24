@@ -8,7 +8,7 @@ from django.utils.html import strip_tags
 from .model_configuration import Configuration
 
 class MailConf:
-    def NewEvent(self):
+    def NewEvent():
         configuration = Configuration.get_solo()
         return Mail(
             Template(configuration.email_new_event_subject),
@@ -17,7 +17,7 @@ class MailConf:
             newEventNotification = True
         )
         
-    def EventFullyBooked(self):
+    def EventFullyBooked():
         onfiguration = Configuration.get_solo()
         return Mail(
             Template(configuration.email_fully_booked_subject),
@@ -26,69 +26,69 @@ class MailConf:
             modifyEventNotification = True
         )
         
-        def EventSufficientParticipantsMissingOrganizer(self):
-            configuration = Configuration.get_solo()
-            return Mail(
-                Template(configuration.email_sufficient_participants_missing_organizer_subject),
-                Template(configuration.email_sufficient_participants_missing_organizer_txt),
-                allOrganizers = True,
-                modifyEventNotification = True
-            )
-        
-        def EventCancle(self):
-            configuration = Configuration.get_solo()
-            return Mail(
-                Template(configuration.email_cancle_subject),
-                Template(configuration.email_cancle_txt),
-                eventParticipants = True,
-                eventOrganizer = True,
-                modifyEventNotification = True
-            )
-        
-        def EventConfirmedOpen(self):
-            configuration = Configuration.get_solo()
-            return Mail(
-                Template(configuration.email_confirm_open_subject),
-                Template(configuration.email_confirm_open_txt),
-                eventParticipants = True,
-                eventOrganizer = True,
-                modifyEventNotification = True
-            )
-        
-        def EventPendingOpen(self):
-            configuration = Configuration.get_solo()
-            return Mail(
-                Template(configuration.email_pending_open_subject),
-                Template(configuration.email_pending_open_txt),
-                eventParticipants = True,
-                eventOrganizer = True,
-                modifyEventNotification = True
-            )
+    def EventSufficientParticipantsMissingOrganizer():
+        configuration = Configuration.get_solo()
+        return Mail(
+            Template(configuration.email_sufficient_participants_missing_organizer_subject),
+            Template(configuration.email_sufficient_participants_missing_organizer_txt),
+            allOrganizers = True,
+            modifyEventNotification = True
+        )
+    
+    def EventCancle():
+        configuration = Configuration.get_solo()
+        return Mail(
+            Template(configuration.email_cancle_subject),
+            Template(configuration.email_cancle_txt),
+            eventParticipants = True,
+            eventOrganizer = True,
+            modifyEventNotification = True
+        )
+    
+    def EventConfirmedOpen():
+        configuration = Configuration.get_solo()
+        return Mail(
+            Template(configuration.email_confirm_open_subject),
+            Template(configuration.email_confirm_open_txt),
+            eventParticipants = True,
+            eventOrganizer = True,
+            modifyEventNotification = True
+        )
+    
+    def EventPendingOpen():
+        configuration = Configuration.get_solo()
+        return Mail(
+            Template(configuration.email_pending_open_subject),
+            Template(configuration.email_pending_open_txt),
+            eventParticipants = True,
+            eventOrganizer = True,
+            modifyEventNotification = True
+        )
 
-    class Mail:
-        def __init__(self, subject, txt, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
-            self.subject = subject
-            self.txt = txt
-            self.allUsers = allUsers
-            self.allOrganizers = allOrganizers
-            self.eventParticipants = eventParticipants
-            self.eventOrganizer = eventOrganizer
-            self.newEventNotification = newEventNotification
-            self.modifyEventNotification = modifyEventNotification
-        
-        def persons(self, event):
-            persons = get_user_model().objects.none()
+class Mail:
+    def __init__(self, subject, txt, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
+        self.subject = subject
+        self.txt = txt
+        self.allUsers = allUsers
+        self.allOrganizers = allOrganizers
+        self.eventParticipants = eventParticipants
+        self.eventOrganizer = eventOrganizer
+        self.newEventNotification = newEventNotification
+        self.modifyEventNotification = modifyEventNotification
+    
+    def persons(self, event):
+        persons = get_user_model().objects.none()
 
-            if self.allUsers:
-                persons |= get_user_model().objects.all()
-            if self.allOrganizers:
-                persons |= get_user_model().objects.filter(is_staff=True)
-            if self.eventParticipants:
-                persons |= event.participants.all()
-            if self.eventOrganizer and event.organizer != None:
-                persons |= get_user_model().objects.filter(id=event.organizer.id)
+        if self.allUsers:
+            persons |= get_user_model().objects.all()
+        if self.allOrganizers:
+            persons |= get_user_model().objects.filter(is_staff=True)
+        if self.eventParticipants:
+            persons |= event.participants.all()
+        if self.eventOrganizer and event.organizer != None:
+            persons |= get_user_model().objects.filter(id=event.organizer.id)
 
-            return persons
+        return persons
  
 def sendMail(event, mail, newEventIcs = None):
     if mail == None:

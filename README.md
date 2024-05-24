@@ -9,9 +9,6 @@ git submodule init
 git submodule update
 ```
 
-
-Modify config/settings.py to your needs and add ssl certificates. tbd.
-
 Import default configuration, mainly email templates and impressum stored in database
 ```
 sudo docker compose run web python manage.py loaddata configuration
@@ -21,6 +18,8 @@ Add admin user
 ```
 sudo docker compose run web python manage.py createAdmin
 ```
+
+Modify config/settings.py to your needs.
 
 Run clubber
 ```
