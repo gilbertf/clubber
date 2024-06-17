@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-19 22:05+0200\n"
-"PO-Revision-Date: 2024-05-19 22:07+0200\n"
+"POT-Creation-Date: 2024-06-17 21:45+0200\n"
+"PO-Revision-Date: 2024-06-17 21:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: clubber/forms.py:13
 msgid "Password"
@@ -27,7 +27,7 @@ msgstr "Passwort"
 msgid "Confirm password"
 msgstr "Passwort zur Bestätigung"
 
-#: clubber/forms.py:26 events/forms.py:69
+#: clubber/forms.py:26 events/forms.py:97
 #: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1909
 msgid "Email address"
 msgstr "E-Mail Adresse"
@@ -50,210 +50,209 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#: events/forms.py:56 events/models.py:69
+#: events/forms.py:46
+msgid "Impressum in German"
+msgstr "Deutsches Impressum"
+
+#: events/forms.py:47
+msgid "Impressum in English"
+msgstr "Englisches Impressum"
+
+#: events/forms.py:48
+msgid "Email Confirm Open Subject in German"
+msgstr ""
+
+#: events/forms.py:49
+msgid "Email Confirm Open Text in German"
+msgstr ""
+
+#: events/forms.py:50
+msgid "Email Confirm Open Subject in English"
+msgstr ""
+
+#: events/forms.py:51
+msgid "Email Confirm Open Text in English"
+msgstr ""
+
+#: events/forms.py:52
+msgid "Email New Event Subject in German"
+msgstr ""
+
+#: events/forms.py:53
+msgid "Email New Event Text in German"
+msgstr ""
+
+#: events/forms.py:54
+msgid "Email New Event Subject in English"
+msgstr ""
+
+#: events/forms.py:55
+msgid "Email New Event Text in English"
+msgstr ""
+
+#: events/forms.py:56
+msgid "Email Fully Booked Subject in German"
+msgstr ""
+
+#: events/forms.py:57
+msgid "Email Fully Booked Text in German"
+msgstr ""
+
+#: events/forms.py:58
+msgid "Email Fully Booked Subject in English"
+msgstr ""
+
+#: events/forms.py:59
+msgid "Email Fully Booked Text in English"
+msgstr ""
+
+#: events/forms.py:60
+msgid "Email Sufficient Participants Missing Organizer Subject in German"
+msgstr ""
+
+#: events/forms.py:61
+msgid "Email Sufficient Participants Missing Organizer Text in German"
+msgstr ""
+
+#: events/forms.py:62
+msgid "Email Sufficient Participants Missing Organizer Subject in English"
+msgstr ""
+
+#: events/forms.py:63
+msgid "Email Sufficient Participants Missing Organizer Text in English"
+msgstr ""
+
+#: events/forms.py:64
+msgid "Email Cancel Subject in German"
+msgstr ""
+
+#: events/forms.py:65
+msgid "Email Cancel Text in German"
+msgstr ""
+
+#: events/forms.py:66
+msgid "Email Cancel Subject in English"
+msgstr ""
+
+#: events/forms.py:67
+msgid "Email Cancel Text in English"
+msgstr ""
+
+#: events/forms.py:68
+msgid "Email Pending Open Subject in German"
+msgstr ""
+
+#: events/forms.py:69
+msgid "Email Pending Open Text in German"
+msgstr ""
+
+#: events/forms.py:70
+msgid "Email Pending Open Subject in English"
+msgstr ""
+
+#: events/forms.py:71
+msgid "Email Pending Open Text in English"
+msgstr ""
+
+#: events/forms.py:84
 msgid "Name in English"
 msgstr "Englische Bezeichnung"
 
-#: events/forms.py:57 events/models.py:70
+#: events/forms.py:85
 msgid "Name in German"
 msgstr "Deutsche Bezeichnung"
 
-#: events/forms.py:58 events/models.py:71
+#: events/forms.py:86
 msgid "Description in English"
 msgstr "Englische Beschreibung"
 
-#: events/forms.py:59 events/models.py:72
+#: events/forms.py:87
 msgid "Description in German"
 msgstr "Deutsche Beschreibung"
 
-#: events/forms.py:69 events/models.py:51
+#: events/forms.py:97 events/models.py:55
 msgid "Language"
 msgstr "Sprache"
 
-#: events/models.py:21
+#: events/models.py:29
 msgid " does not start with http:// or https://"
 msgstr " beginnt nicht mit http:// oder https://"
 
-#: events/models.py:47
+#: events/models.py:51
 msgid "Username"
 msgstr "Benutzername"
 
-#: events/models.py:57
+#: events/models.py:61
 msgid "Notify on new events"
 msgstr "Benachrichtigung erhalten, wenn eine neues Treffen angeboten wird"
 
-#: events/models.py:58
+#: events/models.py:62
 msgid "Notify on changes to events you are registered"
 msgstr ""
 "Benachrichtigung, wenn sich Änderungen bei einer Veranstaltung ergeben bei "
 "welcher du angemeldet bist"
 
-#: events/models.py:66
+#: events/models.py:67
 msgid "Name"
 msgstr "Bezeichnung"
 
-#: events/models.py:67
+#: events/models.py:68
 msgid "Address (URL)"
 msgstr "Internetadresse (URL)"
 
-#: events/models.py:68
+#: events/models.py:69
 msgid "Description"
 msgstr "Beschreibung"
 
-#: events/models.py:97
-msgid "Impressum in German"
-msgstr "Deutsches Impressum"
-
-#: events/models.py:98
-msgid "Impressum in English"
-msgstr "Englisches Impressum"
-
-#: events/models.py:99
-msgid "Email Confirm Open Subject in German"
-msgstr ""
-
-#: events/models.py:100
-msgid "Email Confirm Open Text in German"
-msgstr ""
-
-#: events/models.py:101
-msgid "Email Confirm Open Subject in English"
-msgstr ""
-
-#: events/models.py:102
-msgid "Email Confirm Open Text in English"
-msgstr ""
-
-#: events/models.py:103
-msgid "Email New Event Subject in German"
-msgstr ""
-
-#: events/models.py:104
-msgid "Email New Event Text in German"
-msgstr ""
-
-#: events/models.py:105
-msgid "Email New Event Subject in English"
-msgstr ""
-
-#: events/models.py:106
-msgid "Email New Event Text in English"
-msgstr ""
-
-#: events/models.py:107
-msgid "Email Fully Booked Subject in German"
-msgstr ""
-
-#: events/models.py:108
-msgid "Email Fully Booked Text in German"
-msgstr ""
-
-#: events/models.py:109
-msgid "Email Fully Booked Subject in English"
-msgstr ""
-
-#: events/models.py:110
-msgid "Email Fully Booked Text in English"
-msgstr ""
-
-#: events/models.py:111
-msgid "Email Sufficient Participants Missing Organizer Subject in German"
-msgstr ""
-
-#: events/models.py:112
-msgid "Email Sufficient Participants Missing Organizer Text in German"
-msgstr ""
-
-#: events/models.py:113
-msgid "Email Sufficient Participants Missing Organizer Subject in English"
-msgstr ""
-
-#: events/models.py:114
-msgid "Email Sufficient Participants Missing Organizer Text in English"
-msgstr ""
-
-#: events/models.py:115
-msgid "Email Cancel Subject in German"
-msgstr ""
-
-#: events/models.py:116
-msgid "Email Cancel Text in German"
-msgstr ""
-
-#: events/models.py:117
-msgid "Email Cancel Subject in English"
-msgstr ""
-
-#: events/models.py:118
-msgid "Email Cancel Text in English"
-msgstr ""
-
-#: events/models.py:119
-msgid "Email Pending Open Subject in German"
-msgstr ""
-
-#: events/models.py:120
-msgid "Email Pending Open Text in German"
-msgstr ""
-
-#: events/models.py:121
-msgid "Email Pending Open Subject in English"
-msgstr ""
-
-#: events/models.py:122
-msgid "Email Pending Open Text in English"
-msgstr ""
-
-#: events/models.py:126
+#: events/models.py:78
 msgid "Event type"
 msgstr "Veranstaltungsart"
 
-#: events/models.py:127
+#: events/models.py:79
 msgid "Maximum number of participants"
 msgstr "Maximale Teilnehmerzahl"
 
-#: events/models.py:128
+#: events/models.py:80
 msgid "Minimal number of participants"
 msgstr "Minimale Teilnehmerzahl"
 
-#: events/models.py:129
+#: events/models.py:81
 msgid "Who is organizing?"
 msgstr "Wer öffnet?"
 
-#: events/models.py:130
+#: events/models.py:82
 msgid "Date"
 msgstr "Datum"
 
-#: events/models.py:131
+#: events/models.py:83
 msgid "Begin"
 msgstr "Begin"
 
-#: events/models.py:132
+#: events/models.py:84
 msgid "End"
 msgstr "Ende"
 
-#: events/models.py:139
+#: events/models.py:91
 msgid "The date cannot be in the past."
 msgstr "Das Datum darf nicht in der Vergangenheit liegen."
 
-#: events/models.py:142
+#: events/models.py:94
 msgid "And end time earlier as start time is not allowd."
 msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
 
-#: events/models.py:145
+#: events/models.py:97
 msgid "Min participants > max participants is not allowed."
 msgstr ""
 "Es ist nicht erlaubt, das die Mindestteilnehmerzahl die "
 "Maximalteilnehmerzahl übersteigt."
 
-#: events/models.py:161
+#: events/models.py:113
 msgid "Two events with overlapping times are not allowed."
 msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
 
 #: events/templates/configuration_modify.html:6
-#: events/templates/typ_modify.html:6
-msgid "Modify typ"
-msgstr "Bearbeiten"
+msgid "Server settings"
+msgstr "Servereinstellungen"
 
 #: events/templates/configuration_modify.html:15
 #: events/templates/event_modify.html:15 events/templates/settings.html:13
@@ -490,6 +489,10 @@ msgstr "Bearbeiten"
 msgid "Add new event type"
 msgstr "Neue Veranstaltungsart anlegen"
 
+#: events/templates/typ_modify.html:6
+msgid "Modify typ"
+msgstr "Bearbeiten"
+
 #: events/templates/users_list.html:14
 msgid "you"
 msgstr "du selber"
@@ -511,15 +514,15 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:286
+#: events/views.py:287
 msgid " is already registered"
 msgstr " ist bereits eingetragen"
 
-#: events/views.py:289
+#: events/views.py:290
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:291
+#: events/views.py:292
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
@@ -1793,106 +1796,3 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/modeltranslation/widgets.py:24
 msgid "None"
 msgstr ""
-
-#~ msgid "{{ typ }} on {{ date }} will open"
-#~ msgstr "{{ typ }} am {{ date }} wird geöffnet"
-
-#, python-format
-#~ msgid "Hello %(username)s,<br>"
-#~ msgstr "Hallo %(username)s,<br>"
-
-#, python-format
-#~ msgid ""
-#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s is "
-#~ "cancled."
-#~ msgstr ""
-#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s wurde abgesagt."
-
-#, python-format
-#~ msgid "%(typ)s on %(date)s cancled"
-#~ msgstr "%(typ)s am %(date)s abgesagt"
-
-#, python-format
-#~ msgid "Hello %(username)s,"
-#~ msgstr "Hallo %(username)s,"
-
-#, python-format
-#~ msgid ""
-#~ "the event \"%(typ)s\" on %(date)s from %(start_time)s till %(end_time)s "
-#~ "is cancled."
-#~ msgstr ""
-#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s wurde abgesagt."
-
-#, python-format
-#~ msgid ""
-#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
-#~ "will be opened."
-#~ msgstr ""
-#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s wird geöffnet."
-
-#, python-format
-#~ msgid "%(typ)s on %(date)s will open"
-#~ msgstr "%(typ)s am %(date)s wird geöffnet"
-
-#, python-format
-#~ msgid ""
-#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
-#~ "will not be opened."
-#~ msgstr ""
-#~ "die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s wird nicht geöffnet."
-
-#, python-format
-#~ msgid "%(typ)s on %(date)s will not be opened"
-#~ msgstr "%(typ)s am %(date)s wird nicht geöffnet"
-
-#, python-format
-#~ msgid ""
-#~ "the event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
-#~ "with sufficient registered participants is missing an organizer."
-#~ msgstr ""
-#~ "für die Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s fehlt noch ein Organisator. Ausreichend Teilnehmer sind "
-#~ "schon angemeldet."
-
-#, python-format
-#~ msgid "%(typ)s on %(date)s is missing organizer"
-#~ msgstr "%(typ)s am %(date)s benötigt noch einen Organisator"
-
-#, python-format
-#~ msgid ""
-#~ "a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
-#~ "is available. To join click <a href=%(EMAIL_SITE_URL)s/join/%(user_id)s/"
-#~ "%(event_id)s>here</a>."
-#~ msgstr ""
-#~ "eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s ist verfügbar. Zum anmelden hier <a href=%(EMAIL_SITE_URL)s/"
-#~ "join/%(user_id)s/%(event_id)s>bestätigen</a>."
-
-#, python-format
-#~ msgid "New event %(typ)s on %(date)s"
-#~ msgstr "Neues Treffen %(typ)s am %(date)s"
-
-#, python-format
-#~ msgid ""
-#~ "a new event \"%(typ)s\" at %(date)s from %(start_time)s to %(end_time)s "
-#~ "is available. To join go to %(EMAIL_SITE_URL)s/join/%(user_id)s/"
-#~ "%(event_id)s."
-#~ msgstr ""
-#~ "eine neue Veranstaltung \"%(typ)s\" am %(date)s von %(start_time)s bis "
-#~ "%(end_time)s ist verfügbar. Zum anmelden gehe zu %(EMAIL_SITE_URL)s/join/"
-#~ "%(user_id)s/%(event_id)s."
-
-#, fuzzy
-#~| msgid "Settings"
-#~ msgid "User Settings"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Email and language settings"
-#~ msgstr "E-Mail und Spracheinstellungen"
-
-#~ msgid "Email and language"
-#~ msgstr "E-Mail und Sprache"
