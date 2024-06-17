@@ -151,7 +151,7 @@ class Event(models.Model):
             prev = Event.objects.get(id=instance.id)
             if prev.min_participants != instance.min_participants:
                 if instance.numParticipants >= instance.min_participants and instance.numParticipants < prev.min_participants: #Changed to not missing participants by decreasing min_participants
-                    if instance.organization == None: #eventFlow c10|m3
+                    if instance.organizer == None: #eventFlow c10|m3
                         sendMail(instance, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
                     else:
                         sendMail(instance, Mail.EventConfirmedOpen) #eventFlow m1
