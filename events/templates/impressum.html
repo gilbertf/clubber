@@ -1,10 +1,12 @@
 {% extends "master.html" %}
-{% load crispy_forms_tags %}
+{% load i18n %}
+{% load solo_tags %}
 
 {% block title %}
 Impressum
 {% endblock %}
 
 {% block content %}
-{% include "impressum-cust.html" %}
+    {% get_solo 'events.Configuration' as configuration %}
+    {{ configuration.impressum|safe }}
 {% endblock %}

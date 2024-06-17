@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 import pytz
 from django.http import HttpResponseRedirect
 import operator
-from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person
-from .forms import EventForm, TypForm, SettingsForm
+from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person, Configuration
+from .forms import EventForm, TypForm, SettingsForm, ConfigurationForm
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
@@ -26,7 +26,8 @@ from django.utils.translation import gettext as _
 from django.utils import translation
 from datetime import date
 from django.conf import settings
-from .email import sendMail, Mail
+from .email import sendMail, MailConf
+from .model_configuration import Configuration
 
 class TypListView(ListView):
     model = Typ
@@ -55,6 +56,20 @@ class TypDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
+class ConfigurationModifyView(UserPassesTestMixin, UpdateView):
+    model = Configuration
+    template_name = "configuration_modify.html"
+    form_class = ConfigurationForm
+    
+    success_url = reverse_lazy("events_list")
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get_object(self):
+        model_instance = Configuration.get_solo()
+        return model_instance
+
+    
 class UserSettingsView(UpdateView):
     model = Person
     template_name = "settings.html"
@@ -294,10 +309,10 @@ def eventParticipantTxtModify(request, event_id, participant_txt_id):
 def sendMailNewEvent(event):
     if settings.EMAIL_NOTIFICATION_ENABLE:
                 if event.sufficientParticipants and event.organizer == None:
-                    sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                    sendMail(event, MailConf.EventSufficientParticipantsMissingOrganizer()) #eventFlow m3
                 if event.fullyBooked:
-                    sendMail(event, Mail.EventFullyBooked) #eventFlow m6
-                sendMail(event, Mail.NewEvent, newEventIcs = makeIcsForEvent(event)) #eventFlow m5
+                    sendMail(event, MailConf.EventFullyBooked) #eventFlow m6
+                sendMail(event, MailConf.NewEvent(), newEventIcs = makeIcsForEvent(event)) #eventFlow m5
 
 from django.core.exceptions import ValidationError
 
@@ -337,11 +352,11 @@ def eventDelete(request, event_id): #eventFlow c7
 
 def mailEventParticipantAdd(event, preSufficientParticipants):
     if not preSufficientParticipants and event.sufficientParticipants and event.organizer == None:
-        sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+        sendMail(event, MailConf.EventSufficientParticipantsMissingOrganizer()) #eventFlow m3
     if not preSufficientParticipants and event.sufficientParticipants and event.organizer != None:
-        sendMail(event, Mail.EventConfirmedOpen) #eventFlow m1
+        sendMail(event, MailConf.EventConfirmedOpen()) #eventFlow m1
     if event.fullyBooked:
-        sendMail(event, Mail.FullyBooked) #eventFlow m6
+        sendMail(event, MailConf.FullyBooked()) #eventFlow m6
 
 def eventParticipantAdd(request, event_id): #eventFlow c3
     event = Event.objects.filter(id=event_id).get()
@@ -386,7 +401,7 @@ def eventParticipantRemoveBase(request, event_id, participant_id = None, partici
         removeUserFromEvent(request.user, event)
 
     if preSufficientParticipants and not event.sufficientParticipants:
-        sendMail(event, Mail.EventPendingOpen) #eventFlow m2
+        sendMail(event, MailConf.EventPendingOpen()) #eventFlow m2
 
     advanceEvent(request, event)
     return render(request, 'event.html', {'event': event})
@@ -404,7 +419,7 @@ def eventCancle(request, event_id): #eventFlow c6
     event = Event.objects.filter(id=event_id).get()
     if request.user.is_staff:
         if settings.EMAIL_NOTIFICATION_ENABLE:
-            sendMail(event, Mail.EventCancle) #eventFlow m4
+            sendMail(event, MailConf.EventCancle()) #eventFlow m4
         event.cancled = True
         event.organizer = None
         event.participants.clear()
@@ -422,11 +437,11 @@ def eventCancleUndo(request, event_id): #eventFlow c7
         event.save()
         if settings.EMAIL_NOTIFICATION_ENABLE:
             if not event.sufficientParticipants:
-                sendMail(event, Mail.EventPendingOpen) #eventFlow m2
+                sendMail(event, MailConf.EventPendingOpen()) #eventFlow m2
             if event.sufficientParticipants and event.organizer == None:
-                sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                sendMail(event, MailConf.EventSufficientParticipantsMissingOrganizer()) #eventFlow m3
             if event.fullyBooked:
-                sendMail(event, Mail.FullyBooked) #eventFlow m6
+                sendMail(event, MailConf.FullyBooked()) #eventFlow m6
 
     return render(request, 'event.html', {'event': event})
 
@@ -439,7 +454,7 @@ def eventOrganizerSet(request, event_id): #eventFlow c1
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
             if event.sufficientParticipants:
-                sendMail(event, Mail.EventConfirmedOpen) #eventFlow m1
+                sendMail(event, MailConf.EventConfirmedOpen()) #eventFlow m1
     return render(request, 'event.html', {'event': event})
 
 def eventOrganizerClear(request, event_id): #eventFlow c2
@@ -450,6 +465,6 @@ def eventOrganizerClear(request, event_id): #eventFlow c2
         advanceEvent(request, event)
         if settings.EMAIL_NOTIFICATION_ENABLE:
             if event.sufficientParticipants:
-                sendMail(event, Mail.EventPendingOpen) #eventFlow m2
-                sendMail(event, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                sendMail(event, MailConf.EventPendingOpen()) #eventFlow m2
+                sendMail(event, MailConf.EventSufficientParticipantsMissingOrganizer()) #eventFlow m3
     return render(request, 'event.html', {'event': event})

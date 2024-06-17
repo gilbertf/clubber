@@ -11,17 +11,22 @@ from django.utils import timezone
 from django.urls import reverse
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from django.db.models.signals import pre_save
-from .email import sendMail, Mail
 from modeltranslation.forms import TranslationModelForm
+from .model_configuration import Configuration
+from .email import sendMail, MailConf
+from django.db.models.signals import pre_save
 
-def validate_url(url):
-    if not (url.startswith("http://") or url.startswith("https://")):
-        raise ValidationError(url + _(" does not start with http:// or https://"))
 
 def validate_date_future(d):
     if d < datetime.now().date():
         raise ValidationError("Date is in the past")
+
+class NameTxt(models.Model):
+    txt = models.CharField(max_length=20)
+
+def validate_url(url):
+    if not (url.startswith("http://") or url.startswith("https://")):
+        raise ValidationError(url + _(" does not start with http:// or https://"))
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, password, email = None, email_notification_new_event = False, email_notification_joined_event = False):
@@ -58,18 +63,11 @@ class Person(AbstractBaseUser):
     
     objects = CustomUserManager()
 
-class NameTxt(models.Model):
-    txt = models.CharField(max_length=20)
-
 class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
     description = models.TextField(default="", blank=True, verbose_name=_("Description"))
-    labels = { "name_en": _("Name in English"),
-                  "name_de": _("Name in German"),
-                  "description_en": _("Description in English"),
-                  "description_de": _("Description in German"),
-                  }
+    
     def __str__(self):
         return self.name
 
@@ -142,7 +140,6 @@ class Event(models.Model):
             return True
         return False
 
-
     @staticmethod
     def pre_save(sender, instance, **kwargs):           
         if instance.id is None: # new object will be created
@@ -152,14 +149,14 @@ class Event(models.Model):
             if prev.min_participants != instance.min_participants:
                 if instance.numParticipants >= instance.min_participants and instance.numParticipants < prev.min_participants: #Changed to not missing participants by decreasing min_participants
                     if instance.organizer == None: #eventFlow c10|m3
-                        sendMail(instance, Mail.EventSufficientParticipantsMissingOrganizer) #eventFlow m3
+                        sendMail(instance, MailConf.EventSufficientParticipantsMissingOrganizer()) #eventFlow m3
                     else:
-                        sendMail(instance, Mail.EventConfirmedOpen) #eventFlow m1
+                        sendMail(instance, MailConf.EventConfirmedOpen()) #eventFlow m1
                 if instance.numParticipants < instance.min_participants and instance.numParticipants >= prev.min_participants: #Changed to missing participants by increasing min_participants
-                    sendMail(instance, Mail.EventPendingOpen) #eventFlow c9|m2
+                    sendMail(instance, MailConf.EventPendingOpen()) #eventFlow c9|m2
             if prev.max_participants != instance.max_participants:
                 if instance.numParticipants >= instance.max_participants and instance.numParticipants < prev.max_participants: #Changed to fully booked by decreasing max_participants
-                    sendMail(instance, Mail.EventFullyBooked) #eventFlow c12|m6
+                    sendMail(instance, MailConf.EventFullyBooked()) #eventFlow c12|m6
                 if instance.numParticipants < instance.max_participants and instance.numParticipants >= prev.max_participants: #Changed to not fully booked by increasing max_participants
                     pass
 

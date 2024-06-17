@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django_flatpickr",
     "pwa",
     "modeltranslation",
+    "solo",
 ]
 
 PWA_APP_NAME = 'Clubber'
@@ -155,6 +156,7 @@ LANGUAGES = [
         ]
 
 LANGUAGE_CODE = "de"
+
 TIME_ZONE = "Europe/Berlin"
 USE_I18N = True
 USE_TZ = False
@@ -184,11 +186,14 @@ DJANGO_FLATPICKR = {
 STATIC_ROOT = "static_ext"
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 

@@ -1,2 +1,0 @@
-{% load i18n %}
-{% blocktranslate %}New event {{ typ }} on {{ date }}{% endblocktranslate %}
