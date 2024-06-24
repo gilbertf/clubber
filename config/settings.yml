@@ -2,7 +2,6 @@ CSRF_TRUSTED_ORIGINS: ["http://127.0.0.1:1337"]
 ALLOWED_HOSTS: [
         "127.0.0.1",
 ]
-SECRET_KEY: "xxx"
 
 # Mail: User notification on event changes
 EMAIL_NOTIFICATION_ENABLE: True
@@ -37,5 +36,4 @@ LOGO_ENABLE: False
 #Optional: Link, when clicking on header logo
 #LOGO_URL: "https://www.test.de"
 
-#DEBUG: False
-DEBUG: True
+DEBUG: False

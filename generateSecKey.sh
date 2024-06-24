@@ -1,1 +1,3 @@
-python manage.py shell -c "from django.core.management.utils import get_random_secret_key; print(\"SECRET_KEY: \\\"\" + get_random_secret_key() + \"\\\"\")" >> config/settings.yml
+#!/bin/sh
+echo "Generating \"Random Secret Key\" and appending to ${1:-config/settings.yml}"
+python manage.py shell -c "from django.core.management.utils import get_random_secret_key; print(\"SECRET_KEY: \\\"\" + get_random_secret_key() + \"\\\"\")" >> ${1:-config/settings.yml}

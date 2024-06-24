@@ -8,3 +8,4 @@ RUN pip install -r requirements.txt
 COPY . /code/
 ADD /django-pwa /django-pwa
 RUN pip install ../django-pwa/
+RUN generateSecKey.sh /code/config/settings.yml
