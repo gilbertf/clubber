@@ -73,7 +73,7 @@ class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
     description = models.TextField(default="", blank=True, verbose_name=_("Description"))
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True,  null=True, verbose_name=_("Event location"))
+    location = models.ForeignKey(Location, models.SET_NULL, blank=True,  null=True, verbose_name=_("Event location"))
 
     def __str__(self):
         return self.name
