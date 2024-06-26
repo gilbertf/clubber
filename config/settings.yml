@@ -15,7 +15,6 @@ EMAIL_HOST_USER: "a"
 EMAIL_HOST_PASSWORD: "xxx"
 DEFAULT_FROM_EMAIL: "a@xxx.de"
 EMAIL_SITE_URL: "https://www.abc.de"
-EMAIL_EVENT_LOCATION: "Irgendwo"
 
 # Settings for new events
 #   Default values for number of participants when creating new event
