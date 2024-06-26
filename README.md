@@ -5,6 +5,7 @@ A simple booking system, details will follow.
 Clone repository and init subodules
 ```
 git clone git@github.com:gilbertf/clubber.git
+cd clubber
 git submodule init
 git submodule update
 ```
@@ -68,7 +69,7 @@ python manage.py migrate
 ## Development Setup
 Run development server for testing only
 ```
-python manage.py runserver
+python manage.py runserver --insecure
 ```
 
 ## Production Setup
@@ -80,7 +81,7 @@ to copy all static files to `static_ext`. This `static_ext` folder is to be serv
 In this nginx configuration example the django instance on TCP port 8888 is exported to port 443 sing ssl. The Django instance can be started as daemon using systemd as sketched in the systemd service description file `clubber-web.service`.
 
 ## How to Get Started
-1. Create admin user by running `python manage.py createsuperuser`.
+1. Create admin user by running `python manage.py createAdmin`.
 2. Login to webinterface using this new account and set a valid e-mail and update notification setting (Einstellungen -> E-Mail)
 3. Add at least one event type (Einstellungen -> Veranstaltungsarten)
 4. Create your first event (Neues Treffen)
