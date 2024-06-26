@@ -29,9 +29,12 @@ from django.conf import settings
 from .email import sendMail, MailConf
 from .model_configuration import Configuration
 
-class TypListView(ListView):
+class TypListView(UserPassesTestMixin, ListView):
     model = Typ
     template_name = "typ_list.html"
+    success_url = reverse_lazy("typ_list")
+    def test_func(self):
+        return self.request.user.is_superuser
 
 class TypAddView(UserPassesTestMixin, CreateView):
     model = Typ
