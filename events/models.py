@@ -45,7 +45,6 @@ class CustomUserManager(BaseUserManager):
         user.is_staff = True
         user.save()
         return user
-
                                     
 class Person(AbstractBaseUser):
     username = models.CharField(max_length=20, unique=True, verbose_name=_("Username"))
@@ -63,11 +62,19 @@ class Person(AbstractBaseUser):
     
     objects = CustomUserManager()
 
+class Location(models.Model):
+    name = models.CharField(max_length=50, verbose_name=_("Event location"))
+    address = models.TextField(default="", blank=True, verbose_name=_("Address"))
+
+    def __str__(self):
+        return self.name
+
 class Typ(models.Model):
     name = models.CharField(max_length=30, unique=True, verbose_name=_("Name"))
     url = models.CharField(max_length=100, default="", blank=True, verbose_name=_("Address (URL)"), validators=[validate_url])
     description = models.TextField(default="", blank=True, verbose_name=_("Description"))
-    
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, blank=True,  null=True, verbose_name=_("Event location"))
+
     def __str__(self):
         return self.name
 

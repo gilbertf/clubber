@@ -30,6 +30,10 @@ urlpatterns = [
     path("typ/<int:pk>/delete", views.TypDeleteView.as_view(), name="typ_delete"),
     path("typ/<int:pk>/modify", views.TypModifyView.as_view(), name="typ_modify"),
     path("typ/add", views.TypAddView.as_view(), name="typ_add"),
+    path("location/list", views.LocationListView.as_view(), name="location_list"),
+    path("location/<int:pk>/delete", views.LocationDeleteView.as_view(), name="location_delete"),
+    path("location/<int:pk>/modify", views.LocationModifyView.as_view(), name="location_modify"),
+    path("location/add", views.LocationAddView.as_view(), name="location_add"),
     path("configuration", views.ConfigurationModifyView.as_view(), name="configuration_modify"),
 
 ]

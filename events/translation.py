@@ -1,11 +1,16 @@
 from modeltranslation.translator import translator, TranslationOptions
-from .models import Typ, Configuration
+from .models import Typ, Location, Configuration
 from django.utils.translation import gettext as _
 
 class TypTranslationOptions(TranslationOptions):
     fields = ('name', 'description')
     required_languages = {'de': ('name',)}
 translator.register(Typ, TypTranslationOptions)
+
+class LocationTranslationOptions(TranslationOptions):
+    fields = ('name',)
+    required_languages = {'de': ('name',)}
+translator.register(Location, LocationTranslationOptions)
 
 class ConfigurationTranslationOptions(TranslationOptions):
     fields = (

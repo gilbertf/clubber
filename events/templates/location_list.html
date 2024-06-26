@@ -1,0 +1,46 @@
+{% extends "master.html" %}
+{% load i18n %}
+
+{% block title %}
+	{% translate "Event locations" %}
+{% endblock %}
+
+{% block content %}
+	<ol class="list-group">
+	        {% for location in object_list %}
+			<li class="list-group-item d-flex justify-content-between align-items-start" id="location-{{ location.id }}">
+				<div class="ms-2">
+					{% if location.name_de %}
+						{{ location.name_de }} (de)
+					{% endif %}
+					<br>
+					{% if location.name_en %}
+						{{ location.name_en }} (en)
+					{% endif %}
+					{% if location.address %}
+						<br>
+						<br>
+						{% translate "Address" %}: {{ location.address|linebreaks }}
+					{% endif %}
+				</div>
+				<div class="ms-2">
+					<form hx-swap="delete" hx-target="#location-{{ location.id }}" hx-confirm="{% blocktranslate %}Please confirm to delete the event location {{ location }}.{% endblocktranslate %}">
+						{% csrf_token %}
+						<button class="my-2 mx-2 btn btn-danger" hx-post={% url 'location_delete' location.id %}>{% translate "Delete" %}</button>
+					</form>
+					<form method="GET" action={% url 'location_modify' location.id %}>
+						{% csrf_token %}
+						<button class="my-2 mx-2 btn btn-success">{% translate "Modify" %}</button>
+					</form>
+				</div>
+			</li>
+	        {% endfor %}
+	</ol>
+	
+	<br>
+	
+	<form method="GET" action={% url 'location_add' %}>
+		{% csrf_token %}
+		<button class="mx-2 btn btn-success" id="btn_location_add">{% translate "Add new event location" %}</button>
+	</form>
+{% endblock %}

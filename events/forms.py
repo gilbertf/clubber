@@ -6,7 +6,7 @@ from django_flatpickr.schemas import FlatpickrOptions
 from django.contrib.auth import get_user_model
 from django.db.models.functions import Now
 from django.db import models
-from .models import Event, Typ, Person, Configuration
+from .models import Event, Typ, Location, Person, Configuration
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.forms import TranslationModelForm
@@ -80,11 +80,27 @@ class TypForm(forms.ModelForm):
                   "description_de",
                   "name_en",
                   "description_en",
-                  "url"]
-        labels = { "name_en": _("Name in English"),
+                  "location",
+                  "url",
+                  ]
+        labels = {
                   "name_de": _("Name in German"),
-                  "description_en": _("Description in English"),
+                  "name_en": _("Name in English"),
                   "description_de": _("Description in German"),
+                  "description_en": _("Description in English"),
+                  }
+
+class LocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = [
+                  "name_de",
+                  "name_en",
+                  "address",
+                  ]
+        labels = {
+                  "name_de": _("Event location in German"),
+                  "name_en": _("Event location in English"),
                   }
 
 class SettingsForm(forms.ModelForm):

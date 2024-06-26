@@ -49,11 +49,12 @@
 
 								{% url 'user_password_change' as url_user_password_change %}
 								{% url 'typ_list' as url_typ_list %}
+								{% url 'location_list' as url_location_list %}
 								{% url 'user_settings' as url_user_settings %}
 								{% url 'users_list' as url_users_list %}
 								{% url 'configuration_modify' as url_configuration_modify %}
 
-								<a id="btn_settings" class="nav-link dropdown-toggle{% if request.path == url_user_password_change or request.path == url_user_settings or request.path == url_users_list or request.path == url_typ_list or request.path == url_configuration_modify %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% translate "Settings" %}</a>
+								<a id="btn_settings" class="nav-link dropdown-toggle{% if request.path == url_user_password_change or request.path == url_user_settings or request.path == url_users_list or request.path == url_typ_list or request.path == url_location_list or request.path == url_configuration_modify %} active{% endif %}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% translate "Settings" %}</a>
 								<ul class="dropdown-menu">	
 									<a class="dropdown-item{% if request.path == url_user_settings %} active{% endif %}" href={{ url_user_settings }}>{% translate "User settings" %}</a>
 									<a class="dropdown-item{% if request.path == url_user_password_change %} active{% endif %}" href={{ url_user_password_change }}>{% translate "Change password" %}</a>
@@ -73,6 +74,7 @@
 		            					<li><hr class="dropdown-divider"></li>
 										<a id="btn_users" class="dropdown-item{% if request.path == url_users_list %} active{% endif %}" href={{ url_users_list }}>{% translate "User management" %}</a>
 										<a id="btn_event_types" class="dropdown-item{% if request.path == url_typ_list %} active{% endif %}" href={{ url_typ_list }}>{% translate "Event types" %}</a>
+										<a id="btn_event_locations" class="dropdown-item{% if request.path == url_location_list %} active{% endif %}" href={{ url_location_list }}>{% translate "Event locations" %}</a>
 										<a id="btn_configuration" class="dropdown-item{% if request.path == url_configuration_modify %} active{% endif %}" href={{ url_configuration_modify }}>{% translate "Server configuration" %}</a>
 
 										

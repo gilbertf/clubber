@@ -103,10 +103,30 @@
 	{% endif %}
 
 	<div class="text-sm-start">
-		{{ event.typ.description }}
-		{% if event.typ.url != "" %}
-			<br><a href="{{ event.typ.url }}">{% translate "Additional information" %}</a>
+		{% if event.typ.description %}
+			{{ event.typ.description }}
 		{% endif %}
+		<center>
+		{% if event.typ.location %}
+			{% if event.typ.location.address %}
+				<p>
+					<button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#event-{{event.id}}-location-{{event.typ.location.id}}">
+						{% translate "Where" %}: {{ event.typ.location }}
+					</button>
+				</p>
+				<div class="collapse" id="event-{{event.id}}-location-{{event.typ.location.id}}">
+					<div class="card card-body">
+						{{event.typ.location.address|linebreaks}}
+					</div>
+				</div>
+			{% else %}
+				<p>{% translate "Where" %}: {{ event.typ.location }}</p>
+			{% endif %}
+		{% endif %}
+		{% if event.typ.url %}
+			<p><a class="btn btn-link" href="{{ event.typ.url }}">{% translate "Additional information" %}</a></p>
+		{% endif %}
+		</center>
 	</div>
 		
 	{% if event.cancled %}

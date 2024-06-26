@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 import pytz
 from django.http import HttpResponseRedirect
 import operator
-from .models import Event, Typ, Joined, NameTxt, JoinedTxt, Person, Configuration
-from .forms import EventForm, TypForm, SettingsForm, ConfigurationForm
+from .models import Event, Typ, Location, Joined, NameTxt, JoinedTxt, Person, Configuration
+from .forms import EventForm, TypForm, LocationForm, SettingsForm, ConfigurationForm
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from django.template import Context
@@ -28,6 +28,8 @@ from datetime import date
 from django.conf import settings
 from .email import sendMail, MailConf
 from .model_configuration import Configuration
+from django.db.models.query import QuerySet
+
 
 class TypListView(UserPassesTestMixin, ListView):
     model = Typ
@@ -48,7 +50,6 @@ class TypModifyView(UserPassesTestMixin, UpdateView):
     model = Typ
     template_name = "typ_modify.html"
     form_class = TypForm
-    
     success_url = reverse_lazy("typ_list")
     def test_func(self):
         return self.request.user.is_superuser
@@ -56,6 +57,35 @@ class TypModifyView(UserPassesTestMixin, UpdateView):
 class TypDeleteView(UserPassesTestMixin, DeleteView):
     model = Typ
     success_url = reverse_lazy("typ_list")
+    def test_func(self):
+        return self.request.user.is_superuser
+
+class LocationListView(UserPassesTestMixin, ListView):
+    model = Location
+    template_name = "location_list.html"
+    success_url = reverse_lazy("location_list")
+    def test_func(self):
+        return self.request.user.is_superuser
+
+class LocationAddView(UserPassesTestMixin, CreateView):
+    model = Location
+    template_name = "location_add.html"
+    form_class = LocationForm
+    success_url = reverse_lazy("location_list")
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+class LocationModifyView(UserPassesTestMixin, UpdateView):
+    model = Location
+    template_name = "location_modify.html"
+    form_class = LocationForm
+    success_url = reverse_lazy("location_list")
+    def test_func(self):
+        return self.request.user.is_superuser
+
+class LocationDeleteView(UserPassesTestMixin, DeleteView):
+    model = Location
+    success_url = reverse_lazy("location_list")
     def test_func(self):
         return self.request.user.is_superuser
 
@@ -149,9 +179,6 @@ def prepare_event_list(request):
 
     return structured_el
 
-from django.db.models.query import QuerySet
-
-
 def makeIcsForEvent(event):
     cal = ics.Calendar()
     calEvent = ics.Event()
@@ -160,7 +187,7 @@ def makeIcsForEvent(event):
     calEvent.begin = dt
     dt = datetime(event.date.year, event.date.month, event.date.day, event.end_time.hour, event.end_time.minute, tzinfo=pytz.timezone("Europe/Berlin"))
     calEvent.end = dt
-    calEvent.location = settings.EMAIL_EVENT_LOCATION
+    calEvent.location = str(event.typ.location.address)
     calEvent.url = settings.EMAIL_SITE_URL + "/event/" + str(event.id) + "/show"
     cal.events.add(calEvent)
     return cal.serialize()

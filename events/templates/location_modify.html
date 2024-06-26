@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-	{% translate "Modify typ" %}
+	{% translate "Modify event location" %}
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 			<form  method="post">
 				{% csrf_token %}
 				{{ form|crispy }}
-				<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" value={{typ_id}} type="submit">{% translate "Modify" %}</button>
+				<button class="btn btn-primary" id="btn_location_modify_confirm" name="modify" value={{location_id}} type="submit">{% translate "Modify" %}</button>
 			</form>
 		</div>
 	{% endif %}
