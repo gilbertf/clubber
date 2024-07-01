@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-01 17:46+0200\n"
-"PO-Revision-Date: 2024-07-01 17:47+0200\n"
+"POT-Creation-Date: 2024-07-01 21:17+0200\n"
+"PO-Revision-Date: 2024-07-01 21:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -361,28 +361,24 @@ msgstr "Teilnahme absagen"
 msgid "Confirm participation"
 msgstr "Teilnahme zusagen"
 
-#: events/templates/event.html:175
-msgid "opens"
-msgstr "öffnet"
-
-#: events/templates/event.html:226
+#: events/templates/event.html:230
 msgid "Name of participant"
 msgstr "Neues Teilnehmery"
 
-#: events/templates/event.html:252
+#: events/templates/event.html:256
 msgid "One slot remaining"
 msgstr "Noch ein freier Platz"
 
-#: events/templates/event.html:254
+#: events/templates/event.html:258
 #, python-format
 msgid "%(num)s free slots remaining"
 msgstr "%(num)s freie Plätze"
 
-#: events/templates/event.html:256
+#: events/templates/event.html:260
 msgid "No free slot available"
 msgstr "Das Treffen ist  ausgebucht"
 
-#: events/templates/event.html:258
+#: events/templates/event.html:262
 msgid "Too many registrations"
 msgstr "Das Treffen ist überbucht"
 
