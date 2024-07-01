@@ -187,7 +187,8 @@ def makeIcsForEvent(event):
     calEvent.begin = dt
     dt = datetime(event.date.year, event.date.month, event.date.day, event.end_time.hour, event.end_time.minute, tzinfo=pytz.timezone("Europe/Berlin"))
     calEvent.end = dt
-    calEvent.location = str(event.typ.location.address)
+    if event.typ.location != None:
+        calEvent.location = str(event.typ.location.address)
     calEvent.url = settings.EMAIL_SITE_URL + "/event/" + str(event.id) + "/show"
     cal.events.add(calEvent)
     return cal.serialize()
@@ -313,8 +314,10 @@ def username_check(name, event):
         others_txt = event.participants_txt.filter(txt__iexact=name).count()
         if others == 0 and others_txt == 0:
             return True, ""
+        elif others != 0:
+            return False, name + " " + _("is a registered user name")
         else:
-            return False, name + _(" is already registered")
+            return False, name + " " + _("is already registered")
     else:
             if len(name) == 0:
                 return False, _("You are required to enter a name")

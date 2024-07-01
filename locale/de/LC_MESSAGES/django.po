@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-26 13:11+0200\n"
-"PO-Revision-Date: 2024-06-26 13:11+0200\n"
+"POT-Creation-Date: 2024-07-01 17:46+0200\n"
+"PO-Revision-Date: 2024-07-01 17:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -220,49 +220,49 @@ msgstr "Internetadresse (URL)"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: events/models.py:86
+#: events/models.py:85
 msgid "Event type"
 msgstr "Veranstaltungsart"
 
-#: events/models.py:87
+#: events/models.py:86
 msgid "Maximum number of participants"
 msgstr "Maximale Teilnehmerzahl"
 
-#: events/models.py:88
+#: events/models.py:87
 msgid "Minimal number of participants"
 msgstr "Minimale Teilnehmerzahl"
 
-#: events/models.py:89
+#: events/models.py:88
 msgid "Who is organizing?"
 msgstr "Wer öffnet?"
 
-#: events/models.py:90
+#: events/models.py:89
 msgid "Date"
 msgstr "Datum"
 
-#: events/models.py:91
+#: events/models.py:90
 msgid "Begin"
 msgstr "Begin"
 
-#: events/models.py:92
+#: events/models.py:91
 msgid "End"
 msgstr "Ende"
 
-#: events/models.py:99
+#: events/models.py:98
 msgid "The date cannot be in the past."
 msgstr "Das Datum darf nicht in der Vergangenheit liegen."
 
-#: events/models.py:102
+#: events/models.py:101
 msgid "And end time earlier as start time is not allowd."
 msgstr "Es wird erwartet, dass die Endzeit später als die Startzeit liegt."
 
-#: events/models.py:105
+#: events/models.py:104
 msgid "Min participants > max participants is not allowed."
 msgstr ""
 "Es ist nicht erlaubt, das die Mindestteilnehmerzahl die "
 "Maximalteilnehmerzahl übersteigt."
 
-#: events/models.py:121
+#: events/models.py:120
 msgid "Two events with overlapping times are not allowed."
 msgstr "Zeitliche Überschneidung zweier Treffen ist nicht zulässig."
 
@@ -558,15 +558,19 @@ msgstr "Bitte bestätige,  dass der Benutzer %(user)s gelöscht werden soll"
 msgid "Delete user"
 msgstr "Benutzer löschen"
 
-#: events/views.py:317
-msgid " is already registered"
-msgstr " ist bereits eingetragen"
+#: events/views.py:318
+msgid "is a registered user name"
+msgstr "ist der Name eines registrierten Nutzers"
 
 #: events/views.py:320
+msgid "is already registered"
+msgstr "ist bereits eingetragen"
+
+#: events/views.py:323
 msgid "You are required to enter a name"
 msgstr "Du musst einen Namen eingeben"
 
-#: events/views.py:322
+#: events/views.py:325
 msgid "Exceeding max. length"
 msgstr "Die maximale Länge vwurde überschritten"
 
