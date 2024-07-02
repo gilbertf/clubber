@@ -10,6 +10,10 @@ from .models import Event, Typ, Location, Person, Configuration
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.forms import TranslationModelForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit
+from crispy_forms.bootstrap import AccordionGroup, Accordion
+from crispy_forms.bootstrap import TabHolder, Tab
 
 class ConfigurationForm(forms.ModelForm):
     class Meta:
@@ -43,33 +47,87 @@ class ConfigurationForm(forms.ModelForm):
             "email_pending_open_txt_en"
         ]
         labels = {
-            "impressum_de": _("Impressum in German"),
-            "impressum_en": _("Impressum in English"),
-            "email_confirm_open_subject_de": _("Email Confirm Open Subject in German"),
-            "email_confirm_open_txt_de": _("Email Confirm Open Text in German"),
-            "email_confirm_open_subject_en": _("Email Confirm Open Subject in English"),
-            "email_confirm_open_txt_en": _("Email Confirm Open Text in English"),
-            "email_new_event_subject_de": _("Email New Event Subject in German"),
-            "email_new_event_txt_de": _("Email New Event Text in German"),
-            "email_new_event_subject_en": _("Email New Event Subject in English"),
-            "email_new_event_txt_en": _("Email New Event Text in English"),
-            "email_fully_booked_subject_de": _("Email Fully Booked Subject in German"),
-            "email_fully_booked_txt_de": _("Email Fully Booked Text in German"),
-            "email_fully_booked_subject_en": _("Email Fully Booked Subject in English"),
-            "email_fully_booked_txt_en": _("Email Fully Booked Text in English"),
-            "email_sufficient_participants_missing_organizer_subject_de": _("Email Sufficient Participants Missing Organizer Subject in German"),
-            "email_sufficient_participants_missing_organizer_txt_de": _("Email Sufficient Participants Missing Organizer Text in German"),
-            "email_sufficient_participants_missing_organizer_subject_en": _("Email Sufficient Participants Missing Organizer Subject in English"),
-            "email_sufficient_participants_missing_organizer_txt_en": _("Email Sufficient Participants Missing Organizer Text in English"),
-            "email_cancle_subject_de": _("Email Cancel Subject in German"),
-            "email_cancle_txt_de": _("Email Cancel Text in German"),
-            "email_cancle_subject_en": _("Email Cancel Subject in English"),
-            "email_cancle_txt_en": _("Email Cancel Text in English"),
-            "email_pending_open_subject_de": _("Email Pending Open Subject in German"),
-            "email_pending_open_txt_de": _("Email Pending Open Text in German"),
-            "email_pending_open_subject_en": _("Email Pending Open Subject in English"),
-            "email_pending_open_txt_en": _("Email Pending Open Text in English")
+            "impressum_de": _("German"),
+            "impressum_en": _("English"),
+            "email_confirm_open_subject_de": _("Subject in German"),
+            "email_confirm_open_txt_de": _("Text in German"),
+            "email_confirm_open_subject_en": _("Subject in English"),
+            "email_confirm_open_txt_en": _("Text in English"),
+            "email_new_event_subject_de": _("Subject in German"),
+            "email_new_event_txt_de": _("Text in German"),
+            "email_new_event_subject_en": _("Subject in English"),
+            "email_new_event_txt_en": _("Text in English"),
+            "email_fully_booked_subject_de": _("Subject in German"),
+            "email_fully_booked_txt_de": _("Text in German"),
+            "email_fully_booked_subject_en": _("Subject in English"),
+            "email_fully_booked_txt_en": _("Text in English"),
+            "email_sufficient_participants_missing_organizer_subject_de": _("Subject in German"),
+            "email_sufficient_participants_missing_organizer_txt_de": _("Text in German"),
+            "email_sufficient_participants_missing_organizer_subject_en": _("Subject in English"),
+            "email_sufficient_participants_missing_organizer_txt_en": _("Text in English"),
+            "email_cancle_subject_de": _("Subject in German"),
+            "email_cancle_txt_de": _("Text in German"),
+            "email_cancle_subject_en": _("Subject in English"),
+            "email_cancle_txt_en": _("Text in English"),
+            "email_pending_open_subject_de": _("Subject in German"),
+            "email_pending_open_txt_de": _("Text in German"),
+            "email_pending_open_subject_en": _("Subject in English"),
+            "email_pending_open_txt_en": _("Text in English")
         }
+
+    def __init__(self, *args, **kwargs):
+        super(ConfigurationForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper(self)
+        self.helper.layout = Layout(
+            TabHolder(
+                Tab('Impressum',
+                        'impressum_de',
+                        'impressum_en'
+                ),
+                Tab(_('Email Templates'),
+                    Accordion(
+                        AccordionGroup('Confirm Open',
+                            "email_confirm_open_subject_de",
+                            "email_confirm_open_txt_de",
+                            "email_confirm_open_subject_en",
+                            "email_confirm_open_txt_en",
+                            active=False
+                        ),
+                        AccordionGroup('New Event',
+                            "email_new_event_subject_de",
+                            "email_new_event_txt_de",
+                            "email_new_event_subject_en",
+                            "email_new_event_txt_en",
+                        ),
+                        AccordionGroup('Fully Booked',
+                            "email_fully_booked_subject_de",
+                            "email_fully_booked_txt_de",
+                            "email_fully_booked_subject_en",
+                            "email_fully_booked_txt_en",
+                        ),
+                        AccordionGroup('Sufficient Participants Missing Organizer',
+                            "email_sufficient_participants_missing_organizer_subject_de",
+                            "email_sufficient_participants_missing_organizer_txt_de",
+                            "email_sufficient_participants_missing_organizer_subject_en",
+                            "email_sufficient_participants_missing_organizer_txt_en",
+                        ),
+                        AccordionGroup('Cancle',
+                            "email_cancle_subject_de",
+                            "email_cancle_txt_de",
+                            "email_cancle_subject_en",
+                            "email_cancle_txt_en",
+                        ),
+                        AccordionGroup('Pending Open',
+                            "email_pending_open_subject_de",
+                            "email_pending_open_txt_de",
+                            "email_pending_open_subject_en",
+                            "email_pending_open_txt_en"
+                        )
+                    )
+                )
+            )
+        )
 
 
 class TypForm(forms.ModelForm):

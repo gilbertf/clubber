@@ -11,7 +11,7 @@
 			<div class="container text-left">
 				<form  method="post">
 					{% csrf_token %}
-					{{ form|crispy }}
+					{% crispy form %}
 					<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" type="submit">{% translate "Update" %}</button>
 				</form>
 			</div>
