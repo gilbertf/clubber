@@ -14,14 +14,14 @@
 	      			<div class="fw-bold">{{ user }} {% if request.user == user %} ({% translate "you" %}){% endif %}</div>
 				{{ user.email }}
 
-				<form method="post" id="form-user-{{ user.username }}">
+				<form method="post" id="form-user-{{ user.id }}">
 					{% csrf_token %}
 					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" id="cb-{{ user.username }}" name="admin-events" role="switch" {% if user.is_staff %}checked{% endif %} {% if request.user == user or user.is_superuser %}disabled{% endif %}>
+						<input class="form-check-input" type="checkbox" id="cb-{{ user.id }}" name="admin-events" role="switch" {% if user.is_staff %}checked{% endif %} {% if request.user == user or user.is_superuser %}disabled{% endif %}>
 						<label class="form-check-label">{% translate "Manage events" %}</label>
 					</div>
 					<div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox" id="cb2-{{ user.username }}" name="admin-users" role="switch" {% if user.is_superuser %}checked{% endif %} {% if request.user == user %}disabled{% endif %}>
+						<input class="form-check-input" type="checkbox" id="cb2-{{ user.id }}" name="admin-users" role="switch" {% if user.is_superuser %}checked{% endif %} {% if request.user == user %}disabled{% endif %}>
 					 	<label class="form-check-label">{% translate "Manage users and event types" %}</label>
 					</div>
 					<input type="text" name="user_id" value={{ user.id }} hidden>
@@ -29,11 +29,11 @@
 
 				<script>
 					$(document).ready(function(){
-						$("#cb-{{ user.username }}").change(function(){
-							$("#form-user-{{ user.username }}").submit();
+						$("#cb-{{ user.id }}").change(function(){
+							$("#form-user-{{ user.id }}").submit();
 						});
-						$("#cb2-{{ user.username }}").change(function(){
-							$("#form-user-{{ user.username }}").submit();
+						$("#cb2-{{ user.id }}").change(function(){
+							$("#form-user-{{ user.id }}").submit();
 						});
 					});
 				</script>
