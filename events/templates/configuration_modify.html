@@ -9,7 +9,7 @@
 {% block content %}
 	{% if form %}
 			<div class="container text-left">
-				<form  method="post">
+				<form method="post">
 					{% csrf_token %}
 					{% crispy form %}
 					<button class="btn btn-primary" id="btn_event_modify_confirm" name="modify" type="submit">{% translate "Update" %}</button>

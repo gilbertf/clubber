@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from modeltranslation.forms import TranslationModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Submit
-from crispy_forms.bootstrap import AccordionGroup, Accordion
+from crispy_forms.bootstrap import AccordionGroup, Accordion, Alert
 from crispy_forms.bootstrap import TabHolder, Tab
 
 class ConfigurationForm(forms.ModelForm):
@@ -79,6 +79,7 @@ class ConfigurationForm(forms.ModelForm):
         super(ConfigurationForm, self).__init__(*args, **kwargs)
 
         self.helper = FormHelper(self)
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             TabHolder(
                 Tab('Impressum',
@@ -86,6 +87,7 @@ class ConfigurationForm(forms.ModelForm):
                         'impressum_en'
                 ),
                 Tab(_('Email Templates'),
+                    Alert("You can use the following constants in the templates: {{ date }}, {{ start_time }}, {{ end_time }}, {{ typ }}, {{ event_id }}, {{ user_id }}, {{ username }}, {{ joint_event_url }}, {{ show_event_url}}", dismiss = False, css_class = "alert-primary"),
                     Accordion(
                         AccordionGroup('Confirm Open',
                             "email_confirm_open_subject_de",

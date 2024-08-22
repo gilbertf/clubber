@@ -104,7 +104,6 @@ def sendMail(event, mail, newEventIcs = None):
         "end_time" : event.end_time,
         "typ" : event.typ,
         "event_id" : event.id,
-        "EMAIL_SITE_URL": settings.EMAIL_SITE_URL,
     })
 
     s = "Sending mail to"
@@ -129,6 +128,8 @@ def sendMail(event, mail, newEventIcs = None):
         if user.email != None and len(user.email) > 0:
             d["user_id"] = user.id
             d["username"] = user.username
+            d["joint_event_url"] = settings.EMAIL_SITE_URL + "/join/" + str(user.id) + "/" + str(event.id)
+            d["show_event_url"] = settings.EMAIL_SITE_URL + "/event/" + str(event.id) + "/show"
 
             translation.activate(user.language)
             html_r = mail.txt.render(d)
