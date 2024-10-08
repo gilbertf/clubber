@@ -6,22 +6,27 @@ from django.conf import settings
 from django.template import Template, Context
 from django.utils.html import strip_tags
 from .model_configuration import Configuration
+from django.utils.translation import gettext as _
 
 class MailConf:
     def NewEvent():
         configuration = Configuration.get_solo()
         return Mail(
-            Template(configuration.email_new_event_subject),
-            Template(configuration.email_new_event_txt),
+            Template(configuration.email_new_event_subject_de),
+            Template(configuration.email_new_event_subject_en),
+            Template(configuration.email_new_event_txt_de),
+            Template(configuration.email_new_event_txt_en),
             allUsers = True,
             newEventNotification = True
         )
         
     def EventFullyBooked():
-        onfiguration = Configuration.get_solo()
+        configuration = Configuration.get_solo()
         return Mail(
-            Template(configuration.email_fully_booked_subject),
-            Template(configuration.email_fully_booked_txt),
+            Template(configuration.email_fully_booked_subject_de),
+            Template(configuration.email_fully_booked_subject_en),
+            Template(configuration.email_fully_booked_txt_de),
+            Template(configuration.email_fully_booked_txt_en),
             allOrganizers = True,
             modifyEventNotification = True
         )
@@ -29,8 +34,10 @@ class MailConf:
     def EventSufficientParticipantsMissingOrganizer():
         configuration = Configuration.get_solo()
         return Mail(
-            Template(configuration.email_sufficient_participants_missing_organizer_subject),
-            Template(configuration.email_sufficient_participants_missing_organizer_txt),
+            Template(configuration.email_sufficient_participants_missing_organizer_subject_de),
+            Template(configuration.email_sufficient_participants_missing_organizer_subject_en),
+            Template(configuration.email_sufficient_participants_missing_organizer_txt_de),
+            Template(configuration.email_sufficient_participants_missing_organizer_txt_en),
             allOrganizers = True,
             modifyEventNotification = True
         )
@@ -38,8 +45,10 @@ class MailConf:
     def EventCancle():
         configuration = Configuration.get_solo()
         return Mail(
-            Template(configuration.email_cancle_subject),
-            Template(configuration.email_cancle_txt),
+            Template(configuration.email_cancle_subject_de),
+            Template(configuration.email_cancle_subject_en),
+            Template(configuration.email_cancle_txt_de),
+            Template(configuration.email_cancle_txt_en),
             eventParticipants = True,
             eventOrganizer = True,
             modifyEventNotification = True
@@ -48,8 +57,10 @@ class MailConf:
     def EventConfirmedOpen():
         configuration = Configuration.get_solo()
         return Mail(
-            Template(configuration.email_confirm_open_subject),
-            Template(configuration.email_confirm_open_txt),
+            Template(configuration.email_confirm_open_subject_de),
+            Template(configuration.email_confirm_open_subject_en),
+            Template(configuration.email_confirm_open_txt_de),
+            Template(configuration.email_confirm_open_txt_en),
             eventParticipants = True,
             eventOrganizer = True,
             modifyEventNotification = True
@@ -58,17 +69,21 @@ class MailConf:
     def EventPendingOpen():
         configuration = Configuration.get_solo()
         return Mail(
-            Template(configuration.email_pending_open_subject),
-            Template(configuration.email_pending_open_txt),
+            Template(configuration.email_pending_open_subject_de),
+            Template(configuration.email_pending_open_subject_en),
+            Template(configuration.email_pending_open_txt_de),
+            Template(configuration.email_pending_open_txt_en),
             eventParticipants = True,
             eventOrganizer = True,
             modifyEventNotification = True
         )
 
 class Mail:
-    def __init__(self, subject, txt, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
-        self.subject = subject
-        self.txt = txt
+    def __init__(self, subject_de, subject_en, txt_de, txt_en, allUsers = False, allOrganizers = False, eventParticipants = False, eventOrganizer = False, newEventNotification = False, modifyEventNotification = False):
+        self.subject_de = subject_de
+        self.subject_en = subject_en
+        self.txt_de = txt_de
+        self.txt_en = txt_en
         self.allUsers = allUsers
         self.allOrganizers = allOrganizers
         self.eventParticipants = eventParticipants
@@ -94,7 +109,7 @@ def sendMail(event, mail, newEventIcs = None):
     if mail == None:
         return
 
-    if mail.txt == "" or mail.subject == "":
+    if (mail.txt_de == "" and mail.txt_en == "") or (mail.subject_de == "" and mail.subject_en == ""):
         print("Skipping send mail due to missing mail txt")
         return
        
