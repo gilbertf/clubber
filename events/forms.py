@@ -87,7 +87,7 @@ class ConfigurationForm(forms.ModelForm):
                         'impressum_en'
                 ),
                 Tab(_('Email Templates'),
-                    Alert("You can use the following constants in the templates: {{ date }}, {{ start_time }}, {{ end_time }}, {{ typ }}, {{ event_id }}, {{ user_id }}, {{ username }}, {{ joint_event_url }}, {{ show_event_url}}", dismiss = False, css_class = "alert-primary"),
+                    Alert("You can use the following constants in the templates: {{ date }}, {{ date_weekday }}, {{ start_time }}, {{ end_time }}, {{ typ }}, {{ event_id }}, {{ user_id }}, {{ username }}, {{ joint_event_url }}, {{ show_event_url}}", dismiss = False, css_class = "alert-primary"),
                     Accordion(
                         AccordionGroup('Confirm Open',
                             "email_confirm_open_subject_de",

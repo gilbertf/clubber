@@ -140,14 +140,36 @@ def sendMail(event, mail, newEventIcs = None):
         if not (user.email_notification_new_event and mail.newEventNotification) and not (user.email_notification_joined_event and mail.modifyEventNotification):
             continue
         if user.email != None and len(user.email) > 0:
+            translation.activate(user.language)
+            
             d["user_id"] = user.id
             d["username"] = user.username
             d["joint_event_url"] = settings.EMAIL_SITE_URL + "/join/" + str(user.id) + "/" + str(event.id)
             d["show_event_url"] = settings.EMAIL_SITE_URL + "/event/" + str(event.id) + "/show"
+            d["date_weekday"] = _(event.date.strftime('%A'))
 
-            translation.activate(user.language)
-            html_r = mail.txt.render(d)
-            subject_r = mail.subject.render(d).strip()
+            if user.language == "en":
+                if mail.txt_en != "":
+                    html_r = mail.txt_en.render(d)
+                elif mail.txt_de != "":
+                    html_r = mail.txt_de.render(d)
+
+                if mail.subject_en != "":
+                    subject_r = mail.subject_en.render(d).strip()
+                elif mail.subject_de != "":
+                    subject_r = mail.subject_de.render(d).strip()
+
+            if user.language == "de":
+                if mail.txt_de != "":
+                    html_r = mail.txt_de.render(d)
+                elif mail.txt_en != "":
+                    html_r = mail.txt_en.render(d)   
+
+                if mail.subject_de != "":
+                    subject_r = mail.subject_de.render(d).strip()
+                elif mail.subject_en != "":
+                    subject_r = mail.subject_en.render(d).strip()  
+
             translation.deactivate()
 
             txt_r = strip_tags(html_r)
