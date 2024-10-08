@@ -115,7 +115,7 @@ def sendMail(event, mail, newEventIcs = None):
        
     d = Context({
         'date' : event.date,
-        "start_time" : event.start_time ,
+        "start_time" : event.start_time,
         "end_time" : event.end_time,
         "typ" : event.typ,
         "event_id" : event.id,
