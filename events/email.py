@@ -130,7 +130,6 @@ def sendMail(event, mail, newEventIcs = None):
         s += " eventParticipants"
     if mail.eventOrganizer:
         s += " eventOrganizer"
-    print(s)
 
     from_email = settings.DEFAULT_FROM_EMAIL
 
@@ -158,6 +157,7 @@ def sendMail(event, mail, newEventIcs = None):
             if newEventIcs != None:
                 mailMsg.attach("event.ics", newEventIcs, "text/calendar")
             mailMsgs.append(mailMsg)
+            print(txt_r)
 
     if len(mailMsgs) > 0:
         try:
